@@ -1,4 +1,3 @@
-import './_site-header.scss';
 import {
 	Header,
 	HeaderContainer,
@@ -13,8 +12,9 @@ import {
 	SideNavItems,
 	SideNavLink,
 	SideNavLinkText,
-} from '@carbon/react';
-import { Switcher, Notification, UserAvatar, Search } from '@carbon/icons-react';
+} from "@carbon/react";
+import { Switcher, Notification, UserAvatar, Search } from "@carbon/icons-react";
+import "./_theme.scss"
 
 const SiteHeader = () => (
 	<HeaderContainer
@@ -22,7 +22,7 @@ const SiteHeader = () => (
 			<Header aria-label="Miners Online">
 				<SkipToContent />
 				<HeaderMenuButton
-					aria-label={isSideNavExpanded ? 'Close menu' : 'Open menu'}
+					aria-label={isSideNavExpanded ? "Close menu" : "Open menu"}
 					onClick={onClickSideNavExpand}
 					isActive={isSideNavExpanded}
 					aria-expanded={isSideNavExpanded}
