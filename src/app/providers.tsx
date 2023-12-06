@@ -5,7 +5,7 @@ import { Content, Theme } from '@carbon/react';
 import SiteHeader from '@/components/SiteHeader/SiteHeader';
 
 interface Props  { 
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function Providers({ children }: Props) {

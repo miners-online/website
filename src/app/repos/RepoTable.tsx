@@ -16,16 +16,21 @@ import {
   DataTableRow,
   DataTableHeader,
 } from '@carbon/react';
+import { RepoRowItemProps } from './page';
 
 interface Props {
-  rows: Array<Omit<DataTableRow<any>, 'cells'>>
-  headers: Array<DataTableHeader>
+  rows: RepoRowItemProps[];
+  headers: Array<DataTableHeader>;
 }
 
 const RepoTable = ({ rows, headers }: Props) => {
+  const getRowDescription = (rowId: number) => {
+    const row = rows.find(({ id }) => id === rowId);
+    return row ? row.description : '';
+  };
   return (
     <DataTable
-      rows={rows}
+      rows={(rows as unknown) as Array<Omit<DataTableRow<any>, 'cells'>>}
       headers={headers}
       render={({
         rows,
@@ -58,7 +63,7 @@ const RepoTable = ({ rows, headers }: Props) => {
                     ))}
                   </TableExpandRow>
                   <TableExpandedRow colSpan={headers.length + 1}>
-                    <p>Row description</p>
+                    <p>{getRowDescription((row.id as unknown) as number)}</p>
                   </TableExpandedRow>
                 </React.Fragment>
               ))}

@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 interface Props  { 
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function RootLayout({ children }: Props) {
