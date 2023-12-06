@@ -4,7 +4,11 @@ import { Content, Theme } from '@carbon/react';
 
 import SiteHeader from '@/components/SiteHeader/SiteHeader';
 
-export function Providers({ children }) {
+interface Props  { 
+  children: React.ReactNode
+}
+
+export function Providers({ children }: Props) {
   return (
     <div>
       <SiteHeader />

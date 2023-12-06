@@ -13,9 +13,16 @@ import {
   TableExpandRow,
   TableCell,
   TableExpandedRow,
+  DataTableRow,
+  DataTableHeader,
 } from '@carbon/react';
 
-const RepoTable = ({ rows, headers }) => {
+interface Props {
+  rows: Array<Omit<DataTableRow<any>, 'cells'>>
+  headers: Array<DataTableHeader>
+}
+
+const RepoTable = ({ rows, headers }: Props) => {
   return (
     <DataTable
       rows={rows}

@@ -2,7 +2,7 @@ name: ci
 on:
   pull_request:
     branches:
-      - v11-next-step-3
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -13,22 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
       - uses: actions/cache@v3
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-package.json-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: npm install
       - name: Run ci checks
-        run: yarn ci-check
+        run: mpm run ci-check
       - name: Build project
-        run: yarn build
+        run: npm run build
     #   - name: Run tests
-    #     run: yarn test
+    #     run: npm run test
