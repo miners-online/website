@@ -1,42 +1,36 @@
-# Miners Online
+# Step 3
 
-## 🚀 Project Structure
+## Carbon Tutorial for NextJS 13
 
-Inside of this Astro project, you'll see the following folders and files:
+Base NextJS 13 app using IBM Carbon Design System React components
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+## Create NextJS 13 app
+
+```bash
+yarn create next-app
+
+✔ What is your project named? … next-base
+✔ Would you like to use TypeScript? … *No / Yes
+✔ Would you like to use ESLint? … No / *Yes
+✔ Would you like to use Tailwind CSS? … *No / Yes
+✔ Would you like to use `src/` directory? … No / *Yes
+✔ Would you like to use App Router? (recommended) … No / *Yes
+✔ Would you like to customize the default import alias? … *No / Yes
+
+cd carbon-tutorial-next
+yarn dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Configure paths in `jsconfig.json`
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check the [Astro documentation](https://docs.astro.build).
+```
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/app/*": ["app/*"]
+   }
+  }
+}
+```
