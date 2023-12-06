@@ -56,7 +56,7 @@ export default function LandingPage() {
                 <Column md={4} lg={{ span: 8, offset: 7 }} sm={4}>
                   <Image
                     className="landing-page__illo"
-                    src="/tab-illo.png"
+                    src=""
                     alt="An illustration"
                     width={786}
                     height={647}
