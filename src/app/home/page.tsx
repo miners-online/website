@@ -45,7 +45,7 @@ export default function LandingPage() {
                     What is Miners Online?
                   </h2>
                   <p className="landing-page__p">
-                    Miners Online is Samland's open-source digital platform for
+                    Miners Online is Samland&rsquo;s open-source digital platform for
                     testing products and experiences. With the Samland
                     Department for Digital at its foundation, the system
                     consists of services, tools and resources, and a vibrant
