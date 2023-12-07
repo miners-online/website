@@ -1,25 +1,10 @@
-@use '@carbon/react/scss/themes' as *;
-
-//overriding theme tokens
-@use '@carbon/react/scss/theme' with (
-  $theme: (
-    text-primary: #f7fff4,
-    text-secondary: #f7fff4,
-    icon-primary: #f7fff4,
-    icon-secondary: #f7fff4,
-    background: #334a5f,
-    background-active: #334a5f,
-    background-selected: #334a5f,
-    layer-01: #334a5f,
-  )
-);
-@use '@carbon/react';
-@use '@carbon/react/scss/breakpoint' as *;
-
 @use '@/components/SiteHeader/site-header';
 
 @use '@/app/home/landing-page';
 @use '@/app/repos/repo-page';
+
+@use '@carbon/react';
+@use '@carbon/react/scss/breakpoint' as *;
 
 /// Remove overrides once Carbon bugs are fixed upstream.
 /// Need grid option to not add page gutters at large viewports, to also use when nesting grids
