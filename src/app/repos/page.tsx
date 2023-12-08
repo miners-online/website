@@ -40,6 +40,11 @@ const headers = [
   },
 ];
 
+interface PaginationProps {
+  page: number;
+  pageSize: number;
+}
+
 interface LinkListProps {
   url: string;
   homepageUrl: string;
@@ -139,7 +144,7 @@ function RepoPage() {
           pageSize={currentPageSize}
           pageSizes={[5, 10, 15, 25]}
           itemsPerPageText="Items per page"
-          onChange={({ page, pageSize }) => {
+          onChange={({ page, pageSize }: PaginationProps) => {
             if (pageSize !== currentPageSize) {
               setCurrentPageSize(pageSize);
             }
