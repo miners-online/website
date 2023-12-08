@@ -10,13 +10,11 @@ interface Props  {
 
 export function Providers({ children }: Props) {
   return (
-    <>
-      {/* <Theme theme="g100"> */}
+    <div>
+      <Theme theme="g100">
         <SiteHeader />
-      {/* </Theme> */}
-      <Theme theme="white">
-        <Content>{children}</Content>
       </Theme>
-    </>
+      <Content>{children}</Content>
+    </div>
   );
 }
