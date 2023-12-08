@@ -24,7 +24,7 @@ function GamesPage() {
             <a href="/">Home</a>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <a href="/">Games</a>
+            <a href="/games">Games</a>
           </BreadcrumbItem>
         </Breadcrumb>
         <h1 className="games-page__heading">Games</h1>
