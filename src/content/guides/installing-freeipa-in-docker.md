@@ -1,4 +1,6 @@
-# Installing Free IPA in Docker
+---
+title: Installing Free IPA in Docker
+---
 
 ## Prerequisites
 

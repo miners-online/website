@@ -2,10 +2,10 @@ import './globals.scss';
 
 import { Providers } from './providers';
 
-export const metadata = {
-  title: 'Miners Online',
-  description: 'The official website of Miners Online',
-};
+// export const metadata = {
+//   title: 'Miners Online',
+//   description: 'The official website of Miners Online',
+// };
 
 interface Props  { 
   children: React.ReactNode;

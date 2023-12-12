@@ -1,4 +1,6 @@
-# Configuring Nextcloud to use Free IPA
+---
+title: Configuring Nextcloud to use Free IPA
+---
 
 ## Prerequisites
 
