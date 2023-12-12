@@ -29,11 +29,14 @@ const TutorialHeader = () => (
           isActive={isSideNavExpanded}
         />
         <Link href="/" passHref legacyBehavior>
-          <HeaderName prefix="Miners Online"></HeaderName>
+          <HeaderName prefix="Miners Online"><span></span></HeaderName>
         </Link>
         <HeaderNavigation aria-label="Miners Online">
           <Link href="/repos" passHref legacyBehavior>
             <HeaderMenuItem>Repositories</HeaderMenuItem>
+          </Link>
+          <Link href="/games" passHref legacyBehavior>
+            <HeaderMenuItem>Games</HeaderMenuItem>
           </Link>
         </HeaderNavigation>
         <SideNav
@@ -45,6 +48,9 @@ const TutorialHeader = () => (
             <HeaderSideNavItems>
               <Link href="/repos" passHref legacyBehavior>
                 <HeaderMenuItem>Repositories</HeaderMenuItem>
+              </Link>
+              <Link href="/games" passHref legacyBehavior>
+                <HeaderMenuItem>Games</HeaderMenuItem>
               </Link>
             </HeaderSideNavItems>
           </SideNavItems>
