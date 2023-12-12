@@ -16,74 +16,74 @@ You may changes these assumptions based on your requirements. The Hostname will 
 
 I'm running these commands on an Ubuntu 22.04 system. The commands are probably the same on your system.
 
-1. Setup hostname:
+### 1. Setup hostname
 
-   ```bash
-   sudo hostnamectl set-hostname ipa.minersonline.lan
-   ```
+```bash
+sudo hostnamectl set-hostname ipa.minersonline.lan
+```
 
-   ```bash
-   sudo nano /etc/hosts
-   ```
+```bash
+sudo nano /etc/hosts
+```
 
-   Add the line `10.0.0.97 ipa.minersonline.lan ipa` to the top of the file but change `10.0.0.97` to your machine's IP
+Add the line `10.0.0.97 ipa.minersonline.lan ipa` to the top of the file but change `10.0.0.97` to your machine's IP
 
-   Press `Control + X` then `Y` to save the file.
+Press `Control + X` then `Y` to save the file.
 
-2. Configure your DNS
+### 2. Configure your DNS
 
-   On your router or your DNS server (like PiHole) add the `ipa.minersonline.lan` hostname to match the IP of your machine.
+On your router or your DNS server (like PiHole) add the `ipa.minersonline.lan` hostname to match the IP of your machine.
 
-   > [!NOTE]
-   > This step is different for different models of routers or DNS servers, please consult their documentation.
+> [!NOTE]
+> This step is different for different models of routers or DNS servers, please consult their documentation.
 
 ## Steps
 
-1. Choose a container
+### 1. Choose a container
 
-   Chose a container from the [Free IPA Docker Hub](https://hub.docker.com/r/freeipa/freeipa-server/tags). I've chosen `fedora-rawhide`.
+Chose a container from the [Free IPA Docker Hub](https://hub.docker.com/r/freeipa/freeipa-server/tags). I've chosen `fedora-rawhide`.
 
-2. Perform the installation
+### 2. Perform the installation
 
-   The following command will run the image we built in the last step. This will run the installation process.
+The following command will run the image we built in the last step. This will run the installation process.
 
-   I recommend answering `no` to `Do you want to configure integrated DNS (BIND)?` because the BIND dns server caused problems during my installation.
+I recommend answering `no` to `Do you want to configure integrated DNS (BIND)?` because the BIND dns server caused problems during my installation.
 
-   ```bash
-   docker run --name freeipa-server -ti \
-       --read-only \
-       -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
-       --sysctl net.ipv6.conf.all.disable_ipv6=0 \
-       -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:ro \
-       -v /DATA/AppData/freeipa-server:/data:Z \
-       --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide
-   ```
+```bash
+docker run --name freeipa-server -ti \
+   --read-only \
+   -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
+   --sysctl net.ipv6.conf.all.disable_ipv6=0 \
+   -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:ro \
+   -v /DATA/AppData/freeipa-server:/data:Z \
+   --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide
+```
 
-   > [!NOTE]
-   > If you get any errors please see the [errors section](#errors) for your error.
+> [!NOTE]
+> If you get any errors please see the [errors section](#errors) for your error.
 
-3. Delete the existing container
+### 3. Delete the existing container
 
-   ```bash
-   docker stop freeipa-server
-   docker rm freeipa-server
-   ```
+```bash
+docker stop freeipa-server
+docker rm freeipa-server
+```
 
-4. Restart the container
+### 4. Restart the container
 
-   ```bash
-   docker run -d --name freeipa-server -ti \
-       --read-only \
-       -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
-       --sysctl net.ipv6.conf.all.disable_ipv6=0 \
-       -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:ro \
-       -v /DATA/AppData/freeipa-server:/data:Z \
-       --restart unless-stopped \
-       --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide
-   ```
+```bash
+docker run -d --name freeipa-server -ti \
+   --read-only \
+   -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
+   --sysctl net.ipv6.conf.all.disable_ipv6=0 \
+   -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:ro \
+   -v /DATA/AppData/freeipa-server:/data:Z \
+   --restart unless-stopped \
+   --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide
+```
 
-   > [!NOTE]
-   > If you get any errors please see the [errors section](#errors) for your error.
+> [!NOTE]
+> If you get any errors please see the [errors section](#errors) for your error.
 
 ## Errors
 
@@ -98,45 +98,46 @@ Failed to allocate manager object: Read-only file system
 Exiting PID 1...
 ```
 
-1. Delete existing containers / data
-   `docker rm freeipa-server` and `rm -rf /DATA/AppData/freeipa-server`
+#### 1. Delete existing containers / data
 
-2. Perform the installation again
+`docker rm freeipa-server` and `rm -rf /DATA/AppData/freeipa-server`
 
-   ```bash
-   docker run --name freeipa-server -ti \
-       --read-only \
-       -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
-       --sysctl net.ipv6.conf.all.disable_ipv6=0 \
-       --cgroupns host \
-       --security-opt seccomp=unconfined \
-       -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:rw \
-       -v /DATA/AppData/freeipa-server:/data:Z \
-       --privileged \
-       --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide --no-ntp
-   ```
+#### 2. Perform the installation again
 
-   During the installation answer the question `Do you want to configure chrony with NTP server or pool address?` with `yes`
+```bash
+docker run --name freeipa-server -ti \
+   --read-only \
+   -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
+   --sysctl net.ipv6.conf.all.disable_ipv6=0 \
+   --cgroupns host \
+   --security-opt seccomp=unconfined \
+   -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:rw \
+   -v /DATA/AppData/freeipa-server:/data:Z \
+   --privileged \
+   --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide --no-ntp
+```
 
-3. Delete the new container
+During the installation answer the question `Do you want to configure chrony with NTP server or pool address?` with `yes`
 
-   ```bash
-   docker stop freeipa-server
-   docker rm freeipa-server
-   ```
+#### 3. Delete the new container
 
-4. Restart the container
+```bash
+docker stop freeipa-server
+docker rm freeipa-server
+```
 
-   ```bash
-   docker run -d --name freeipa-server -ti \
-       --read-only \
-       -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
-       --sysctl net.ipv6.conf.all.disable_ipv6=0 \
-       --cgroupns host \
-       --security-opt seccomp=unconfined \
-       -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:rw \
-       -v /DATA/AppData/freeipa-server:/data:Z \
-       --restart unless-stopped \
-       --privileged \
-       --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide --no-ntp
-   ```
+#### 4. Restart the container again
+
+```bash
+docker run -d --name freeipa-server -ti \
+   --read-only \
+   -h ipa.minersonline.lan -p 53:53/udp -p 53:53 -p 80:80 -p 443:443 -p 389:389 -p 636:636 -p 88:88 -p 464:464 -p 88:88/udp -p 464:464/udp -p 123:123/udp \
+   --sysctl net.ipv6.conf.all.disable_ipv6=0 \
+   --cgroupns host \
+   --security-opt seccomp=unconfined \
+   -v /sys/fs/cgroup/freeipa.scope:/sys/fs/cgroup:rw \
+   -v /DATA/AppData/freeipa-server:/data:Z \
+   --restart unless-stopped \
+   --privileged \
+   --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide --no-ntp
+```
