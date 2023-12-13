@@ -21,10 +21,10 @@ function GamesPage() {
       <Column lg={16} md={8} sm={4} className="games-page__banner">
         <Breadcrumb noTrailingSlash aria-label="Page navigation">
           <BreadcrumbItem>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <a href="/games">Games</a>
+            <Link href="/games">Games</Link>
           </BreadcrumbItem>
         </Breadcrumb>
         <h1 className="games-page__heading">Games</h1>

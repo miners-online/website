@@ -18,9 +18,9 @@
 
 @use '@/components/SiteHeader/site-header';
 
-@use '@/app/home/landing-page';
-@use '@/app/repos/repo-page';
-@use '@/app/games/games-page';
+@use '@/pages/landing-page';
+@use '@/pages/repos/repo-page';
+@use '@/pages/games/games-page';
 @use '@/pages/articles/articles-page';
 
 /// Remove overrides once Carbon bugs are fixed upstream.

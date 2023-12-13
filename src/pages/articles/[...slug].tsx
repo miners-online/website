@@ -19,6 +19,7 @@ import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link';
 
 export async function getStaticPaths() {
   try {
@@ -181,13 +182,13 @@ export default function ArticlePage({ slug, frontmatter, content }: ArticleProps
       <Column lg={16} md={8} sm={4} className="articles-page__banner">
         <Breadcrumb noTrailingSlash aria-label="Page navigation">
           <BreadcrumbItem>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <a href="/articles">Articles</a>
+            <Link href="/articles">Articles</Link>
           </BreadcrumbItem>
           <BreadcrumbItem>
-            <a href={`/articles/${slug}`}>{frontmatter.title}</a>
+            <Link href={`/articles/${slug}`}>{frontmatter.title}</Link>
           </BreadcrumbItem>
         </Breadcrumb>
         <h1 className="articles-page__heading">Miners Online</h1>

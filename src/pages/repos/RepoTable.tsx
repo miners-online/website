@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import {
   DataTable,
   TableContainer,
@@ -16,7 +16,7 @@ import {
   DataTableRow,
   DataTableHeader,
 } from '@carbon/react';
-import { RepoRowItemProps } from './page';
+import { RepoRowItemProps } from './index';
 
 interface Props {
   rows: RepoRowItemProps[];
@@ -28,7 +28,12 @@ const RepoTable = ({ rows, headers }: Props) => {
     const row = rows.find(({ id }) => id === rowId);
     return row ? row.description : '';
   };
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true)
+  }, []);
+
+  return mounted && (
     <DataTable
       rows={(rows as unknown) as Array<Omit<DataTableRow<any>, 'cells'>>}
       headers={headers}
