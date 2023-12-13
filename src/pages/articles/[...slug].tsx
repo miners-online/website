@@ -123,8 +123,6 @@ const components = {
     const {notInline, children, className, node, ...rest} = props
     const match = /language-(\w+)/.exec(className || '')
 
-    console.log(notInline, children)
-
     if (notInline == true) {
       return match ? (
         <SyntaxHighlighter
