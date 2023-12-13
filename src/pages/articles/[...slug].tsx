@@ -16,10 +16,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Markdown from 'react-markdown';
-import RootLayout from '@/app/layout';
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 export async function getStaticPaths() {
   try {
@@ -148,6 +147,26 @@ const components = {
   }
 }
 
+interface MarkdownWrapperProps {
+  children: string;
+}
+
+function MarkdownWrapper({children}: MarkdownWrapperProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true)
+  }, []);
+
+  return mounted && (
+    <Markdown
+      remarkPlugins={[remarkGfm]}
+      components={components}
+    >
+      {children}
+    </Markdown>
+	);
+}
+
 interface ArticleProps {
   slug: string;
   frontmatter: {
@@ -158,50 +177,45 @@ interface ArticleProps {
 
 export default function ArticlePage({ slug, frontmatter, content }: ArticleProps) {
   return (
-    <RootLayout>
-      <Grid className="articles-page" fullWidth>
-        <Column lg={16} md={8} sm={4} className="articles-page__banner">
-          <Breadcrumb noTrailingSlash aria-label="Page navigation">
-            <BreadcrumbItem>
-              <a href="/">Home</a>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <a href="/articles">Articles</a>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <a href={`/articles/${slug}`}>{frontmatter.title}</a>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <h1 className="articles-page__heading">Miners Online</h1>
-        </Column>
-        <Column lg={16} md={8} sm={4} className="articles-page__r2">
-          <Tabs defaultSelectedIndex={0}>
-            <TabList className="tabs-group" aria-label="Page navigation">
-              <Tab>Content</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <Grid className="tabs-group-content">
-                  <Column
-                    lg={16}
-                    md={8}
-                    sm={4}
-                    className="articles-page__tab-content"
-                  >
-                    <h1 className="games-page__subheading">{ frontmatter.title }</h1>
-                    <Markdown
-                      remarkPlugins={[remarkGfm]}
-                      components={components}
-                    >
-                      {content}
-                    </Markdown>
-                  </Column>
-                </Grid>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </Column>
-      </Grid>
-    </RootLayout>
+    <Grid className="articles-page" fullWidth>
+      <Column lg={16} md={8} sm={4} className="articles-page__banner">
+        <Breadcrumb noTrailingSlash aria-label="Page navigation">
+          <BreadcrumbItem>
+            <a href="/">Home</a>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <a href="/articles">Articles</a>
+          </BreadcrumbItem>
+          <BreadcrumbItem>
+            <a href={`/articles/${slug}`}>{frontmatter.title}</a>
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <h1 className="articles-page__heading">Miners Online</h1>
+      </Column>
+      <Column lg={16} md={8} sm={4} className="articles-page__r2">
+        <Tabs defaultSelectedIndex={0}>
+          <TabList className="tabs-group" aria-label="Page navigation">
+            <Tab>Content</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Grid className="tabs-group-content">
+                <Column
+                  lg={16}
+                  md={8}
+                  sm={4}
+                  className="articles-page__tab-content"
+                >
+                  <h1 className="games-page__subheading">{ frontmatter.title }</h1>
+                  <MarkdownWrapper>
+                    {content}
+                  </MarkdownWrapper>
+                </Column>
+              </Grid>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Column>
+    </Grid>
   );
 }

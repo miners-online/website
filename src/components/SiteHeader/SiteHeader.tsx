@@ -15,10 +15,10 @@ import {
   HeaderSideNavItems,
 } from '@carbon/react';
 import { Switcher, Notification, UserAvatar } from '@carbon/icons-react';
-
 import Link from 'next/link';
 
-const TutorialHeader = () => (
+function SiteHeader() {
+  return (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
       <Header aria-label="Miners Online">
@@ -75,6 +75,6 @@ const TutorialHeader = () => (
       </Header>
     )}
   />
-);
+)};
 
-export default TutorialHeader;
+export default SiteHeader;

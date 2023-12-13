@@ -1,21 +1,27 @@
+import SiteHeader from '@/components/SiteHeader/SiteHeader';
 import './globals.scss';
 
-import { Providers } from './providers';
+import { Content, Theme } from '@carbon/react';
 
-// export const metadata = {
-//   title: 'Miners Online',
-//   description: 'The official website of Miners Online',
-// };
+export const metadata = {
+  title: 'Miners Online',
+  description: 'The official website of Miners Online',
+};
 
 interface Props  { 
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: Props) {
+export default function BaseLayout({ children }: Props) {
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Theme theme="white">
+          <Theme theme="g100">
+            <SiteHeader/>
+          </Theme>
+          <Content>{children}</Content>
+        </Theme>
       </body>
     </html>
   );
