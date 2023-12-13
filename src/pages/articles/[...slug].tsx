@@ -128,9 +128,10 @@ const components = {
         <SyntaxHighlighter
           {...rest}
           PreTag={CodeWrapper}
-          children={String(children).replace(/\n$/, '')}
           language={match[1]}
-        />
+        >
+          {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
       ) : (
         <CodeWrapper {...rest}>
           {children}
@@ -188,9 +189,10 @@ export default function ArticlePage({ slug, frontmatter, content }: ArticleProps
                     <h1 className="games-page__subheading">{ frontmatter.title }</h1>
                     <Markdown
                       remarkPlugins={[remarkGfm]}
-                      children={content}
                       components={components}
-                    />
+                    >
+                      {content}
+                    </Markdown>
                   </Column>
                 </Grid>
               </TabPanel>
