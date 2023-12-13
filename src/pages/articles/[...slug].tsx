@@ -10,6 +10,7 @@ import {
   TabPanel,
   Grid,
   Column,
+  CodeSnippet,
 } from '@carbon/react';
 import fs from 'fs';
 import path from 'path';
@@ -17,7 +18,8 @@ import matter from 'gray-matter';
 import Markdown from 'react-markdown';
 import RootLayout from '@/app/layout';
 import remarkGfm from 'remark-gfm'
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import React from 'react'
 
 export async function getStaticPaths() {
   try {
@@ -91,6 +93,60 @@ interface StaticProps {
   };
 }
 
+interface CodeWrapperProps {
+  children: React.ReactNode;
+}
+
+function CodeWrapper({children}: CodeWrapperProps) {
+	return (
+		<CodeSnippet type="multi" feedback="Copied to clipboard">
+			{children}
+		</CodeSnippet>
+	)
+}
+
+const components = {
+  h1: (props: any) => <h1 className="text-3xl font-bold pl-3 pb-3" {...props} />,
+  h2: (props: any) => <h2 className="text-2xl font-bold pl-3 pb-3" {...props} />,
+
+  p: (props: any) => <p className="p-3" {...props} />,
+
+  // code blocks are `<code>` elements warped inside a `<pre>`
+  pre: (props: any) => {
+    const {children, className, node, ...rest} = props
+    if (children.props.node.tagName == "code") {
+      return components["code"]({notInline: true, ...children.props});
+    }
+  },
+  // all `<code>` elements
+  code: (props: any) => {
+    const {notInline, children, className, node, ...rest} = props
+    const match = /language-(\w+)/.exec(className || '')
+
+    console.log(notInline, children)
+
+    if (notInline == true) {
+      return match ? (
+        <SyntaxHighlighter
+          {...rest}
+          PreTag={CodeWrapper}
+          children={String(children).replace(/\n$/, '')}
+          language={match[1]}
+        />
+      ) : (
+        <CodeWrapper {...rest}>
+          {children}
+        </CodeWrapper>
+      )
+    }
+    return (
+      <CodeSnippet type="inline" feedback="Copied to clipboard">
+        {children}
+      </CodeSnippet>
+    )
+  }
+}
+
 interface ArticleProps {
   slug: string;
   frontmatter: {
@@ -135,24 +191,7 @@ export default function ArticlePage({ slug, frontmatter, content }: ArticleProps
                     <Markdown
                       remarkPlugins={[remarkGfm]}
                       children={content}
-                      components={{
-                        code(props) {
-                          const {children, className, node, ...rest} = props
-                          const match = /language-(\w+)/.exec(className || '')
-                          return match ? (
-                            <SyntaxHighlighter
-                              {...rest}
-                              PreTag="div"
-                              children={String(children).replace(/\n$/, '')}
-                              language={match[1]}
-                            />
-                          ) : (
-                            <code {...rest} className={className}>
-                              {children}
-                            </code>
-                          )
-                        }
-                      }}
+                      components={components}
                     />
                   </Column>
                 </Grid>

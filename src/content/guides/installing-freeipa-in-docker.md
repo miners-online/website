@@ -119,8 +119,6 @@ docker run --name freeipa-server -ti \
    --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide --no-ntp
 ```
 
-During the installation answer the question `Do you want to configure chrony with NTP server or pool address?` with `yes`
-
 #### 3. Delete the new container
 
 ```bash
