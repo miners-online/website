@@ -74,7 +74,7 @@ export async function getStaticProps({params: { slug }}: StaticProps) {
 
     return {
       props: {
-        slug: newSlug,
+        slug: newSlug.replace("\\", "/"),
         frontmatter,
         content
       }   
@@ -125,26 +125,33 @@ const components = {
     const {notInline, children, className, node, ...rest} = props
     const match = /language-(\w+)/.exec(className || '')
 
-    if (notInline == true) {
-      return match ? (
-        <SyntaxHighlighter
-          {...rest}
-          PreTag={CodeWrapper}
-          language={match[1]}
-        >
-          {String(children).replace(/\n$/, '')}
-        </SyntaxHighlighter>
-      ) : (
-        <CodeWrapper {...rest}>
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+      setMounted(true)
+    }, []);
+
+    if (mounted) {
+      if (notInline == true) {
+        return match ? (
+          <SyntaxHighlighter
+            {...rest}
+            PreTag={CodeWrapper}
+            language={match[1]}
+          >
+            {String(children).replace(/\n$/, '')}
+          </SyntaxHighlighter>
+        ) : (
+          <CodeWrapper {...rest}>
+            {children}
+          </CodeWrapper>
+        )
+      }
+      return (
+        <CodeSnippet type="inline" feedback="Copied to clipboard">
           {children}
-        </CodeWrapper>
+        </CodeSnippet>
       )
     }
-    return (
-      <CodeSnippet type="inline" feedback="Copied to clipboard">
-        {children}
-      </CodeSnippet>
-    )
   }
 }
 
@@ -158,7 +165,7 @@ function MarkdownWrapper({children}: MarkdownWrapperProps) {
     setMounted(true)
   }, []);
 
-  return mounted && (
+  return (
     <Markdown
       remarkPlugins={[remarkGfm]}
       components={components}
