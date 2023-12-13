@@ -67,14 +67,14 @@ interface StaticProps {
 
 export async function getStaticProps({params: { slug }}: StaticProps) {
   try {
-    const newSlug = path.join(...slug);
+    const newSlug = slug.join("/");
     const filePath = path.join('src/content', newSlug) + '.md';
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data: frontmatter, content } = matter(fileContent);
 
     return {
       props: {
-        slug: newSlug.replace("\\", "/"),
+        slug: newSlug,
         frontmatter,
         content
       }   
