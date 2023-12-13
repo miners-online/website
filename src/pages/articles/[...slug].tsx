@@ -14,8 +14,10 @@ import {
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import md from 'markdown-it';
+import Markdown from 'react-markdown';
 import RootLayout from '@/app/layout';
+import remarkGfm from 'remark-gfm'
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 
 export async function getStaticPaths() {
   try {
@@ -122,9 +124,39 @@ export default function ArticlePage({ slug, frontmatter, content }: ArticleProps
             </TabList>
             <TabPanels>
               <TabPanel>
-                  <h1>{ frontmatter.title }</h1>
-                  <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
-                </TabPanel>
+                <Grid className="tabs-group-content">
+                  <Column
+                    lg={16}
+                    md={8}
+                    sm={4}
+                    className="articles-page__tab-content"
+                  >
+                    <h1 className="games-page__subheading">{ frontmatter.title }</h1>
+                    <Markdown
+                      remarkPlugins={[remarkGfm]}
+                      children={content}
+                      components={{
+                        code(props) {
+                          const {children, className, node, ...rest} = props
+                          const match = /language-(\w+)/.exec(className || '')
+                          return match ? (
+                            <SyntaxHighlighter
+                              {...rest}
+                              PreTag="div"
+                              children={String(children).replace(/\n$/, '')}
+                              language={match[1]}
+                            />
+                          ) : (
+                            <code {...rest} className={className}>
+                              {children}
+                            </code>
+                          )
+                        }
+                      }}
+                    />
+                  </Column>
+                </Grid>
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </Column>
