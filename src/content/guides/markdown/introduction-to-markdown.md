@@ -140,7 +140,7 @@ This will render as:
 
 ### Code
 
-For inline code, wrap the code snippet with backticks (`\```). For code blocks, use three backticks (```) before and after the code block.
+For inline code, wrap the code snippet with backticks (\`code\`). For code blocks, use three backticks (\`\`\`code\`\`\`) before and after the code block. If you need to have code blocks inside code blocks you can increase the number of backticks on the parent codeblock. This would be useful so you can demonstrate languages like Markdown without the inner codeblock being parsed.
 
 Example:
 
@@ -160,6 +160,26 @@ Inline code: `code snippet`
 ```
 Code block
 Multiple lines
+```
+
+#### Syntax Highlighting
+
+Code blocks can have syntax highlighting.
+
+Example:
+
+````markdown
+```python
+age = 3
+print(f"Hello world, my age is {age}.")
+```
+````
+
+This will display as:
+
+```python
+age = 3
+print(f"Hello world, my age is {age}.")
 ```
 
 ## Advanced Markdown
