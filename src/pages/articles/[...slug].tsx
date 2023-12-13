@@ -44,7 +44,8 @@ export async function getStaticPaths() {
 
     return {
       paths: [], 
-      fallback: false
+      fallback: false,
+      notFound: true
     };  
   }
 };
@@ -82,7 +83,8 @@ export async function getStaticProps({params: { slug }}: StaticProps) {
     console.error(error);
 
     return {
-      props: {}
+      props: {},
+      notFound: true
     };  
   }
 };
