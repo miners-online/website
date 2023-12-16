@@ -113,7 +113,7 @@ The "LDAP user and group backend" app is used to provide LDAP support for Nextcl
 
 2. Open up the "Directory Settings" section.
 
-3. Inside the "User Display Name" type `name`.
+3. Inside the "User Display Name" type `displayName`.
 
 4. Inside the "Base User Tree" type `cn=users,dc=minersonline,dc=lan`.
 
