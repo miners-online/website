@@ -96,7 +96,7 @@ interface StaticProps {
 }
 
 interface CodeWrapperProps {
-  children: React.ReactNode;
+  children: React.ReactElement;
 }
 
 function CodeWrapper({children}: CodeWrapperProps) {
@@ -125,7 +125,11 @@ const components = {
     const {notInline, children, className, node, ...rest} = props
     const match = /language-(\w+)/.exec(className || '')
 
+    console.log(children);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [mounted, setMounted] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       setMounted(true)
     }, []);
