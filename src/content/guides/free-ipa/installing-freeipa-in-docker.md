@@ -13,6 +13,7 @@ The guide will assume some details:
 
 - Hostname: `ipa.minersonline.lan`
 - Storage path: `/DATA/AppData/freeipa-server`
+- Server IP: `10.0.0.97`
 
 You may changes these assumptions based on your requirements. The Hostname will determine the domain name of the Free IPA setup, in this example `minersonline.local`. The Storage path will determine where Free IPA will store its data.
 

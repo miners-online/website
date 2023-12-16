@@ -60,9 +60,7 @@ The new user needs to be an admin so it can be used to receive information about
 
 The "LDAP user and group backend" app is used to provide LDAP support for Nextcloud.
 
-1. Go to the Nextcloud apps page and enable the "
-   LDAP user and group backend" app. Optionally, I recommend installing the "Write support for LDAP" and the "
-   LDAP Contacts Backend" app.
+1. Go to the Nextcloud apps page and enable the "LDAP user and group backend" app. Optionally, I recommend installing the "Write support for LDAP" and the "LDAP Contacts Backend" app.
 
 #### 2. Configure LDAP / AD connection settings
 
