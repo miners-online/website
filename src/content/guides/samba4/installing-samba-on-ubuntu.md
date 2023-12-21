@@ -124,7 +124,15 @@ samba-tool dns delete 10.0.0.97 minersonline.lan ipa.minersonline.lan A 172.19.0
 samba-tool dns delete 10.0.0.97 minersonline.lan ipa.minersonline.lan A 172.18.0.1
 ```
 
-### 4. Testing / verification
+### 4. Running Samba on startup
+
+Running Samba on system startup is a good idea if you want clients to be allowed to connect automatically. To do this run the following command:
+
+```bash
+sudo update-rc.d smbd defaults
+```
+
+### 5. Testing / verification
 
 #### 1. Verify DNS is working
 
