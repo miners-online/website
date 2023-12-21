@@ -1,5 +1,5 @@
 ---
-title: Installing Samba4 on Ubuntu
+title: Installing Samba on Ubuntu
 ---
 
 ## Prerequisites

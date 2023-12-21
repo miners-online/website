@@ -1,5 +1,5 @@
 ---
-title: Configuring Nextcloud to use Samba 4
+title: Configuring Nextcloud to use Samba
 ---
 
 ## Prerequisites
