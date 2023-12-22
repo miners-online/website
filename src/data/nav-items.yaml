@@ -1,0 +1,8 @@
+- title: Guides
+  pages:
+    - title: Free IPA
+      path: /guides/free-ipa
+    - title: Markdown
+      path: /guides/markdown
+    - title: Samba
+      path: /guides/samba
