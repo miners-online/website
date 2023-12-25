@@ -2,6 +2,8 @@
 title: Configuring Nextcloud to use Free IPA
 ---
 
+import InlineNotification from 'gatsby-theme-carbon/src/components/InlineNotification';
+
 ## Prerequisites
 
 The following applications need to be installed on your system
@@ -72,10 +74,12 @@ The "LDAP user and group backend" app is used to provide LDAP support for Nextcl
 
 4. Set the "User DN" to `uid=nextcloudsystemuser,cn=users,cn=accounts,dc=minersonline,dc=lan`
 
-   > [!NOTE]
-   > The `nextcloudsystemuser` part is the "User Login" we set earlier.
-   >
-   > The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+<InlineNotification>
+
+The `nextcloudsystemuser` part is the "User Login" we set earlier.
+
+The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+</InlineNotification>
 
 5. Set the "Password" to what you noted down earlier.
 
@@ -83,8 +87,10 @@ The "LDAP user and group backend" app is used to provide LDAP support for Nextcl
 
 7. Set the "One Base DN per line" to `dc=minersonline,dc=lan`
 
-   > [!NOTE]
-   > Again, The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+<InlineNotification>
+
+Again, The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+</InlineNotification>
 
 8. Finally, press "Continue".
 
@@ -114,13 +120,17 @@ The "LDAP user and group backend" app is used to provide LDAP support for Nextcl
 
 3. Inside the "Base User Tree" type `cn=users,cn=accounts,dc=minersonline,dc=lan`.
 
-   > [!NOTE]
-   > Again, The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+<InlineNotification>
+
+Again, The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+</InlineNotification>
 
 4. Inside the "Base Group Tree" type `cn=groups,cn=accounts,dc=minersonline,dc=lan`.
 
-   > [!NOTE]
-   > Again, The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+<InlineNotification>
+
+Again, The `dc=minersonline,dc=lan` part depends on your Free IPA realm domain. For example if your domain is `office.example.com` then you would use `dc=office,dc=example,dc=com`.
+</InlineNotification>
 
 5. Set the "Group-Member association" to `member`.
 
