@@ -2,6 +2,8 @@
 title: Installing Free IPA in Docker
 ---
 
+import InlineNotification from 'gatsby-theme-carbon/src/components/InlineNotification';
+
 ## Prerequisites
 
 The following applications need to be installed on your system:
@@ -37,8 +39,9 @@ Press `Control + X` then `Y` to save the file.
 
 On your router or your DNS server (like PiHole) add the `ipa.minersonline.lan` hostname to match the IP of your machine.
 
-> [!NOTE]
-> This step is different for different models of routers or DNS servers, please consult their documentation.
+<InlineNotification>
+This step is different for different models of routers or DNS servers, please consult their documentation.
+</InlineNotification>
 
 ## Steps
 
@@ -62,8 +65,9 @@ docker run --name freeipa-server -ti \
    --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide
 ```
 
-> [!NOTE]
-> If you get any errors please see the [errors section](#errors) for your error.
+<InlineNotification>
+If you get any errors please see the [errors section](#errors) for your error.
+</InlineNotification>
 
 ### 3. Delete the existing container
 
@@ -85,8 +89,9 @@ docker run -d --name freeipa-server -ti \
    --tmpfs /run --tmpfs /tmp freeipa/freeipa-server:fedora-rawhide
 ```
 
-> [!NOTE]
-> If you get any errors please see the [errors section](#errors) for your error.
+<InlineNotification>
+If you get any errors please see the [errors section](#errors) for your error.
+</InlineNotification>
 
 ## Errors
 
