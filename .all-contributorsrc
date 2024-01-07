@@ -1,0 +1,36 @@
+{
+  "projectName": "website",
+  "projectOwner": "Miners-Online",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "ajh123",
+      "name": "Samuel Hulme",
+      "avatar_url": "https://avatars.githubusercontent.com/u/41990982?v=4",
+      "profile": "https://minersonline.uk/",
+      "contributions": [
+        "doc",
+        "code"
+      ]
+    },
+    {
+      "login": "all-contributors",
+      "name": "All Contributors",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46410174?v=4",
+      "profile": "https://allcontributors.org",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": true,
+  "commitType": "docs"
+}
