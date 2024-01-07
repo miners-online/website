@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "miners_online/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "miners_online/wsgi.py"
+      }
+    ]
+}

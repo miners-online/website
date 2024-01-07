@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 SECRET_KEY = "django-insecure-rp-6eq90gln7+0lgd^z4pkop=a=mutc1yo(n(@6%0y&b!4*+r_"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'minersonline.uk']
 
 # Application definition
 
