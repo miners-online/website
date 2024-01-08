@@ -1,2 +1,26 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import {
+        truncate,
+        breakpoints,
+        Content,
+        Grid,
+        Row,
+        Column,
+        Button,
+    } from "carbon-components-svelte";
+
+</script>
+
+<Content>
+    <Grid>
+        <Row>
+        <Column>
+            <Button>Primary button</Button>
+
+            <div use:truncate>Text...</div>
+            
+            {JSON.stringify(breakpoints)}
+        </Column>
+        </Row>
+    </Grid>
+</Content>
