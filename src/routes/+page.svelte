@@ -2,25 +2,18 @@
     import {
         truncate,
         breakpoints,
-        Content,
-        Grid,
         Row,
-        Column,
         Button,
+        Column,
     } from "carbon-components-svelte";
-
 </script>
 
-<Content>
-    <Grid>
-        <Row>
-        <Column>
-            <Button>Primary button</Button>
+<Row>
+    <Column>
+        <Button>Primary button</Button>
 
-            <div use:truncate>Text...</div>
-            
-            {JSON.stringify(breakpoints)}
-        </Column>
-        </Row>
-    </Grid>
-</Content>
+        <div use:truncate>Text...</div>
+        
+        {JSON.stringify(breakpoints)}
+    </Column>
+</Row>

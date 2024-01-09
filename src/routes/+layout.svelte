@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as config from '$lib/config'
-    import { theme } from "$lib";
-    import "carbon-components-svelte/css/white.css";
+    import { theme } from "../store";
+    import "carbon-components-svelte/css/all.css";
     import {
         Header,
         HeaderUtilities,
@@ -16,7 +16,8 @@
         Column,
         Theme,
         RadioButtonGroup,
-        RadioButton
+        RadioButton,
+        Content
     } from "carbon-components-svelte";
 
     const data = [
@@ -32,7 +33,7 @@
         },
     ];
 
-    let ref = null;
+    let ref: any = null;
     let active = false;
     let value = "";
     let selectedResultIndex = 0;
@@ -47,54 +48,54 @@
             );
             })
         : [];
-
-    let isSideNavOpen = false;
-    let isOpen1 = false;
 </script>
 
-<Theme
-    persist
-    bind:theme="{$theme}"
-    on:update="{(e) => {
-        const theme = e.detail.theme;
-        document.documentElement.style.setProperty("color-scheme", ["white", "g10"].includes(theme) ? "light" : "dark");
-    }}"
->
-    <Header company="Miners Online" platformName="">
-        <svelte:fragment slot="skip-to-content">
-            <SkipToContent />
-        </svelte:fragment>
-        <HeaderUtilities>
-            <HeaderSearch
-                bind:ref
-                bind:active
-                bind:value
-                bind:selectedResultIndex
-                placeholder="Search Miners Online"
-                {results}
-                on:select={() => {
-                    window.location.href = results[selectedResultIndex].href;
-                }}
-            />
-        </HeaderUtilities>
-    </Header>
+<Header company="{config.title}" platformName="">
+    <svelte:fragment slot="skip-to-content">
+        <SkipToContent />
+    </svelte:fragment>
+    <HeaderUtilities>
+        <HeaderSearch
+            bind:ref
+            bind:active
+            bind:value
+            bind:selectedResultIndex
+            placeholder="Search {config.title}"
+            {results}
+            on:select={() => {
+                window.location.href = results[selectedResultIndex].href;
+            }}
+        />
+    </HeaderUtilities>
+</Header>
 
-    <!-- <Theme bind:theme/> -->
-
-    <!-- <RadioButtonGroup legendText="Carbon theme" bind:selected={theme}>
-        {#each ["g10", "g80", "g90", "g100", "white"] as value}
-          <RadioButton labelText={value} {value} />
-        {/each}
-    </RadioButtonGroup> -->
-    <slot/>
-</Theme>
-
-<footer>
-    <Grid>
-        <Row>
-        <Column>
-            <p>{config.title} &copy 2023 - {new Date().getFullYear()}</p>
-        </Column>
-        </Row>
+<Content>
+    <Grid fullWidth>
+        <slot/>
+        <Row/> <!-- expand the margin / padding of this-->
+        <Row> <!-- <the footer> -->
+            <Column>
+                <p>{config.title} &copy 2023 - {new Date().getFullYear()}</p>
+            </Column>
+            <Column>
+                <Theme
+                    persist
+                    bind:theme="{$theme}"
+                    render="toggle"
+                    toggle={{
+                        themes: ["g10", "g80"],
+                        labelA: "Enable dark mode",
+                        labelB: "Enable dark mode",
+                        hideLabel: true,
+                        size: "sm",
+                    }}
+                    on:update="{(e) => {
+                        const eTheme = e.detail.theme;
+                        document.documentElement.style.setProperty("color-scheme", ["white", "g10"].includes(eTheme) ? "light" : "dark");
+                        theme.set(eTheme)
+                    }}"
+                />
+            </Column>
+        </Row> <!-- </the footer> -->
     </Grid>
-</footer>
+</Content>
