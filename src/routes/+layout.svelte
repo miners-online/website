@@ -69,11 +69,11 @@
     </HeaderUtilities>
 </Header>
 
-<Content>
-    <Grid fullWidth>
+<Content style="height:100%">
+    <Grid fullWidth id="main">
         <slot/>
-        <Row/> <!-- expand the margin / padding of this-->
-        <Row> <!-- <the footer> -->
+        <Row id="spacer-row"/>
+        <Row id="footer"> <!-- <the footer> -->
             <Column>
                 <p>{config.title} &copy 2023 - {new Date().getFullYear()}</p>
             </Column>
@@ -98,4 +98,21 @@
             </Column>
         </Row> <!-- </the footer> -->
     </Grid>
+
+    <style>
+        #main {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #spacer-row {
+            flex: 1;
+        }
+
+        #footer {
+            /* margin-top: auto; */
+            /* flex: 0; */
+        }
+    </style>
 </Content>
