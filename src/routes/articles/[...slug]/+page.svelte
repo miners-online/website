@@ -8,6 +8,10 @@
     } from "carbon-components-svelte";
 
 	export let data;
+
+    let title = data.title;
+    let date = data.date;
+    let content = data.content;
 </script>
 
 <Row>
@@ -15,14 +19,14 @@
         <Breadcrumb>
             <BreadcrumbItem href="/">Miners Online</BreadcrumbItem>
             <BreadcrumbItem href="/articles">Articles</BreadcrumbItem>
-            <BreadcrumbItem href={$page.url.toString()} isCurrentPage>{data.post.title}</BreadcrumbItem>
+            <BreadcrumbItem href={$page.url.toString()} isCurrentPage>{title}</BreadcrumbItem>
         </Breadcrumb>
-        <h1>{data.post.title}</h1>
-        <p>Published: {new Date(data.post.date).toDateString()}</p>
+        <h1>{title}</h1>
+        <p>Published: {new Date(date).toDateString()}</p>
     </Column>
 </Row>
 <Row>
     <Column>
-        <div>{@html data.post.content}</div>
+        <div>{@html content}</div>
     </Column>
 </Row>
