@@ -6,7 +6,6 @@
         Breadcrumb,
         BreadcrumbItem,
     } from "carbon-components-svelte";
-
 </script>
 
 <Row>
