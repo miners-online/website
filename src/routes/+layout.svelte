@@ -33,7 +33,7 @@
         },
     ];
 
-    let ref: any = null;
+    let ref = null;
     let active = false;
     let value = "";
     let selectedResultIndex = 0;

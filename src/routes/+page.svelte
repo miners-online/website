@@ -1,19 +1,15 @@
 <script>
     import {
-        truncate,
-        breakpoints,
         Row,
-        Button,
         Column,
     } from "carbon-components-svelte";
+
+    // @ts-ignore -- this markdown is a Svelte component now ...
+    import Content from '../content/home.md'
 </script>
 
 <Row>
     <Column>
-        <Button>Primary button</Button>
-
-        <div use:truncate>Text...</div>
-        
-        {JSON.stringify(breakpoints)}
+        <Content/>
     </Column>
 </Row>
