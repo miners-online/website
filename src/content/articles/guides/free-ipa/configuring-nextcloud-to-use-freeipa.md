@@ -1,5 +1,6 @@
 ---
 title: Configuring Nextcloud to use Free IPA
+date: 2023-12-12
 ---
 
 ## Prerequisites

@@ -1,5 +1,6 @@
 ---
 title: Introduction to Markdown
+date: 2023-12-13
 ---
 
 Markdown is a lightweight and intuitive markup language designed to make the process of writing and formatting plain text both simple and efficient. Originally created by John Gruber and Aaron Swartz, Markdown has gained widespread popularity among writers, developers, and content creators for its ease of use and readability. Serving as a bridge between plain text and richly formatted documents, Markdown allows users to focus on the content without the distraction of complex formatting codes. This introduction guide will walk you through the fundamental elements of Markdown, from creating headings and formatting text to more advanced features like tables and task lists, empowering you to effectively communicate and present information in a clear and visually appealing manner.

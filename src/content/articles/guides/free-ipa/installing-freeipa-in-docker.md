@@ -1,5 +1,6 @@
 ---
 title: Installing Free IPA in Docker
+date: 2023-12-12
 ---
 
 ## Prerequisites

@@ -1,5 +1,6 @@
 ---
 title: Configuring Nextcloud to use Samba
+date: 2023-12-16
 ---
 
 ## Prerequisites

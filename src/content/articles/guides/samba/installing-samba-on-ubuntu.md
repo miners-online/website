@@ -1,5 +1,6 @@
 ---
 title: Installing Samba on Ubuntu
+date: 2023-12-16
 ---
 
 ## Prerequisites
