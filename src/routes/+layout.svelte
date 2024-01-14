@@ -33,6 +33,7 @@
         },
     ];
 
+    // @ts-ignore TODO: fix typing in Svelte
     let ref = null;
     let active = false;
     let value = "";
