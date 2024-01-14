@@ -69,7 +69,7 @@
     </HeaderUtilities>
 </Header>
 
-<Content style="height:100%">
+<Content style="height:100%; padding: 0;">
     <Grid fullWidth id="main">
         <slot/>
         <Row id="spacer-row"/>
@@ -111,8 +111,9 @@
         }
 
         #footer {
-            /* margin-top: auto; */
-            /* flex: 0; */
+            margin-top: 48px;
+            flex: 0;
+            bottom: 0;
         }
     </style>
 </Content>
