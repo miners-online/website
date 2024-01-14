@@ -8,8 +8,6 @@ interface metadata {
 	}
 }
 
-export const prerender = true;
-
 export const load = async ({ params }: metadata) =>{
 	const response = await fetch(`${config.url}api/articles/json`);
 	const posts = ((await response.json()).posts) as Article[];
