@@ -11,7 +11,8 @@ interface metadata {
 }
 
 interface frontmatter {
-	title: string
+	title: string;
+	date: Date;
 }
 
 export const load: PageServerLoad = async ({ params }: metadata) =>{
@@ -22,6 +23,7 @@ export const load: PageServerLoad = async ({ params }: metadata) =>{
 
 	return { post: {
 		title: ((compiled?.data?.fm as any) as frontmatter).title,
+		date: ((compiled?.data?.fm as any) as frontmatter).date,
 		content: compiled?.code
 	}};
 	} catch (err) {
@@ -31,3 +33,5 @@ export const load: PageServerLoad = async ({ params }: metadata) =>{
 		});
 	}
 }
+
+export const prerender = 'auto';

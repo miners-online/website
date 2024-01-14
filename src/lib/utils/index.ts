@@ -1,3 +1,11 @@
+export interface Article {
+	meta: {
+		title: string;
+		date: string;
+	},
+	path: string;
+}
+
 export const fetchMarkdownPosts = async () => {
 	const allPostFiles = import.meta.glob('/src/content/articles/**/*.md');
 	const iterablePostFiles = Object.entries(allPostFiles);
@@ -11,7 +19,7 @@ export const fetchMarkdownPosts = async () => {
 			return {
 				meta: metadata,
 				path: postPath
-			};
+			} as Article;
 		})
 	);
 

@@ -5,19 +5,16 @@
     import {
         Header,
         HeaderUtilities,
-        HeaderAction,
         HeaderSearch,
-        HeaderPanelLinks,
-        HeaderPanelDivider,
-        HeaderPanelLink,
         SkipToContent,
         Grid,
         Row,
         Column,
         Theme,
-        RadioButtonGroup,
-        RadioButton,
-        Content
+        Content,
+        SideNav,
+        SideNavItems,
+        SideNavLink
     } from "carbon-components-svelte";
 
     const data = [
@@ -49,9 +46,16 @@
             );
             })
         : [];
+
+    let isSideNavOpen = false;
 </script>
 
-<Header company="{config.title}" platformName="">
+<Header
+    company="{config.title}"
+    platformName=""
+    bind:isSideNavOpen
+    persistentHamburgerMenu={true}
+>
     <svelte:fragment slot="skip-to-content">
         <SkipToContent />
     </svelte:fragment>
@@ -70,6 +74,13 @@
     </HeaderUtilities>
 </Header>
 
+<SideNav bind:isOpen={isSideNavOpen}>
+    <SideNavItems>
+        <SideNavLink text="Home" href="/"/>
+        <SideNavLink text="Articles" href="/articles"/>
+    </SideNavItems>
+</SideNav>
+
 <Content style="height:100%; padding: 0;">
     <Grid fullWidth id="main">
         <slot/>
@@ -84,7 +95,7 @@
                     bind:theme="{$theme}"
                     render="toggle"
                     toggle={{
-                        themes: ["g10", "g80"],
+                        themes: ["white", "g80"],
                         labelA: "Enable dark mode",
                         labelB: "Enable dark mode",
                         hideLabel: true,
@@ -92,8 +103,7 @@
                     }}
                     on:update="{(e) => {
                         const eTheme = e.detail.theme;
-                        document.documentElement.style.setProperty("color-scheme", ["white", "g10"].includes(eTheme) ? "light" : "dark");
-                        theme.set(eTheme)
+                        document.documentElement.style.setProperty("color-scheme", ["white", "g80"].includes(eTheme) ? "light" : "dark");
                     }}"
                 />
             </Column>

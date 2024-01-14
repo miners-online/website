@@ -1,5 +1,4 @@
 import { dev } from '$app/environment';
-import type { CarbonTheme } from 'carbon-components-svelte/src/Theme/Theme.svelte';
 
 export const title = 'Miners Online';
 export const description = 'The official site for Miners Online';
