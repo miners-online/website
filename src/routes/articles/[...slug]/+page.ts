@@ -11,7 +11,8 @@ interface metadata {
 export const load = async ({ params }: metadata) =>{
 	const response = await fetch(`${config.url}api/articles/json`);
     if (!response.ok) {
-		throw new Error(`HTTP error! Status: ${response.status}, Response: ${response})`);
+		console.error("response %o", response)
+		throw new Error(`HTTP error! Status: ${response.status})`);
 	}
 
 	const posts = ((await response.json()).posts) as Article[];
