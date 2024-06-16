@@ -10,9 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxthq/studio": "^2.0.0",
     "nuxt": "^3.12.1",
+    "shadcn-docs-nuxt": "latest",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3",
-    "shadcn-docs-nuxt": "latest"
+    "vue-router": "^4.3.3"
   }
 }
