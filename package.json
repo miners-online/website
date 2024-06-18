@@ -12,7 +12,7 @@
   "dependencies": {
     "@nuxthq/studio": "^2.0.0",
     "nuxt": "^3.12.1",
-    "shadcn-docs-nuxt": "latest",
+    "shadcn-docs-nuxt": "0.3.1",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   }
