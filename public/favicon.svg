@@ -51,10 +51,6 @@
          id="stop8" />
     </linearGradient>
   </defs>
-  <style
-     id="style13">
-    @media (prefers-color-scheme:dark){:root{filter:invert(100%)}}
-  </style>
   <rect
      fill="#f25022"
      width="30.200001"
