@@ -2,5 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: ['shadcn-docs-nuxt'],
-  modules: ["@nuxthq/studio"]
+  modules: ["@nuxthq/studio"],
+  routeRules: {
+    '/.well-known/acme-challenge/**': {
+      proxy: {
+        to: 'https://admin.minersonline.uk/.well-known/acme-challenge/',
+      }
+    }
+  }
 });
