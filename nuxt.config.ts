@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/.well-known/acme-challenge/**': {
       proxy: {
-        to: 'http://admin.minersonline.uk/.well-known/acme-challenge/',
+        to: 'http://90.212.186.149/.well-known/acme-challenge/',
       }
     }
   }
