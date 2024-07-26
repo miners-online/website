@@ -4,6 +4,11 @@ export default defineNuxtConfig({
   extends: ['shadcn-docs-nuxt'],
   modules: ["@nuxthq/studio"],
   routeRules: {
+    '/.well-known/acme-challenge/': {
+      proxy: {
+        to: 'http://90.212.186.149/.well-known/acme-challenge/',
+      }
+    },
     '/.well-known/acme-challenge/**': {
       proxy: {
         to: 'http://90.212.186.149/.well-known/acme-challenge/**',
