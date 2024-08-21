@@ -1,7 +1,4 @@
----
-title: Joining
-description: How to connect to our Minecraft server
----
+# How to join our Minecraft server
 
 Joining the Miners Online Minecraft server is a straightforward process. Follow this guide to get started:
 

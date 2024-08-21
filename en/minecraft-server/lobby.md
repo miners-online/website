@@ -1,7 +1,4 @@
----
-title: Lobby
-description: The lobby is the central hub of the server!
----
+# Lobby
 
 The lobby contains a small medieval house designed by the Planet Minecraft user xXKeIvinDudeXx found [online](https://www.planetminecraft.com/project/small-medieval-house-schematic-3576946/)
 

@@ -1,7 +1,4 @@
----
-title: Bed Wars
-description: Protect and defend your team's bed!
----
+# Bed Wars
 
 ## Joining
 

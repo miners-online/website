@@ -1,21 +1,17 @@
 import { defineConfig, type DefaultTheme } from "vitepress";
 
-// https://vitepress.dev/reference/site-config
-export default defineConfig({
-  title: "Miners Online",
-
-  rewrites: {
-    "en/:rest*": ":rest*",
-  },
-
-  lastUpdated: true,
-  cleanUrls: true,
-  metaChunk: true,
-
+export const en = defineConfig({
+  lang: "en-US",
   description: "The official website for Miners Online.",
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: nav(),
+
+    editLink: {
+      pattern: "https://github.com/miners-online/website/edit/main/:path",
+      text: "Edit on GitHub",
+    },
 
     sidebar: {
       "/minecraft-server/": {
@@ -24,14 +20,8 @@ export default defineConfig({
       },
     },
 
-    socialLinks: [{ icon: "github", link: "https://github.com/miners-online" }],
-
-    search: {
-      provider: "local",
-    },
-
     footer: {
-      copyright: "Copyright © 2023-present Miners Online",
+      copyright: `Copyright © 2023-${new Date().getFullYear()}  Miners Online`,
     },
   },
 });
