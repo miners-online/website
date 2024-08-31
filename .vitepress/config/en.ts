@@ -54,7 +54,6 @@ function sidebarMinecraftServer(): DefaultTheme.SidebarItem[] {
       text: "Game modes",
       collapsed: false,
       items: [
-        { text: "Bed wars", link: "bedwars" },
         { text: "Lobby ", link: "lobby" },
       ],
     },
@@ -63,6 +62,7 @@ function sidebarMinecraftServer(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       items: [
         { text: "Lobby ", link: "legacy/lobby" },
+        { text: "Bed wars ", link: "legacy/bedwars" },
       ],
     },
   ];
