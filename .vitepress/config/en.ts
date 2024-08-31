@@ -58,5 +58,12 @@ function sidebarMinecraftServer(): DefaultTheme.SidebarItem[] {
         { text: "Lobby ", link: "lobby" },
       ],
     },
+    {
+      text: "Legacy",
+      collapsed: true,
+      items: [
+        { text: "Lobby ", link: "legacy/lobby" },
+      ],
+    },
   ];
 }
