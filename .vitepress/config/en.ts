@@ -29,17 +29,7 @@ export const en = defineConfig({
 function nav(): DefaultTheme.NavItem[] {
   return [
     { text: "Home", link: "/" },
-    { text: "Blog", link: "/blog" },
-    {
-      text: "Projects",
-      items: [
-        {
-          text: "Net Bits",
-          link: "https://netbits.minersonline.uk/en/latest/",
-        },
-        { text: "Minecraft Server", link: "/minecraft-server" },
-      ],
-    },
+    { text: "Documentation", link: "/minecraft-server" },
   ];
 }
 
