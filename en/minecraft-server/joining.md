@@ -4,7 +4,7 @@ Joining the Miners Online Minecraft server is a straightforward process. Follow 
 
 ## Step 1: Ensure You Have Minecraft Java Edition
 
-Miners Online is a server for Minecraft Java Edition. Make sure you have the Java version installed on your computer. If not, you can purchase and download it from the official Minecraft website: [Minecraft.net](https://www.minecraft.net/).
+Miners Online is a server for Minecraft Java Edition. Make sure you have the Java version installed on your computer. If not, you can purchase and download it from the official [Minecraft website](https://www.minecraft.net/).
 
 ## Step 2: Launch Minecraft
 
@@ -13,6 +13,9 @@ Miners Online is a server for Minecraft Java Edition. Make sure you have the Jav
 2. Log in with your Microsoft account credentials.
 
 3. Make sure your game is updated to the latest version.
+
+> [!TIP]
+> It is possible to join Miners Online on any Minecraft version greater then 1.7, for the best experience 1.21+ is recommended.
 
 ## Step 3: Add the Miners Online Server
 

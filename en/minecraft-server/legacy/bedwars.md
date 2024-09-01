@@ -1,4 +1,4 @@
-# Bed Wars
+# Bed Wars (Legacy)
 
 ## Joining
 

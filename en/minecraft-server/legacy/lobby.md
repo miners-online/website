@@ -1,5 +1,5 @@
 ---
-title: Lobby
+title: Lobby (Legacy)
 description: The lobby is the central hub of the server!
 ---
 
