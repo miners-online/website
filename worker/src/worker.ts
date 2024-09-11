@@ -86,7 +86,7 @@ async function setPlayerStatistic(uuid: string, gameName: string, statName: stri
     VALUES (?, ?, ?, ?)
     ON CONFLICT(uuid, game_name, stat_name) DO UPDATE SET value = excluded.value`;
   await env.DB.prepare(query).bind(uuid, gameName, statName, value).run();
-  return new Response('Statistic updated', { status: 200 });
+  return new Response(JSON.stringify({message: 'Statistic updated', status: 200}), { status: 200 });
 }
 
 async function getPlayerGameStats(uuid: string, gameName: string, env: Env): Promise<Response> {
@@ -95,9 +95,9 @@ async function getPlayerGameStats(uuid: string, gameName: string, env: Env): Pro
     WHERE uuid = ? AND game_name = ?`;
   const result = await env.DB.prepare(query).bind(uuid, gameName).all();
   if (result.results.length > 0) {
-    return new Response(JSON.stringify(result.results), { status: 200 });
+    return new Response(JSON.stringify({message: "Success", status: 200, data: result.results}), { status: 200 });
   }
-  return new Response('Game stats not found', { status: 404 });
+  return new Response(JSON.stringify({message: 'Game stats not found', status: 404}), { status: 404 });
 }
 
 async function deletePlayerStatistic(uuid: string, gameName: string, statName: string, env: Env): Promise<Response> {
@@ -105,5 +105,5 @@ async function deletePlayerStatistic(uuid: string, gameName: string, statName: s
     DELETE FROM player_statistics
     WHERE uuid = ? AND game_name = ? AND stat_name = ?`;
   await env.DB.prepare(query).bind(uuid, gameName, statName).run();
-  return new Response('Statistic deleted', { status: 200 });
+  return new Response(JSON.stringify({message: 'Statistic deleted', status: 200}), { status: 200 });
 }
