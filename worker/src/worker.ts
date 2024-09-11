@@ -8,45 +8,49 @@ interface Env {
 export default {
   async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/api/statistics/')) {
-      const sections = url.pathname.replace("/api/statistics/", "").split("/");
-      const uuid = sections[0];
-      const gameName = sections[1];
-      const statName = sections[2];
+    if (url.pathname.startsWith('/api/')) {
+      try {
+        if (url.pathname.startsWith('/api/statistics/')) {
+          const sections = url.pathname.replace("/api/statistics/", "").split("/");
+          const uuid = sections[0];
+          const gameName = sections[1];
+          const statName = sections[2];
 
-      console.log(sections);
-
-      const token = request.headers.get('Authorization');
-      if (!token) {
-        return new Response('Unauthorized', { status: 401 });
-      }
-      
-      const authClient = await getClientForToken(token, env);
-      if (!authClient) {
-        return new Response('Invalid token', { status: 403 });
-      }
-      
-      switch (request.method) {
-        case 'POST':
-          if (statName && await hasPermission(token, `statistics.${gameName}.write`, env)) {
-            const body = await request.json();
-            return await setPlayerStatistic(uuid, gameName, statName, body.value, env);
+          const token = request.headers.get('Authorization');
+          if (!token) {
+            return new Response(JSON.stringify({message: 'Unauthorized', status: 401}), { status: 401 });
           }
-          break;
-        case 'GET':
-          if (gameName && await hasPermission(token, `statistics.${gameName}.read`, env)) {
-            return await getPlayerGameStats(uuid, gameName, env);
+          
+          const authClient = await getClientForToken(token, env);
+          if (!authClient) {
+            return new Response(JSON.stringify({message: 'Invalid token', status: 403}), { status: 403 });
           }
-          break;
-        case 'DELETE':
-          if (statName && await hasPermission(token, `statistics.${gameName}.delete`, env)) {
-            return await deletePlayerStatistic(uuid, gameName, statName, env);
+          
+          switch (request.method) {
+            case 'POST':
+              if (statName && await hasPermission(token, `statistics.${gameName}.write`, env)) {
+                const body = await request.text();
+                return await setPlayerStatistic(uuid, gameName, statName, body, env);
+              }
+              break;
+            case 'GET':
+              if (gameName && await hasPermission(token, `statistics.${gameName}.read`, env)) {
+                return await getPlayerGameStats(uuid, gameName, env);
+              }
+              break;
+            case 'DELETE':
+              if (statName && await hasPermission(token, `statistics.${gameName}.delete`, env)) {
+                return await deletePlayerStatistic(uuid, gameName, statName, env);
+              }
+              break;
+            default:
+              return new Response(JSON.stringify({message: 'Method Not Allowed', status: 405}), { status: 405 });
           }
-          break;
-        default:
-          return new Response('Method Not Allowed', { status: 405 });
+          return new Response(JSON.stringify({message: 'Forbidden', status: 403}), { status: 403 });
+        }
+      } catch (error) {
+        return new Response(JSON.stringify({message: 'An error occurred whilst processing the request', status: 500, error: error}), { status: 500 });
       }
-      return new Response('Forbidden', { status: 403 });
     }
 
     return env.ASSETS.fetch(request);
@@ -70,16 +74,10 @@ async function hasPermission(token: string, requiredPermission: string, env: Env
     JOIN tokens ON permissions.token_id = tokens.id
     WHERE tokens.token = ? AND permissions.permission = ? LIMIT 1`;
 
-  console.log(`Checking permission for token: ${token}`);
-  console.log(`Required permission: ${requiredPermission}`);
-
   const result = await env.DB.prepare(query).bind(token, requiredPermission).first();
-
-  console.log('Query result:', result); // Log the result to inspect what it returns
 
   return !!result; // Returns true if the permission exists for the token
 }
-
 
 // Player statistics operations
 async function setPlayerStatistic(uuid: string, gameName: string, statName: string, value: string, env: Env): Promise<Response> {
