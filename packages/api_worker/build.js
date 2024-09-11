@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 // Output directory for your site
-const outputDir = path.join(process.cwd(), '.vitepress/dist/');
+const outputDir = path.join(process.cwd(), '../../publish_out');
 
 // Ensure the output directory exists
 if (!fs.existsSync(outputDir)) {
@@ -11,7 +11,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 esbuild.build({
-  entryPoints: ['worker/src/worker.ts'],  // Entry point for your TypeScript file
+  entryPoints: ['src/worker.ts'],  // Entry point for your TypeScript file
   bundle: true,
   outfile: path.join(outputDir, '_worker.js'),  // Output to _worker.js in your site's output directory
   platform: 'browser',  // Target Cloudflare Workers

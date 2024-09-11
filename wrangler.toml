@@ -1,7 +1,10 @@
 compatibility_date = "2024-09-11"
 
 name = "miners-online-web"
-pages_build_output_dir = ".vitepress/dist"
+pages_build_output_dir = "./publish_out"
+
+[build]
+command = "npm run build"
 
 [[d1_databases]]
 binding = "DB" # available in your Worker on env.DB

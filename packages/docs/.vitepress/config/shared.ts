@@ -4,6 +4,8 @@ import { defineConfig } from "vitepress";
 export const shared = defineConfig({
   title: "Miners Online",
 
+  outDir: '../../publish_out',
+
   rewrites: {
     "en/:rest*": ":rest*",
   },

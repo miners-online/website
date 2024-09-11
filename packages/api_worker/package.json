@@ -1,0 +1,16 @@
+{
+  "name": "api_worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20240821.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.1",
+    "typescript": "^5.6.2"
+  }
+}
+  
