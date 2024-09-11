@@ -3,10 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "npm run docs:build && npm run worker:build",
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "worker:build": "node functions/build.js"
+    "worker:build": "node worker/build.js"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20240821.1",

@@ -11,7 +11,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 esbuild.build({
-  entryPoints: ['functions/src/worker.ts'],  // Entry point for your TypeScript file
+  entryPoints: ['worker/src/worker.ts'],  // Entry point for your TypeScript file
   bundle: true,
   outfile: path.join(outputDir, '_worker.js'),  // Output to _worker.js in your site's output directory
   platform: 'browser',  // Target Cloudflare Workers
