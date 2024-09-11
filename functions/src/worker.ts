@@ -1,49 +1,55 @@
-import { D1Database } from "@cloudflare/workers-types";
+import { D1Database, ExportedHandler, Fetcher } from "@cloudflare/workers-types";
 
 interface Env {
   DB: D1Database;
+  ASSETS: Fetcher;
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
-    const uuid = url.pathname.split('/')[2];
-    const gameName = url.pathname.split('/')[4];
-    const statName = url.pathname.split('/')[6];
+    if (url.pathname.startsWith('/api/statistics/')) {
+      const urlSub = url.pathname.replace("/api/statistics/", "");
+      const uuid = urlSub.split('/')[2];
+      const gameName = urlSub.split('/')[4];
+      const statName = urlSub.split('/')[6];
 
-		const token = request.headers.get('Authorization');
-		if (!token) {
-			return new Response('Unauthorized', { status: 401 });
-		}
-		
-		const authClient = await getClientForToken(token, env);
-		if (!authClient) {
-			return new Response('Invalid token', { status: 403 });
-		}
-		
-		switch (request.method) {
-			case 'POST':
-				if (statName && await hasPermission(token, `statistics.${gameName}.write`, env)) {
-					const body = await request.json();
-					return await setPlayerStatistic(uuid, gameName, statName, body.value, env);
-				}
-				break;
-			case 'GET':
-				if (gameName && await hasPermission(token, `statistics.${gameName}.read`, env)) {
-					return await getPlayerGameStats(uuid, gameName, env);
-				}
-				break;
-			case 'DELETE':
-				if (statName && await hasPermission(token, `statistics.${gameName}.delete`, env)) {
-					return await deletePlayerStatistic(uuid, gameName, statName, env);
-				}
-				break;
-			default:
-				return new Response('Method Not Allowed', { status: 405 });
-		}
-		return new Response('Forbidden', { status: 403 });
+      const token = request.headers.get('Authorization');
+      if (!token) {
+        return new Response('Unauthorized', { status: 401 });
+      }
+      
+      const authClient = await getClientForToken(token, env);
+      if (!authClient) {
+        return new Response('Invalid token', { status: 403 });
+      }
+      
+      switch (request.method) {
+        case 'POST':
+          if (statName && await hasPermission(token, `statistics.${gameName}.write`, env)) {
+            const body = await request.json();
+            return await setPlayerStatistic(uuid, gameName, statName, body.value, env);
+          }
+          break;
+        case 'GET':
+          if (gameName && await hasPermission(token, `statistics.${gameName}.read`, env)) {
+            return await getPlayerGameStats(uuid, gameName, env);
+          }
+          break;
+        case 'DELETE':
+          if (statName && await hasPermission(token, `statistics.${gameName}.delete`, env)) {
+            return await deletePlayerStatistic(uuid, gameName, statName, env);
+          }
+          break;
+        default:
+          return new Response('Method Not Allowed', { status: 405 });
+      }
+      return new Response('Forbidden', { status: 403 });
+    }
+
+    return env.ASSETS.fetch(request);
   },
-};
+} satisfies ExportedHandler<Env>;
 
 // Query the database to get client information based on token
 async function getClientForToken(token: string, env: Env): Promise<any> {

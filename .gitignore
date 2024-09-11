@@ -24,5 +24,6 @@ logs
 .env.*
 !.env.example
 
-# Wrangler cache
+# Wrangler / workers build
 .wrangler
+functions/dist
