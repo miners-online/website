@@ -9,10 +9,12 @@ export default {
   async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/api/statistics/')) {
-      const urlSub = url.pathname.replace("/api/statistics/", "");
-      const uuid = urlSub.split('/')[2];
-      const gameName = urlSub.split('/')[4];
-      const statName = urlSub.split('/')[6];
+      const sections = url.pathname.replace("/api/statistics/", "").split("/");
+      const uuid = sections[1];
+      const gameName = sections[2];
+      const statName = sections[3];
+
+      console.log(sections);
 
       const token = request.headers.get('Authorization');
       if (!token) {

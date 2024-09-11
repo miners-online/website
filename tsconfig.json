@@ -22,6 +22,7 @@
         "template",
         "bin",
         "docs/snippets",
-        "scripts"
+        "scripts",
+        "worker/**"
     ]
 }

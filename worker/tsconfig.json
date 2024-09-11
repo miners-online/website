@@ -3,9 +3,9 @@
     "target": "ES2020",
     "module": "ESNext",
     "types": ["@cloudflare/workers-types"],
-    "outDir": "./dist", // This is where the intermediate TypeScript files will be placed
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext"
   },
   "include": [
     "src/**/*"
