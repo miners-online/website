@@ -69,10 +69,17 @@ async function hasPermission(token: string, requiredPermission: string, env: Env
     SELECT 1 FROM permissions
     JOIN tokens ON permissions.token_id = tokens.id
     WHERE tokens.token = ? AND permissions.permission = ? LIMIT 1`;
-  
+
+  console.log(`Checking permission for token: ${token}`);
+  console.log(`Required permission: ${requiredPermission}`);
+
   const result = await env.DB.prepare(query).bind(token, requiredPermission).first();
+
+  console.log('Query result:', result); // Log the result to inspect what it returns
+
   return !!result; // Returns true if the permission exists for the token
 }
+
 
 // Player statistics operations
 async function setPlayerStatistic(uuid: string, gameName: string, statName: string, value: string, env: Env): Promise<Response> {
