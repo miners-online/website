@@ -10,9 +10,9 @@ export default {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/api/statistics/')) {
       const sections = url.pathname.replace("/api/statistics/", "").split("/");
-      const uuid = sections[1];
-      const gameName = sections[2];
-      const statName = sections[3];
+      const uuid = sections[0];
+      const gameName = sections[1];
+      const statName = sections[2];
 
       console.log(sections);
 
