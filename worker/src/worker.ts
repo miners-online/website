@@ -68,9 +68,10 @@ async function hasPermission(token: string, requiredPermission: string, env: Env
   const query = `
     SELECT 1 FROM permissions
     JOIN tokens ON permissions.token_id = tokens.id
-    WHERE tokens.token = ? AND permissions.permission = ?`;
+    WHERE tokens.token = ? AND permissions.permission = ? LIMIT 1`;
+  
   const result = await env.DB.prepare(query).bind(token, requiredPermission).first();
-  return !!result;
+  return !!result; // Returns true if the permission exists for the token
 }
 
 // Player statistics operations
