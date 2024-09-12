@@ -6,6 +6,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import "./global.scss";
+import AppHeader from "~/components/AppHeader/AppHeader"
+import { Content, Theme } from '@carbon/react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,7 +21,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <div>
+          <Theme theme="g100">
+            <AppHeader />
+          </Theme>
+          <Content>
+            {children}
+          </Content>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>

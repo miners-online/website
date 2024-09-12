@@ -1,5 +1,4 @@
 /* Bring in all the styles for Carbon in your root/global stylesheet */
 @use '@carbon/react';
 
-/* Or bring in the styles for one component */
-@use '@carbon/react/scss/components/button';
+@use './components/AppHeader/_app-header.scss'
