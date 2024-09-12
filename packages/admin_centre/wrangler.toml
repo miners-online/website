@@ -1,0 +1,9 @@
+compatibility_date = "2024-09-11"
+
+name = "miners-online-admin"
+pages_build_output_dir = "./build/client"
+
+[[d1_databases]]
+binding = "DB" # available in your Worker on env.DB
+database_name = "minersonline-statistics"
+database_id = "94afe8ac-b1bf-4d6b-be92-aa1e06ab86ec"
