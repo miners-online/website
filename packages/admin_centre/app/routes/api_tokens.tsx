@@ -6,10 +6,10 @@ import {
   useLoaderData
 } from "@remix-run/react";
 
-import type { SecureAPIToken } from "~/lib/models";
+import type { DisplayableAPIToken } from "~/lib/models";
 import { getAPITokensSecure } from "~/lib/models";
-import { Button } from "~/components/ui/button";
-
+import { DataTable } from "~/components/data-table";
+import { columns } from "~/components/tokens-columns";
 
 export const meta: MetaFunction = () => {
   return [
@@ -27,20 +27,13 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function API_Tokens() {
-  const results: SecureAPIToken[] = useLoaderData<typeof loader>() as SecureAPIToken[];
+  const results: DisplayableAPIToken[] = useLoaderData<typeof loader>() as DisplayableAPIToken[];
   return (
     <>
       <h1>API Tokens</h1>
-      {results.map((token) => {
-        return (
-          <div key={token.id}>
-            <h2>{token.clientId}</h2>
-            <p>{token.clientId}</p>
-            <p>{new Date(token.createdAt).toDateString()}</p>
-            <p>{new Date(token.updatedAt).toDateString()}</p>
-          </div>
-        )
-      })}
+      <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={results} filterKey="name" filterDisplay="names"/>
+    </div>
     </>
   );
 }

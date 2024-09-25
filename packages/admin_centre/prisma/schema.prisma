@@ -25,6 +25,7 @@ model api_client {
 
 model api_token {
   id           String              @id @default(uuid())
+  name         String
   value        String
   clientId     String
   client       api_client          @relation(fields: [clientId], references: [id])
