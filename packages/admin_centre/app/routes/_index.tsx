@@ -1,26 +1,24 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 
-import { Button } from '@carbon/react';
-import { Add } from '@carbon/react/icons';
-import React from "react";
-
+import { Button } from "~/components/ui/button"
+import { ModeToggle } from "~/components/mode-toggle"
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "API Tokens | Admin Centre" },
+    { title: "Home | Admin Centre" },
     {
       name: "description",
-      content: "Miners Online Admin Centre API Tokens",
+      content: "Miners Online Admin Centre Home",
     },
   ];
 };
 
-export default function API_Tokens() {
+export default function Home() {
   return (
     <>
-      <h1>API Tokens</h1>
+      <ModeToggle/>
+      <h1>Home</h1>
       <Button>Click me</Button>
-      <Add />
     </>
   );
 }
