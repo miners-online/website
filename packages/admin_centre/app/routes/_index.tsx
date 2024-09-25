@@ -1,7 +1,8 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 
 import { Button } from "~/components/ui/button"
-import { ModeToggle } from "~/components/mode-toggle"
+import { BaseLayout } from "~/layouts/base-layout";
+import { BreadcrumbItem } from "~/components/nav/header";
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,12 +14,18 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const breadcrumbs: BreadcrumbItem[] = [
+  {
+    label: "Home",
+    to: "/"
+  }
+]
+
 export default function Home() {
   return (
-    <>
-      <ModeToggle/>
+    <BaseLayout breadcrumbs={breadcrumbs}>
       <h1>Home</h1>
       <Button>Click me</Button>
-    </>
+    </BaseLayout>
   );
 }

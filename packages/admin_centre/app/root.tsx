@@ -13,6 +13,7 @@ import type { LinksFunction } from "@remix-run/node";
 import stylesheet from "~/tailwind.css?url";
 import clsx from "clsx"
 import { ThemeProvider, useTheme, PreventFlashOnWrongTheme } from "remix-themes"
+import { TooltipProvider } from "~/components/ui/tooltip";
  
 import { themeSessionResolver } from "./sessions.server"
 
@@ -34,9 +35,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function AppWithProviders() {
   const data = useLoaderData<typeof loader>()
   return (
-    <ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
-      <App />
-    </ThemeProvider>
+    <TooltipProvider>
+      <ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
+        <App />
+      </ThemeProvider>
+    </TooltipProvider>
   )
 }
 

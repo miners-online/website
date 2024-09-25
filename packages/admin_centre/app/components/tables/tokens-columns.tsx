@@ -24,7 +24,7 @@ export const columns: ColumnDef<DisplayableAPIToken>[] = [
   },
   {
     accessorKey: "clientName",
-    header: "Client"
+    header: "Owner"
   },
   {
     accessorKey: "createdAt",

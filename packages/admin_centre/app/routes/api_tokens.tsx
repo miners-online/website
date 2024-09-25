@@ -6,10 +6,20 @@ import {
   useLoaderData
 } from "@remix-run/react";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card"
+
 import type { DisplayableAPIToken } from "~/lib/models";
 import { getAPITokensSecure } from "~/lib/models";
-import { DataTable } from "~/components/data-table";
-import { columns } from "~/components/tokens-columns";
+import { DataTable } from "~/components/tables/data-table";
+import { columns } from "~/components/tables/tokens-columns";
+import { BaseLayout } from "~/layouts/base-layout";
+import { BreadcrumbItem } from "~/components/nav/header";
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,6 +31,17 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const breadcrumbs: BreadcrumbItem[] = [
+  {
+    label: "Home",
+    to: "/"
+  },
+  {
+    label: "API Tokens",
+    to: "/api_tokens"
+  }
+]
+
 export const loader: LoaderFunction = async () => {
   let results = await getAPITokensSecure();
   return json(results);
@@ -29,11 +50,18 @@ export const loader: LoaderFunction = async () => {
 export default function API_Tokens() {
   const results: DisplayableAPIToken[] = useLoaderData<typeof loader>() as DisplayableAPIToken[];
   return (
-    <>
-      <h1>API Tokens</h1>
-      <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={results} filterKey="name" filterDisplay="names"/>
-    </div>
-    </>
+    <BaseLayout breadcrumbs={breadcrumbs}>
+      <Card>
+        <CardHeader>
+          <CardTitle>API Tokens</CardTitle>
+          <CardDescription>
+            Manage and create your API Tokens.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <DataTable columns={columns} data={results} filterKey="name" filterDisplay="names"/>
+        </CardContent>
+      </Card>
+    </BaseLayout>
   );
 }
