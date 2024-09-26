@@ -59,7 +59,16 @@ export default function API_Tokens() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <DataTable columns={columns} data={results} filterKey="name" filterDisplay="names"/>
+          <DataTable
+            columns={columns}
+            data={results}
+            filterKey="name"
+            filterDisplay="names"
+            addButton={{
+              content: "Create new token",
+              onClick: () => alert("HI")
+            }}
+          />
         </CardContent>
       </Card>
     </BaseLayout>
