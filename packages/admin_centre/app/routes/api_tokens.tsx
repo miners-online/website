@@ -24,13 +24,14 @@ import {
 } from "~/components/ui/dialog"
 
 import { Button } from "~/components/ui/button";
-
-import type { DisplayableAPIToken } from "~/lib/models";
+import { Option } from "~/components/ui/multi-select"
 import { getAPITokensSecure } from "~/lib/models";
 import { DataTable } from "~/components/tables/data-table";
 import { columns } from "~/components/tables/tokens-columns";
 import { BaseLayout } from "~/layouts/base-layout";
 import { BreadcrumbItem } from "~/components/nav/header";
+import { CreateTokenForm } from "~/components/forms/create-token-form"
+import { getGames } from "~/lib/models";
 
 export const meta: MetaFunction = () => {
   return [
@@ -55,11 +56,16 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export const loader: LoaderFunction = async () => {
   let results = await getAPITokensSecure();
-  return json(results);
+  const games = await getGames();
+  const options = games.map((item) => ({
+    label: item.name,
+    value: item.id,
+  }));
+  return json({ gameOptions: options, tokens: results });
 };
 
 export default function API_Tokens() {
-  const results: DisplayableAPIToken[] = useLoaderData<typeof loader>() as DisplayableAPIToken[];
+  const { gameOptions, tokens } = useLoaderData<typeof loader>();
   return (
     <BaseLayout breadcrumbs={breadcrumbs}>
       <Card>
@@ -72,11 +78,11 @@ export default function API_Tokens() {
         <CardContent>
           <DataTable
             columns={columns}
-            data={results}
+            data={tokens}
             filterKey="name"
             filterDisplay="names"
             toolbarExtra={
-              <CreateTokenDiaglog/>
+              <CreateTokenDialog gameOptions={gameOptions}/>
             }
           />
         </CardContent>
@@ -85,7 +91,7 @@ export default function API_Tokens() {
   );
 }
 
-export function CreateTokenDiaglog() {
+export function CreateTokenDialog({ gameOptions }: { gameOptions: Option[] }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -97,7 +103,7 @@ export function CreateTokenDiaglog() {
         <DialogHeader>
           <DialogTitle>Create new token</DialogTitle>
           <DialogDescription>
-            Blah
+            <CreateTokenForm gameOptions={gameOptions}/>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

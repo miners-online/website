@@ -14,6 +14,7 @@ import stylesheet from "~/tailwind.css?url";
 import clsx from "clsx"
 import { ThemeProvider, useTheme, PreventFlashOnWrongTheme } from "remix-themes"
 import { TooltipProvider } from "~/components/ui/tooltip";
+import { Toaster } from "~/components/ui/toaster"
  
 import { themeSessionResolver } from "./sessions.server"
 
@@ -59,6 +60,7 @@ function App() {
       </head>
       <body>
         <Outlet />
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
       </body>

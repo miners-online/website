@@ -38,3 +38,8 @@ export const getClient = async (client_id: string) => {
   })
   return client;
 };
+
+export const getGames = async () => {
+  let games = await prisma.game.findMany();
+  return games;
+};
