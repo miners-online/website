@@ -22,7 +22,6 @@ import {
   TableRow,
 } from "~/components/ui/table";
 
-import { PlusIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 
@@ -31,11 +30,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
   filterKey: string
   filterDisplay: string
-  addButton?: {
-    onClick: React.MouseEventHandler<HTMLButtonElement>
-    isIcon?: boolean
-    content: React.ReactNode | string
-  }
+  toolbarExtra?: React.ReactNode
 }
 
 export function DataTable<TData, TValue>({
@@ -43,7 +38,7 @@ export function DataTable<TData, TValue>({
   data,
   filterKey,
   filterDisplay,
-  addButton
+  toolbarExtra
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -68,13 +63,9 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
-        {
-          addButton != undefined ?
-          <Button className="mr-4" size={addButton.isIcon == true ? "icon" : "default"} onClick={addButton.onClick}>
-            {addButton.content}
-          </Button> :
-          <></>
-        }
+
+        {toolbarExtra != undefined ? toolbarExtra : <></>}
+
         <Input
           placeholder={`Filter ${filterDisplay}...`}
           value={(table.getColumn(filterKey)?.getFilterValue() as string) ?? ""}

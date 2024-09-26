@@ -14,6 +14,17 @@ import {
   CardTitle,
 } from "~/components/ui/card"
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog"
+
+import { Button } from "~/components/ui/button";
+
 import type { DisplayableAPIToken } from "~/lib/models";
 import { getAPITokensSecure } from "~/lib/models";
 import { DataTable } from "~/components/tables/data-table";
@@ -64,13 +75,32 @@ export default function API_Tokens() {
             data={results}
             filterKey="name"
             filterDisplay="names"
-            addButton={{
-              content: "Create new token",
-              onClick: () => alert("HI")
-            }}
+            toolbarExtra={
+              <CreateTokenDiaglog/>
+            }
           />
         </CardContent>
       </Card>
     </BaseLayout>
   );
+}
+
+export function CreateTokenDiaglog() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="mr-4">
+          Create new token
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create new token</DialogTitle>
+          <DialogDescription>
+            Blah
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  )
 }
