@@ -1,0 +1,41 @@
+---
+import ButtonStyled from '@modrinth/ui/src/components/base/ButtonStyled.vue';
+import Button from '@modrinth/ui/src/components/base/Button.vue';
+---
+
+<header>
+    <div class="nav-buttons">
+        <ButtonStyled>
+            <Button link="/">Home</Button>
+        </ButtonStyled>
+        <ButtonStyled>
+            <Button link="/wiki">Wiki</Button>
+        </ButtonStyled>
+        <ButtonStyled>
+            <Button link="/wiki/projects/minecraft-serve">Minecraft Server</Button>
+        </ButtonStyled>
+        <ButtonStyled>
+            <Button link="/wiki">Projects</Button>
+        </ButtonStyled>
+        <ButtonStyled>
+            <Button link="/wiki/other/contribute">Contribute</Button>
+        </ButtonStyled>
+    </div>
+</header>
+
+<style>
+header {
+    margin: 16px;
+    height: 40px;            /* Set the header height */
+    display: flex;           /* Use flexbox for vertical alignment */
+    align-items: center;     /* Center the buttons vertically */
+    justify-content: center; /* Center-align buttons horizontally */
+}
+
+.nav-buttons {
+    display: flex;           /* Align buttons horizontally */
+    gap: 1rem;               /* Optional: Add space between buttons */
+    justify-content: center; /* Center-align buttons horizontally */
+    flex-wrap: nowrap;       /* Prevent wrapping of buttons */
+}
+</style>

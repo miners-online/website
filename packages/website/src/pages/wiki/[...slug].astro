@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Card from '@modrinth/ui/src/components/base/Card.vue';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const blogEntries = await getCollection('wiki');
+    return blogEntries.map(entry => ({
+        params: { slug: entry.slug }, props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+const date = new Date(entry.data.pubDate);
+const formattedDate = new Intl.DateTimeFormat(navigator.language).format(date);
+---
+
+<BaseLayout pageTitle={entry.data.title}>
+	<Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
+		<h1>{entry.data.title}</h1>
+        <p>{entry.data.description}</p>
+        <i>Published by {entry.data.author} on {formattedDate} {entry.data.pubTime}</i>
+	</Card>
+    <div class="container">
+        <div class="left-column">
+            <Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
+                <div class="markdown-body">
+                    <Content/>
+                </div>
+            </Card>
+        </div>
+        <div class="right-column">
+            <Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
+                <h3>Table of contents</h3>
+                <ul>
+                {headings.map((heading) => (
+                    <li>
+                        {heading.depth}
+                        <a href={`#${heading.slug}`}>{heading.text}</a>
+                    </li>
+                ))}
+                </ul>
+            </Card>
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .container {
+        display: flex;
+    }
+
+    .left-column {
+        flex: 3; /* 3/4 of the container */
+        margin-right: 12px;
+    }
+
+    .right-column {
+        flex: 1; /* 1/4 of the container */
+    }
+</style>
