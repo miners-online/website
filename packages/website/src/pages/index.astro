@@ -6,26 +6,62 @@ const pageTitle = "Home Page";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
-		<div class="markdown-body">
-			<h1>Welcome to Miners Online!</h1>
-			<p>
-				Miners Online is a collaborative, open-source platform that brings together enthusiasts to create, contribute, and innovate.
-				Based in the United Kingdom, Miners Online is a place where community-driven development flourishes.
-			</p>
+    <div class="container">
+        <div class="left-column">
+			<Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
+				<div class="markdown-body">
+					<h1>Welcome to Miners Online!</h1>
+					<p>
+						Miners Online is a collaborative, open-source platform that brings together enthusiasts to create, contribute, and innovate.
+						Based in the United Kingdom, Miners Online is a place where community-driven development flourishes.
+					</p>
 
-			<h2>Platform Overview</h2>
-			<p>
-				Miners Online supports community-driven projects using modern frameworks to encourage creativity and innovation.
-				Whether you're an experienced developer or just starting, we welcome your contributions.
-			</p>
+					<h2>Platform Overview</h2>
+					<p>
+						Miners Online supports community-driven projects using modern frameworks to encourage creativity and innovation.
+						Whether you're an experienced developer or just starting, we welcome your contributions.
+					</p>
 
-			<h2>Current Projects</h2>
-			<ul>
-				<li><a href="https://minersonline.uk">Miners Online Wiki</a> - A collaborative wiki for tutorials, FAQs, and documentation.</li>
-				<li><a href="#">Minecraft Server</a> - An open-source Minestom-powered server in development.</li>
-			</ul>
+					<h2>Current Projects</h2>
+					<ul>
+						<li><a href="https://minersonline.uk">Miners Online Wiki</a> - A collaborative wiki for tutorials, FAQs, and documentation.</li>
+						<li><a href="#">Minecraft Server</a> - An open-source Minestom-powered server in development.</li>
+					</ul>
+				</div>
+			</Card>
 		</div>
-	</Card>
-	<Sidebar />
+		<div class="right-column">
+			<Sidebar />
+		</div>
+	</div>
 </BaseLayout>
+
+<style>
+	/* Default (Mobile-first) styles */
+	.container {
+		display: flex;
+		flex-direction: column; /* Stack columns vertically by default */
+	}
+
+	.left-column,
+	.right-column {
+		margin-right: 0; /* No margin for mobile */
+	}
+
+	/* Desktop and larger screens */
+	@media (min-width: 1060px) {
+		.container {
+			flex-direction: row; /* Side-by-side layout for larger screens */
+			flex-wrap: wrap; /* Allow wrapping if needed */
+		}
+
+		.left-column {
+			flex: 3; /* 3/4 of the container */
+			margin-right: 12px;
+		}
+
+		.right-column {
+			flex: 1; /* 1/4 of the container */
+		}
+	}
+</style>

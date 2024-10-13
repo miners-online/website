@@ -34,12 +34,31 @@ const formattedDate = new Intl.DateTimeFormat(navigator.language).format(date);
             <Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
                 <h3>Table of contents</h3>
                 <ul>
-                {headings.map((heading) => (
-                    <li>
-                        {heading.depth}
-                        <a href={`#${heading.slug}`}>{heading.text}</a>
-                    </li>
-                ))}
+                    {headings.reduce((acc, heading, index) => {
+                        // Only add the heading if it's a top-level heading or a subheading following a parent heading
+                        const isNewHeading = acc.length === 0 || acc[acc.length - 1].slug !== heading.slug;
+                
+                        if ((heading.depth === 1 || heading.depth === 2) && isNewHeading) {
+                            acc.push(
+                                <li>
+                                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                                    {/* Check for subheadings */}
+                                    {headings[index + 1] && headings[index + 1].depth > heading.depth && (
+                                        <ul>
+                                            {headings.slice(index + 1).map((subheading) => (
+                                                subheading.depth === heading.depth + 1 && isNewHeading && (
+                                                    <li>
+                                                        <a href={`#${subheading.slug}`}>{subheading.text}</a>
+                                                    </li>
+                                                )
+                                            ))}
+                                        </ul>
+                                    )}
+                                </li>
+                            );
+                        }
+                        return acc;
+                    }, [])}
                 </ul>
             </Card>
         </div>
@@ -49,14 +68,42 @@ const formattedDate = new Intl.DateTimeFormat(navigator.language).format(date);
 <style>
     .container {
         display: flex;
+        flex-direction: column; /* Stack columns by default (mobile-first) */
     }
 
     .left-column {
-        flex: 3; /* 3/4 of the container */
-        margin-right: 12px;
+        order: 2; /* Left column goes below the right column */
+        flex: 3;
+        margin-right: 0; /* Remove right margin for mobile */
     }
 
     .right-column {
-        flex: 1; /* 1/4 of the container */
+        order: 1; /* Right column goes on top */
+        flex: 1;
+    }
+
+    /* On larger screens, return to horizontal layout */
+    @media (min-width: 1060px) {
+        .container {
+            flex-direction: row; /* Standard row direction on larger screens */
+        }
+
+        .left-column {
+            order: 1; /* Left column back to its original position */
+            margin-right: 12px; /* Restore margin */
+        }
+
+        .right-column {
+            order: 2; /* Right column back to its original position */
+        }
+    }
+
+    /* Styling for nested lists */
+    .right-column ul {
+        padding-left: 10px; /* Adds padding to nested levels */
+    }
+
+    .right-column li ul {
+        margin-left: 20px; /* Indentation for nested items */
     }
 </style>
