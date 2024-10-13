@@ -1,0 +1,19 @@
+{
+    "title": "Miners Online",
+    "description": "our Minecraft server",
+    "tags": [],
+    "links": [
+        {
+            "type": "wiki",
+            "url": "https://minersonline.uk/wiki/projects/minecraft-server"
+        },
+        {
+            "type": "gh-issues",
+            "url": "https://github.com/miners-online/.github/issues"
+        },
+        {
+            "type": "gh-discussions",
+            "url": "https://github.com/orgs/miners-online/discussions"
+        }
+    ]
+}
