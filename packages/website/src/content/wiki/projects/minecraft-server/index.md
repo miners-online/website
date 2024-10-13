@@ -5,6 +5,7 @@ pubTime: '16:36'
 description: "Welcome to the Miners Online Minecraft Server, a unique minigame-focused experience designed for players who love quick, engaging challenges. Built from an open-source foundation, our server encourages community-driven development and innovation. Whether you're here to contribute ideas or help shape the server's future, you're in the right place!."
 author: 'Samuel Hulme'
 tags: ["minecraft", "networking", "games"]
+relatedProject: 'minecraft-server'
 ---
 
 ## What Sets Miners Online Apart?

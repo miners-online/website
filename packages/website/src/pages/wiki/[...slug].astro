@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Card from '@modrinth/ui/src/components/base/Card.vue';
 import type { MarkdownHeading } from 'astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 
 export async function getStaticPaths() {
     const wikiEntries = await getCollection('wiki');
@@ -15,6 +15,11 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 const date = new Date(entry.data.pubDate);
 const formattedDate = new Intl.DateTimeFormat(navigator.language).format(date);
+
+let project = undefined;
+if (entry.data.relatedProject != undefined) {
+    project = await getEntry('projects', entry.data.relatedProject.id);
+}
 ---
 
 <BaseLayout pageTitle={entry.data.title}>
@@ -32,7 +37,19 @@ const formattedDate = new Intl.DateTimeFormat(navigator.language).format(date);
             </Card>
         </div>
         <div class="right-column">
-            <Card collapsible={false}, defaultCollapsed={false}, noAutoBody>
+            {entry.data.relatedProject && 
+                <Card collapsible={false} defaultCollapsed={false} noAutoBody>
+                    <h3>Project information</h3>
+                    <p>This page is part of the <code>{project?.data.title}</code> project</p>
+                    <h4>Project links:</h4>
+                    <ul>
+                        {project?.data.links.map((link) => (
+                            <li><a href={link.url} target="_blank">{link.type}</a></li> 
+                        ))}
+                    </ul>                   
+                </Card>
+            }
+            <Card collapsible={false} defaultCollapsed={false} noAutoBody>
                 <h3>Table of contents</h3>
                 <ul>
                     {headings.reduce((acc: MarkdownHeading[], heading, index) => {

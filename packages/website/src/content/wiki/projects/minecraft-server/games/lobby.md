@@ -5,6 +5,7 @@ pubTime: '16:36'
 description: "The lobby is the first place you will enter when you join the Miners Online Minecraft server"
 author: 'Samuel Hulme'
 tags: ["minecraft", "networking", "games"]
+relatedProject: 'minecraft-server'
 ---
 
 This version of the lobby was created on the 19th of August 2024.
