@@ -49,36 +49,38 @@ if (entry.data.relatedProject != undefined) {
                     </ul>                   
                 </Card>
             }
-            <Card collapsible={false} defaultCollapsed={false} noAutoBody>
-                <h3>Table of contents</h3>
-                <ul>
-                    {headings.reduce((acc: MarkdownHeading[], heading, index) => {
-                        // Only add the heading if it's a top-level heading or a subheading following a parent heading
-                        const isNewHeading = acc.length === 0 || acc[acc.length - 1].slug !== heading.slug;
-                
-                        if ((heading.depth === 1 || heading.depth === 2) && isNewHeading) {
-                            acc.push(
-                                <li>
-                                    <a href={`#${heading.slug}`}>{heading.text}</a>
-                                    {/* Check for subheadings */}
-                                    {headings[index + 1] && headings[index + 1].depth > heading.depth && (
-                                        <ul>
-                                            {headings.slice(index + 1).map((subheading) => (
-                                                subheading.depth === heading.depth + 1 && isNewHeading && (
-                                                    <li>
-                                                        <a href={`#${subheading.slug}`}>{subheading.text}</a>
-                                                    </li>
-                                                )
-                                            ))}
-                                        </ul>
-                                    )}
-                                </li>
-                            );
-                        }
-                        return acc;
-                    }, [])}
-                </ul>
-            </Card>
+            { headings.length > 0 &&
+                <Card collapsible={false} defaultCollapsed={false} noAutoBody>
+                    <h3>Table of contents</h3>
+                    <ul>
+                        {headings.reduce((acc: MarkdownHeading[], heading, index) => {
+                            // Only add the heading if it's a top-level heading or a subheading following a parent heading
+                            const isNewHeading = acc.length === 0 || acc[acc.length - 1].slug !== heading.slug;
+                    
+                            if ((heading.depth === 1 || heading.depth === 2) && isNewHeading) {
+                                acc.push(
+                                    <li>
+                                        <a href={`#${heading.slug}`}>{heading.text}</a>
+                                        {/* Check for subheadings */}
+                                        {headings[index + 1] && headings[index + 1].depth > heading.depth && (
+                                            <ul>
+                                                {headings.slice(index + 1).map((subheading) => (
+                                                    subheading.depth === heading.depth + 1 && isNewHeading && (
+                                                        <li>
+                                                            <a href={`#${subheading.slug}`}>{subheading.text}</a>
+                                                        </li>
+                                                    )
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </li>
+                                );
+                            }
+                            return acc;
+                        }, [])}
+                    </ul>
+                </Card>
+            }
         </div>
     </div>
 </BaseLayout>
