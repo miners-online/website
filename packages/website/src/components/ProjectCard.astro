@@ -1,0 +1,45 @@
+---
+import Card from '@modrinth/ui/src/components/base/Card.vue';
+
+const {name, author, description, url} = Astro.props
+---
+
+<a class="link" href={url}>
+    <Card collapsible={false} defaultCollapsed={false} noAutoBody>
+        <div class="title">
+            <h2>{name}</h2>
+            <p class="author">by {author}</p>
+        </div>
+        <p class="description">{description}</p>
+    </Card>
+</a>
+
+<style>
+    .title {
+        align-items: baseline;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .link {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Use inherited color from parent */
+        margin: 0;
+        padding: 0;
+    }
+
+    .link:hover,
+    .link:active,
+    .link:visited {
+        color: inherit; /* Ensure color remains the same on hover, active, and visited states */
+    }
+
+    .author {
+        margin-left: 0.5em; /* Add space between name and author */
+    }
+
+    .description {
+        margin-bottom: 0;
+    }
+</style>

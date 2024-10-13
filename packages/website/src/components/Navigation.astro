@@ -1,6 +1,26 @@
 ---
 import ButtonStyled from '@modrinth/ui/src/components/base/ButtonStyled.vue';
 import Button from '@modrinth/ui/src/components/base/Button.vue';
+
+const links = [
+    {
+        to: "/wiki",
+        text: "Wiki"
+    },
+    {
+        to: "/wiki/projects/minecraft-server",
+        text: "Minecraft Server"
+    },
+    {
+        to: "/wiki/projects",
+        text: "Projects"
+    },
+    {
+        to: "/wiki/other/contribute",
+        text: "Contribute"
+    }
+]
+
 ---
 
 <header>
@@ -8,18 +28,11 @@ import Button from '@modrinth/ui/src/components/base/Button.vue';
         <ButtonStyled>
             <Button link="/">Home</Button>
         </ButtonStyled>
-        <ButtonStyled>
-            <Button link="/wiki">Wiki</Button>
-        </ButtonStyled>
-        <ButtonStyled>
-            <Button link="/wiki/projects/minecraft-serve">Minecraft Server</Button>
-        </ButtonStyled>
-        <ButtonStyled>
-            <Button link="/wiki">Projects</Button>
-        </ButtonStyled>
-        <ButtonStyled>
-            <Button link="/wiki/other/contribute">Contribute</Button>
-        </ButtonStyled>
+        {links.map((link) => (
+            <ButtonStyled>
+                <Button link={link.to}>{link.text}</Button>
+            </ButtonStyled>
+        ))}
     </div>
 </header>
 
