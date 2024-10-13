@@ -7,8 +7,6 @@ author: 'Samuel Hulme'
 tags: ["minecraft", "networking", "games"]
 ---
 
-Welcome to the **Miners Online Minecraft Server**, a unique minigame-focused experience designed for players who love quick, engaging challenges. Built from an open-source foundation, our server encourages community-driven development and innovation. Whether you're here to contribute ideas or help shape the server's future, you're in the right place!
-
 ## What Sets Miners Online Apart?
 
 Although there are no active minigames at the moment, our server offers a dynamic platform for experimenting with new game ideas. With a focus on open-source principles, **Miners Online** allows players and developers to work together to create a suite of fun, innovative minigames.
