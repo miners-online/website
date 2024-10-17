@@ -8,7 +8,7 @@ edit_uri: https://github.com/miners-online/website/tree/main/packages/website/do
 
 theme:
   logo: assets/favicon.svg
-  favicon: images/favicon.svg
+  favicon: assets/favicon.svg
   name: material
   palette: 
     # Palette toggle for light mode
