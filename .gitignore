@@ -53,7 +53,8 @@ downloads/
 eggs/
 .eggs/
 lib/
-!/packages/docs/lib
+!/packages/docs2/lib
+!/packages/docs/src/lib
 lib64/
 parts/
 sdist/
