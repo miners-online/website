@@ -1,8 +1,11 @@
 ---
 title: New website again
-date:
-    created: 2024-10-17
-tags: ["networking", "website", "mkdocs"]
+date: 17-10-2024
+authors:
+  - avatar: "https://avatars.githubusercontent.com/u/41990982?v=4"
+    handle: ajh123
+    username: Samuel Hulme
+    handleUrl: "https://github.com/ajh123"
 ---
 
 After a lot of experimenting, the Miners Online website has returned to using Material for MkDocs.

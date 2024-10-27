@@ -1,8 +1,11 @@
 ---
 title: 'UniFi VPN with Active Directory and RADIUS'
-date:
-    created: 2024-10-05
-tags: ["unifi", "networking", "active-directory", "radius"]
+date: 05-10-2024
+authors:
+  - avatar: "https://avatars.githubusercontent.com/u/41990982?v=4"
+    handle: ajh123
+    username: Samuel Hulme
+    handleUrl: "https://github.com/ajh123"
 ---
 
 In this guide we will set up a VPN on a UniFi network that uses a RADIUS server that is backed by Active Directory for authentication.
