@@ -1,6 +1,8 @@
 ---
 import '@/styles/globals.css'
 import { Button } from "@/components/ui/button"
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { AppSidebar } from '@/components/app-sidebar'
 ---
 
 <html lang="en">
@@ -12,7 +14,12 @@ import { Button } from "@/components/ui/button"
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
-		<Button>Hello World</Button>
+		<SidebarProvider>
+			<AppSidebar/>
+			<main>
+				<SidebarTrigger />
+				<Button>Hello</Button>
+			</main>
+		</SidebarProvider>
 	</body>
 </html>
