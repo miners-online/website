@@ -1,8 +1,6 @@
 import { ModeToggle } from "@/components/theme-toggle";
 import {
   GithubIcon,
-  TwitterIcon,
-  HexagonIcon,
   MoveUpRightIcon,
 } from "lucide-react";
 import Link from "next/link";
@@ -60,7 +58,7 @@ export function Navbar() {
             <Search />
             <div className="flex ml-2.5 sm:ml-0">
               <Link
-                href="https://github.com/nisabmohd/NexDocs"
+                href="https://github.com/miners-online"
                 className={buttonVariants({ variant: "ghost", size: "icon" })}
               >
                 <GithubIcon className="h-[1.1rem] w-[1.1rem]" />
