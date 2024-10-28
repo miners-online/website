@@ -1,6 +1,5 @@
 ---
-title: 'Miners Online Minecraft Server'
-tags: ["minecraft", "networking", "games"]
+title: 'Introduction'
 ---
 
 Welcome to the Miners Online Minecraft Server, a unique minigame-focused experience designed for players who love quick, engaging challenges. Built from an open-source foundation, our server encourages community-driven development and innovation. Whether you're here to contribute ideas or help shape the server's future, you're in the right place!.
