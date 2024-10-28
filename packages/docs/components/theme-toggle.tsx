@@ -12,24 +12,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import Giscus from "@giscus/react";
-
 export function ModeToggle() {
   const { setTheme, theme } = useTheme();
 
-  function sendMessage(message) {
-    const iframe = document.querySelector('iframe.giscus-frame');
-    if (!iframe) return;
-    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-  }
+  // function sendMessage(message) {
+  //   const iframe = document.querySelector('iframe.giscus-frame');
+  //   if (!iframe) return;
+  //   iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  // }
 
   function setTheme2(theme: string) {
     setTheme(theme)
-    sendMessage({
-      setConfig: {
-        theme: theme
-      }
-    });
+    // sendMessage({
+    //   setConfig: {
+    //     theme: theme
+    //   }
+    // });
   }
 
   return (
