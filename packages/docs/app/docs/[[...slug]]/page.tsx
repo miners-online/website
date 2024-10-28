@@ -52,6 +52,5 @@ export function generateStaticParams() {
     }));
     slugArr.push(...arr);
   });
-  console.log(slugArr)
   return slugArr;
 }

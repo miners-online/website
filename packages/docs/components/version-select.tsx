@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { useVersion } from "./context/version";
 
 function isPathSameVersion(path: string, v: Version) {
-  return path.split("/")[2] == v;
+  return path.startsWith(`/docs/${v}`);
 }
 
 export default function VersionManager() {
