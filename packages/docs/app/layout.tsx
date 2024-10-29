@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Miners Online",
   metadataBase: new URL("https://minersonline.uk/"),
   description: "",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +31,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} font-regular`}
         suppressHydrationWarning
