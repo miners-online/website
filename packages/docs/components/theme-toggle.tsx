@@ -15,21 +15,6 @@ import {
 export function ModeToggle() {
   const { setTheme, theme } = useTheme();
 
-  // function sendMessage(message) {
-  //   const iframe = document.querySelector('iframe.giscus-frame');
-  //   if (!iframe) return;
-  //   iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-  // }
-
-  function setTheme2(theme: string) {
-    setTheme(theme)
-    // sendMessage({
-    //   setConfig: {
-    //     theme: theme
-    //   }
-    // });
-  }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,13 +25,13 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme2("light")}>
+        <DropdownMenuItem onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme2("dark")}>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme2("system")}>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,10 +1,13 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
 const GiscusProvider = dynamic(() => import("@giscus/react"), { ssr: false });
 
 export default function Giscus() {
+  const { theme } = useTheme();
+
   return (
     <GiscusProvider
       repo="miners-online/.github"
@@ -16,8 +19,9 @@ export default function Giscus() {
       reactionsEnabled="1"
       emitMetadata="0"
       inputPosition="top"
-      theme="preferred_color_scheme"
+      theme={theme}
       lang="en"
+      loading="lazy"
     />
   );
 }
