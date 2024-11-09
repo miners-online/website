@@ -48,7 +48,7 @@ Whether you’re an experienced developer or just starting, we welcome your cont
   ---
   title: Miners Online Wiki
   icon: lucide:box
-  to: /minecraft-sever/v0.1.0
+  to: /minecraft-server/v0.1.0
   ---
   A collaborative wiki for tutorials, FAQs, and documentation about Miners Online. *(this very website you’re on!)*
   ::
