@@ -7,7 +7,7 @@ navigation: false
 ---
 actions:
   - name: Join our Minecraft Server
-    to: /minecraft-sever/v0.1.0
+    to: /minecraft-server/v0.1.0
   - name: Find us on GitHub
     variant: outline
     to: https://github.com/miners-online/
