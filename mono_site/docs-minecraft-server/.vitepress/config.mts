@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  lastUpdated: true,
   base: '/minecraft-server/',
   title: "Miners Online / Minigames",
   description: "The modern Minecraft minigame network from Miners Online",
@@ -47,6 +48,6 @@ export default defineConfig({
     }
   },
   sitemap: {
-    hostname: 'https://minersonline.uk/minecraft-server'
+    hostname: 'https://minersonline.uk/minecraft-server/'
   }
 })
