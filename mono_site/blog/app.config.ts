@@ -19,6 +19,10 @@ export default defineAppConfig({
       },
       nav: [
         {
+          title: 'Main Home',
+          to: 'https://minersonline.uk/',
+        },
+        {
           title: 'Docs',
           links: [
             {
