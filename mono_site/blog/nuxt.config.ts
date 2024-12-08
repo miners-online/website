@@ -8,5 +8,6 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'none'
-  }
+  },
+  ssr: true
 });

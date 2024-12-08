@@ -2,26 +2,30 @@ import fs from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 
+interface Project {
+    name: string,
+    source: string,
+    buildCommand?: string,
+    outputDirectory?: string    
+}
+
 interface ProjectsConfig {
-    projects: [
-        {
-            name: string,
-            source: string,
-            buildCommand: string,
-            outputDirectory: string
-        }
-    ]
+    projects: Project[]
     outputDirectory: string
 }
 
 const config: ProjectsConfig = {
     projects: [
         {
+            name: "blog",
+            source: "../blog",
+        } as Project,
+        {
             name: "minecraft-server",
             source: "../docs/minecraft-server",
             buildCommand: "npm run docs:build",
             outputDirectory: ".vitepress/dist"
-        },   
+        } as Project,
     ],
     outputDirectory: "./publish_out"
 };
@@ -92,20 +96,22 @@ async function buildProjects(config: ProjectsConfig) {
         }
 
         // Run build command
-        console.log(`Building ${project.name}...`);
-        try {
-            await runCommand(project.buildCommand, projectDir);
-        } catch (error) {
-            console.error(`Failed to build ${project.name}. Skipping this project.`);
-            continue;
+        if (project.buildCommand != undefined && project.outputDirectory != undefined) {
+            console.log(`Building ${project.name}...`);
+            try {
+                await runCommand(project.buildCommand, projectDir);
+            } catch (error) {
+                console.error(`Failed to build ${project.name}. Skipping this project.`);
+                continue;
+            }
+
+            // Copy build output to the main output directory
+            const buildOutput = path.join(projectDir, project.outputDirectory);
+            const targetOutput = path.join(outputDirectory, project.name);
+
+            console.log(`Copying ${project.name} build to ${targetOutput}...`);
+            copyDirectory(buildOutput, targetOutput);
         }
-
-        // Copy build output to the main output directory
-        const buildOutput = path.join(projectDir, project.outputDirectory);
-        const targetOutput = path.join(outputDirectory, project.name);
-
-        console.log(`Copying ${project.name} build to ${targetOutput}...`);
-        copyDirectory(buildOutput, targetOutput);
     }
 
     console.log("Build process complete.");
