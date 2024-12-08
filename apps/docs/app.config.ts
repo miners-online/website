@@ -23,7 +23,7 @@ export default defineAppConfig({
           links: [
             {
               title: 'Minecraft Server',
-              to: '/minecraft-server',
+              to: 'https://minersonline.uk/minecraft-server',
               description: 'An open-source Minestom-powered Minecraft: Java Edition server in development.',
             },
             {
@@ -39,7 +39,7 @@ export default defineAppConfig({
           links: [
             {
               title: 'Blog',
-              to: '/blog',
+              to: '/',
               description: 'A collaborative blog about Miners Online and what we have been up to.',
             },
             {

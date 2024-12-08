@@ -3,4 +3,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: ['shadcn-docs-nuxt'],
   compatibilityDate: '2024-07-06',
+  app: {
+    baseURL: '/blog/'
+  },
+  image: {
+    provider: 'none'
+  }
 });
