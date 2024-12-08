@@ -1,5 +1,6 @@
 # Build output
 /publish_out
+/mono_site/main/publish_out
 /packages/website/site
 
 ### Nuxt / Node

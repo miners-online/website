@@ -1,0 +1,15 @@
+{
+    "private": true,
+    "scripts": {
+        "static:build": "npx ts-node build.ts",
+        "start": "npx ts-node api/index.ts"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/node": "^22.10.1",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "express": "^4.21.2"
+    }
+}
