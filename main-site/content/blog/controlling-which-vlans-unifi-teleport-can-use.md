@@ -1,13 +1,8 @@
 ---
 title: 'Controlling which VLANs UniFi Teleport can use'
-description: ''
+author: "Samuel Hulme"
+date: 2024-10-09
 ---
-
-*09-10-2024*
-
-Posted by: [Samuel Hulme (`@ajh123`)](https://github.com/ajh123)
-
-<hr>
 
 In this guide we will learn how to configure which IPs and VLANs users connected via UniFi Teleport can access.
 
