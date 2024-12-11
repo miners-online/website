@@ -1,0 +1,12 @@
+{
+    "title": "Minecraft Server",
+    "description": "The Miners Online Minecraft Server",
+    "icon": "Library",
+    "root": true,
+    "pages": [
+        "---Guide---",
+        "index",
+        "---Games---",
+        "lobby"
+    ]
+}
