@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { blog } from '@/app/source';
+import { MDXComponents } from 'mdx/types';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -40,7 +41,7 @@ export default async function Page(props: {
       <article className="container flex flex-col px-0 py-8 lg:flex-row lg:px-4">
         <div className="prose min-w-0 flex-1 p-4">
           <InlineTOC items={page.data.toc} />
-          <page.data.body components={defaultMdxComponents} />
+          <page.data.body components={defaultMdxComponents as unknown as MDXComponents} />
         </div>
         <div className="flex flex-col gap-4 border-l p-4 text-sm lg:w-[250px]">
           <div>

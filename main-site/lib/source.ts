@@ -2,11 +2,8 @@ import { docs, meta } from '@/.source';
 import { createMDXSource } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
 import {
-  defineConfig,
-  defineDocs,
   defineCollections,
   frontmatterSchema,
-  metaSchema,
 } from 'fumadocs-mdx/config';
 import { z } from 'zod';
 

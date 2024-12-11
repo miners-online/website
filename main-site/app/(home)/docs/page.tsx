@@ -1,6 +1,4 @@
-import { Building2, LibraryIcon } from 'lucide-react';
 import Link, { type LinkProps } from 'next/link';
-import Image from 'next/image';
 
 export default function DocsPage(): React.ReactElement {
   return (
@@ -55,18 +53,18 @@ export default function DocsPage(): React.ReactElement {
   );
 }
 
-function Icon({ children }: { children: React.ReactNode }): React.ReactElement {
-  return (
-    <div
-      className="mb-2 size-9 rounded-lg border p-1.5 shadow-fd-primary/30"
-      style={{
-        boxShadow: 'inset 0px 8px 8px 0px var(--tw-shadow-color)',
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+// function Icon({ children }: { children: React.ReactNode }): React.ReactElement {
+//   return (
+//     <div
+//       className="mb-2 size-9 rounded-lg border p-1.5 shadow-fd-primary/30"
+//       style={{
+//         boxShadow: 'inset 0px 8px 8px 0px var(--tw-shadow-color)',
+//       }}
+//     >
+//       {children}
+//     </div>
+//   );
+// }
 
 function Item(
   props: LinkProps & { children: React.ReactNode },
