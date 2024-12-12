@@ -1,22 +1,14 @@
-import { docs, meta } from '@/.source';
+import { docs, blog, meta } from '@/.source';
 import { createMDXSource } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
-import {
-  defineCollections,
-  frontmatterSchema,
-} from 'fumadocs-mdx/config';
-import { z } from 'zod';
 
-export const source = loader({
+export const docsSource = loader({
   baseUrl: '/docs',
   source: createMDXSource(docs, meta),
 });
 
-export const blog = defineCollections({
-  dir: 'content/blog',
-  schema: frontmatterSchema.extend({
-    author: z.string(),
-    date: z.string().date().or(z.date()).optional(),
-  }),
-  type: 'doc',
+
+export const blogSource = loader({
+  baseUrl: '/blog',
+  source: createMDXSource(blog, meta),
 });
