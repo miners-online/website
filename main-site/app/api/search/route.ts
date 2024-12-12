@@ -1,7 +1,7 @@
 import { docsSource, blogSource } from '@/lib/source';
 import { AdvancedIndex, createSearchAPI } from 'fumadocs-core/search/server';
  
-let sources: AdvancedIndex[] = []
+const sources: AdvancedIndex[] = []
 docsSource.getPages().forEach((page) => (
     sources.push({
         title: page.data.title,
