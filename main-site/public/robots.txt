@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Host: https://minersonline.uk
-Sitemap: https://minersonline.uk/sitemap.xml
