@@ -13,12 +13,12 @@ export default function HeroSection() {
               Join our community and explore the world of Minecraft together
             </p>
           </div>
-          <div className="w-full max-w-sm space-y-2">
+          {/* <div className="w-full max-w-sm space-y-2">
             <div className="flex flex-col sm:flex-row gap-2 justify-center">
               <Button className="bg-green-600 hover:bg-green-700">Join Server</Button>
               <Button variant="outline">Learn More</Button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
