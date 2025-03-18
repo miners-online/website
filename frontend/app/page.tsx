@@ -26,7 +26,7 @@ export default function Home() {
         />
       </div>
       <ServerScheduleCard
-        serverName="Minecraft Survival Server"
+        serverName="Miners Online Schedule"
         description="Weekly operating hours"
         schedule={serverSchedule}
         timezone="the UK"
