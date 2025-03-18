@@ -1,6 +1,18 @@
 import HeroSection from "@/components/hero-section"
 import ServerStatus from "@/components/server-status"
 import ModpackSection from "@/components/modpack-section"
+import { ServerScheduleCard } from "@/components/server-schedule-card"
+
+const serverSchedule = [
+  { day: "Monday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
+  { day: "Tuesday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
+  { day: "Wednesday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
+  { day: "Thursday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
+  { day: "Friday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
+  { day: "Saturday", active: true, startTime: "12:00 AM", endTime: "8:30 PM" },
+  { day: "Sunday", active: true, startTime: "12:00 AM", endTime: "8:30 PM" },
+]
+
 
 export default function Home() {
   return (
@@ -13,6 +25,13 @@ export default function Home() {
           mrpackUrl="https://cdn.modrinth.com/data/5HDNFYqy/versions/LpK5jGN3/Miners%20Online%20%28Creative%20S3%29%201.0.1.mrpack"
         />
       </div>
+      <ServerScheduleCard
+        serverName="Minecraft Survival Server"
+        description="Weekly operating hours"
+        schedule={serverSchedule}
+        timezone="the UK"
+        className="mt-12"
+      />
     </main>
   )
 }
