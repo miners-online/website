@@ -1,9 +1,21 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
+import { MinecraftServerStatus } from "@/app/api/minecraftServer/route";
+
 export default function ServerStatus() {
-  // In a real implementation, you would fetch the server status
-  const isOnline = true
+  const [serverStatus, setServerStatus] = useState<MinecraftServerStatus | null>(null);
+
+  useEffect(() => {
+    // Fetch the server status from the API route
+    fetch("/api/minecraftServer")
+      .then((res) => res.json())
+      .then((data: MinecraftServerStatus) => setServerStatus(data))
+      .catch((err) => console.error("Error fetching Minecraft status:", err));
+  }, []);
 
   return (
     <Card>
@@ -14,8 +26,8 @@ export default function ServerStatus() {
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center">
           <span className="font-medium">Status:</span>
-          <Badge variant={isOnline ? "default" : "destructive"} className={isOnline ? "bg-green-500" : ""}>
-            {isOnline ? "Online" : "Offline"}
+          <Badge variant={serverStatus?.online ? "default" : "destructive"} className={serverStatus?.online ? "bg-green-500" : ""}>
+            {serverStatus?.online ? "Online" : "Offline"}
           </Badge>
         </div>
 
@@ -31,7 +43,7 @@ export default function ServerStatus() {
 
         <div className="flex justify-between items-center">
           <span className="font-medium">Players:</span>
-          <span>24/100 Online</span>
+          <span>{serverStatus?.players} / {serverStatus?.maxPlayers} {serverStatus?.online ? "Online" : "Offline"}</span>
         </div>
       </CardContent>
     </Card>
