@@ -9,8 +9,8 @@ const serverSchedule = [
   { day: "Wednesday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
   { day: "Thursday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
   { day: "Friday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
-  { day: "Saturday", active: true, startTime: "12:00 AM", endTime: "8:30 PM" },
-  { day: "Sunday", active: true, startTime: "12:00 AM", endTime: "8:30 PM" },
+  { day: "Saturday", active: true, startTime: "12:00 PM", endTime: "8:30 PM" },
+  { day: "Sunday", active: true, startTime: "12:00 PM", endTime: "8:30 PM" },
 ]
 
 
