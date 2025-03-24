@@ -2,6 +2,7 @@ import HeroSection from "@/components/hero-section"
 import ServerStatus from "@/components/server-status"
 import ModpackSection from "@/components/modpack-section"
 import { ServerScheduleCard } from "@/components/server-schedule-card"
+import { globals } from "../lib/globals"
 
 const serverSchedule = [
   { day: "Monday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
@@ -21,12 +22,12 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
         <ServerStatus />
         <ModpackSection
-          modrinthUrl="https://modrinth.com/modpack/miners-online-experience/version/1.0.2"
-          mrpackUrl="https://cdn.modrinth.com/data/5HDNFYqy/versions/wQueo9HN/Miners%20Online%20Experience%20Pack%201.0.2.mrpack"
+          modrinthUrl={globals.modPack.modrinthUrl}
+          mrpackUrl={globals.modPack.mrpackUrl}
         />
       </div>
       <ServerScheduleCard
-        serverName="Miners Online Schedule"
+        serverName={`${globals.siteName} Schedule`}
         description="Weekly operating hours"
         schedule={serverSchedule}
         timezone="the UK"

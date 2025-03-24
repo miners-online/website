@@ -1,5 +1,7 @@
 // import { Button } from "@/components/ui/button"
 
+import { globals } from "@/lib/globals";
+
 export default function HeroSection() {
   return (
     <section className="py-12 md:py-24 text-center">
@@ -7,10 +9,10 @@ export default function HeroSection() {
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Welcome to Miners Online
+              Welcome to {globals.siteName}
             </h1>
             <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-              Join our community and explore the world of Minecraft together
+              {globals.siteDescription}
             </p>
           </div>
           {/* <div className="w-full max-w-sm space-y-2">

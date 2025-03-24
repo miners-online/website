@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/navbar"
+import { globals } from "../lib/globals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Miners Online",
-  description: "Join our community and explore the world of Minecraft together",
+  title: globals.siteName,
+  description: globals.siteDescription,
   icons: {
     icon: "/favicon.svg",
   }
@@ -42,7 +43,7 @@ export default function RootLayout({
             {children}
             <footer className="border-t py-6 mt-12">
               <div className="container mx-auto px-4 text-center text-muted-foreground">
-                <p>© {new Date().getFullYear()} Miners Online. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} {globals.siteName}. All rights reserved.</p>
                 <p>NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
               </div>
             </footer>

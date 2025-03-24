@@ -3,17 +3,17 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-
-import { MinecraftServerStatus } from "@/app/api/minecraftServer/route";
+import { globals } from "@/lib/globals";
+import { type ServerStatus } from "@/lib/minecraft_status";
 
 export default function ServerStatus() {
-  const [serverStatus, setServerStatus] = useState<MinecraftServerStatus | null>(null);
+  const [serverStatus, setServerStatus] = useState<ServerStatus | null>(null);
 
   useEffect(() => {
     // Fetch the server status from the API route
-    fetch("/api/minecraftServer")
+    fetch(`https://api.mcsrvstat.us/2/${globals.serverIP}`)
       .then((res) => res.json())
-      .then((data: MinecraftServerStatus) => setServerStatus(data))
+      .then((data: ServerStatus) => setServerStatus(data))
       .catch((err) => console.error("Error fetching Minecraft status:", err));
   }, []);
 
@@ -33,7 +33,7 @@ export default function ServerStatus() {
 
         <div className="flex justify-between items-center">
           <span className="font-medium">Server IP:</span>
-          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">minersonline.uk</code>
+          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">{globals.serverIP}</code>
         </div>
 
         <div className="flex justify-between items-center">
@@ -43,7 +43,12 @@ export default function ServerStatus() {
 
         <div className="flex justify-between items-center">
           <span className="font-medium">Players:</span>
-          <span>{serverStatus?.players} / {serverStatus?.maxPlayers} {serverStatus?.online ? "Online" : "Offline"}</span>
+          <span>
+            {serverStatus?.online 
+              ? `${serverStatus.players.online} / ${serverStatus.players.max} Online`
+              : "0 / 0 Offline"
+            }
+          </span>
         </div>
       </CardContent>
     </Card>
