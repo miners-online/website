@@ -1,5 +1,7 @@
 import { IMinecraftData, pingUriResult } from "minecraft-server-ping";
 
+export const runtime = 'edge';
+
 export type MinecraftServerStatus = {
     online: boolean;
     version: string;
