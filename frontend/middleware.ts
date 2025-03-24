@@ -1,6 +1,12 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+export default clerkMiddleware(({
+    authorizedParties: [
+        'http://localhost:3000',
+        'https://website-7y3.pages.dev/',
+        'https://minersonline.uk'
+    ],
+}));
 
 export const config = {
     matcher: [
