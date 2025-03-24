@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,6 +36,17 @@ export default function Navbar() {
           >
             GitHub
           </Link>
+          <SignedOut>
+            <span className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+              <SignInButton />
+            </span>
+            <span className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+              <SignUpButton />
+            </span>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -69,6 +81,13 @@ export default function Navbar() {
             >
               GitHub
             </Link>
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       )}

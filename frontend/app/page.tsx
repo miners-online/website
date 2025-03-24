@@ -21,8 +21,8 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
         <ServerStatus />
         <ModpackSection
-          modrinthUrl="https://modrinth.com/modpack/miners-online-cs3-pack/version/1.0.1"
-          mrpackUrl="https://cdn.modrinth.com/data/5HDNFYqy/versions/LpK5jGN3/Miners%20Online%20%28Creative%20S3%29%201.0.1.mrpack"
+          modrinthUrl="https://modrinth.com/modpack/miners-online-experience/version/1.0.2"
+          mrpackUrl="https://cdn.modrinth.com/data/5HDNFYqy/versions/wQueo9HN/Miners%20Online%20Experience%20Pack%201.0.2.mrpack"
         />
       </div>
       <ServerScheduleCard
