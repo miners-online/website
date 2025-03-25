@@ -1,37 +1,25 @@
-import HeroSection from "@/components/hero-section"
+import Hero from "@/components/hero"
 import ServerStatus from "@/components/server-status"
-import ModpackSection from "@/components/modpack-section"
-import { ServerScheduleCard } from "@/components/server-schedule-card"
 import { globals } from "../lib/globals"
-
-const serverSchedule = [
-  { day: "Monday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
-  { day: "Tuesday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
-  { day: "Wednesday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
-  { day: "Thursday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
-  { day: "Friday", active: true, startTime: "9:00 AM", endTime: "8:30 PM" },
-  { day: "Saturday", active: true, startTime: "12:00 PM", endTime: "8:30 PM" },
-  { day: "Sunday", active: true, startTime: "12:00 PM", endTime: "8:30 PM" },
-]
-
+import { Faq } from "@/components/faq"
+import { faq_items } from "@/lib/faq"
 
 export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
-      <HeroSection />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-        <ServerStatus />
-        <ModpackSection
-          modrinthUrl={globals.modPack.modrinthUrl}
-          mrpackUrl={globals.modPack.mrpackUrl}
-        />
-      </div>
-      <ServerScheduleCard
-        serverName={`${globals.siteName} Schedule`}
-        description="Weekly operating hours"
-        schedule={serverSchedule}
-        timezone="the UK"
-        className="mt-12"
+      <Hero
+        heading = "Welcome to Miners Online"
+        buttons = {{
+          secondary: {
+            text: "View on GitHub",
+            url: "https://github.com/miners-online",
+          },
+        }}
+        description={globals.siteDescription}
+        right={<ServerStatus/>}
+      />
+      <Faq
+        items={faq_items}
       />
     </main>
   )

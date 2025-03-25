@@ -26,10 +26,10 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/about"
+            href="/rules"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
-            About
+            Rules
           </Link>
           <Link
             href="https://github.com/miners-online"
