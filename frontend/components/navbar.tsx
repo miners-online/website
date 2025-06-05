@@ -6,6 +6,8 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { LogtoContext } from "@logto/next"
+import { getUser } from "@/lib/logto"
+import UserDropdown from "./auth/user-dropdown"
 
 interface Props {
   onSignOut: () => Promise<void>;
@@ -17,7 +19,7 @@ interface Props {
 export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const { isAuthenticated, claims } = logtoContext;
+  const user = getUser(logtoContext);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -31,35 +33,34 @@ export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex ml-auto gap-6">
-          <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
+          <Link href="/" className="h-auto p-2 hover:bg-accent">
             Home
           </Link>
           <Link
             href="/rules"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            className="h-auto p-2 hover:bg-accent"
           >
             Rules
           </Link>
           <Link
             href="https://github.com/miners-online"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            className="h-auto p-2 hover:bg-accent"
           >
             GitHub
           </Link>
-          {!isAuthenticated ? (
+          {!user ? (
             <span
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="h-auto p-2 hover:bg-accent"
               onClick={onSignIn}
             >
               Sign In
             </span>
           ) : (
-            <span
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              onClick={onSignOut}
-            >
-              Sign Out
-            </span>
+            <UserDropdown
+              user={user}
+              onSignOut={onSignOut}
+              onSettings={async () => {window.location.href = "/settings"}}
+            />
           )}
         </nav>
 
@@ -76,39 +77,38 @@ export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
           <div className="container flex flex-col space-y-3 py-4">
             <Link
               href="/"
-              className="text-sm font-medium transition-colors hover:text-primary"
+              className="h-auto p-2 hover:bg-accent"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="h-auto p-2 hover:bg-accent"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="https://github.com/miners-online"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="h-auto p-2 hover:bg-accent"
               onClick={() => setIsMenuOpen(false)}
             >
               GitHub
             </Link>
-            {!isAuthenticated ? (
+            {!user ? (
               <span
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                className="h-auto p-2 hover:bg-accent"
                 onClick={onSignIn}
               >
                 Sign In
               </span>
             ) : (
-              <span
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-                onClick={onSignOut}
-              >
-                Sign Out
-              </span>
+              <UserDropdown
+                user={user}
+                onSignOut={onSignOut}
+                onSettings={async () => {window.location.href = "/settings"}}
+              />
             )}
           </div>
         </div>
