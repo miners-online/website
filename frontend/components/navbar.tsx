@@ -4,11 +4,20 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 import Image from "next/image"
+import { LogtoContext } from "@logto/next"
 
-export default function Navbar() {
+interface Props {
+  onSignOut: () => Promise<void>;
+  onSignIn: () => Promise<void>;
+  logtoContext: LogtoContext;
+};
+
+
+export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const { isAuthenticated, claims } = logtoContext;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -37,17 +46,21 @@ export default function Navbar() {
           >
             GitHub
           </Link>
-          <SignedOut>
-            <span className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              <SignInButton />
+          {!isAuthenticated ? (
+            <span
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              onClick={onSignIn}
+            >
+              Sign In
             </span>
-            <span className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-              <SignUpButton />
+          ) : (
+            <span
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              onClick={onSignOut}
+            >
+              Sign Out
             </span>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -82,13 +95,21 @@ export default function Navbar() {
             >
               GitHub
             </Link>
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            {!isAuthenticated ? (
+              <span
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                onClick={onSignIn}
+              >
+                Sign In
+              </span>
+            ) : (
+              <span
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                onClick={onSignOut}
+              >
+                Sign Out
+              </span>
+            )}
           </div>
         </div>
       )}
