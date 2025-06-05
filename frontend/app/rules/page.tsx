@@ -1,5 +1,7 @@
 import { Faq, FaqItem } from "@/components/faq"
 
+export const runtime = 'edge';
+
 const rules: FaqItem[] = [
   {
     question: "Respect other players",
