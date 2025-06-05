@@ -1,6 +1,6 @@
 import { Faq, FaqItem } from "@/components/faq"
 
-export const rules: FaqItem[] = [
+const rules: FaqItem[] = [
   {
     question: "Respect other players",
     answer: "Harassment, hate speech, and bullying are strictly prohibited. Treat all players with respect. Violations may result in warnings, fines, or bans.",
