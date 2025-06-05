@@ -7,16 +7,15 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { LogtoContext } from "@logto/next"
 import { getUser } from "@/lib/logto"
+import { ExternalLink } from "lucide-react"
 import UserDropdown from "./auth/user-dropdown"
 
 interface Props {
-  onSignOut: () => Promise<void>;
-  onSignIn: () => Promise<void>;
   logtoContext: LogtoContext;
 };
 
 
-export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
+export default function Navbar({logtoContext }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const user = getUser(logtoContext);
@@ -24,7 +23,7 @@ export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center px-4">
-        <div className="flex items-center gap-2 mr-4">
+        <div className="flex items-center gap-4 mr-4">
           <div className="w-8 h-8 rounded flex items-center justify-center">
             <Image width="64" height="64" alt="Miners Online Logo"  src="/favicon.svg"></Image>
           </div>
@@ -33,32 +32,35 @@ export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex ml-auto gap-6">
-          <Link href="/" className="h-auto p-2 hover:bg-accent">
+          <Link href="/"
+            className="h-auto py-4 hover:bg-accent text-sm font-medium"
+          >
             Home
           </Link>
           <Link
             href="/rules"
-            className="h-auto p-2 hover:bg-accent"
+            className="h-auto py-4 hover:bg-accent text-sm font-medium"
           >
             Rules
           </Link>
           <Link
             href="https://github.com/miners-online"
-            className="h-auto p-2 hover:bg-accent"
-          >
+            className="h-auto py-4 hover:bg-accent text-sm font-medium"
+            >
+            <ExternalLink className="inline mr-1" size={16} />
             GitHub
           </Link>
           {!user ? (
-            <span
-              className="h-auto p-2 hover:bg-accent"
-              onClick={onSignIn}
+            <Link
+              href="/api/logto/sign-in"
+              className="h-auto py-4 hover:bg-accent text-sm font-medium"
             >
               Sign In
-            </span>
+            </Link>
           ) : (
             <UserDropdown
               user={user}
-              onSignOut={onSignOut}
+              onSignOut={async () => {window.location.href = "/api/logto/sign-out"}}
               onSettings={async () => {window.location.href = "/settings"}}
             />
           )}
@@ -77,36 +79,36 @@ export default function Navbar({ onSignOut, onSignIn, logtoContext }: Props) {
           <div className="container flex flex-col space-y-3 py-4">
             <Link
               href="/"
-              className="h-auto p-2 hover:bg-accent"
+              className="h-auto py-4 hover:bg-accent text-sm font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="h-auto p-2 hover:bg-accent"
+              className="h-auto py-4 hover:bg-accent text-sm font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="https://github.com/miners-online"
-              className="h-auto p-2 hover:bg-accent"
+              className="h-auto py-4 hover:bg-accent"
               onClick={() => setIsMenuOpen(false)}
             >
               GitHub
             </Link>
             {!user ? (
-              <span
-                className="h-auto p-2 hover:bg-accent"
-                onClick={onSignIn}
+              <Link
+                href="/api/logto/sign-in"
+                className="h-auto py-4 hover:bg-accent text-sm font-medium"
               >
                 Sign In
-              </span>
+              </Link>
             ) : (
               <UserDropdown
                 user={user}
-                onSignOut={onSignOut}
+                onSignOut={async () => {window.location.href = "/api/logto/sign-out"}}
                 onSettings={async () => {window.location.href = "/settings"}}
               />
             )}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getLogtoContext, signIn, signOut } from '@logto/next/server-actions';
+import { getLogtoContext } from '@logto/next/server-actions';
 import "./globals.css";
 
 import Navbar from "@/components/navbar"
@@ -29,16 +29,6 @@ export default async function RootLayout({
         <div className="min-h-screen bg-gradient-to-b from-green-900/20 to-green-950/30">
           <Navbar
             logtoContext={logtoContext}
-            onSignIn={async () => {
-              'use server';
-
-              await signIn(logtoConfig);
-            }}
-            onSignOut={async () => {
-              'use server';
-
-              await signOut(logtoConfig);
-            }}
           />
           {children}
           <footer className="border-t py-6 mt-12">
