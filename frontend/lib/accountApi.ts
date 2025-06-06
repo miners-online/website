@@ -18,7 +18,10 @@ export async function getBasicInfo(field: string, token: string) {
     method: 'GET',
   }, token);
   const data = await res.json();
-  return data[field]; // Return the specific field requested
+  return {
+    data: data[field],
+    status: res.status
+  };
 
   // console.log(data)
 
@@ -31,29 +34,44 @@ export async function updateBasicInfo(field: string, value: any, token: string) 
     method: 'PATCH',
     body: JSON.stringify(body),
   }, token);
-  return res.json();
+  return {
+    data: await res.json(),
+    status: res.status
+  };
 }
 
 // Verification flows for sensitive fields
 
 export async function requestVerificationCode(type: 'primaryEmail' | 'primaryPhone', value: string, token: string) {
+  const realType = type === 'primaryEmail' ? 'email' : 'phone';
+
+  console.log(`Requesting verification code for ${realType}: ${value}`);
+
   const res = await fetchWithToken(`${LOGTO_ENDPOINT}/api/verifications/verification-code`, {
     method: 'POST',
-    body: JSON.stringify({ identifier: { type, value } }),
+    body: JSON.stringify({ identifier: { type: realType, value } }),
   }, token);
-  return res.json(); // returns verificationRecordId etc
+  return {
+    data: await res.json(),
+    status: res.status
+  };
 }
 
 export async function verifyCode(type: 'primaryEmail' | 'primaryPhone', value: string, verificationId: string, code: string, token: string) {
+  const realType = type === 'primaryEmail' ? 'email' : 'phone';
+
   const res = await fetchWithToken(`${LOGTO_ENDPOINT}/api/verifications/verification-code/verify`, {
-    method: 'PATCH',
+    method: 'POST',
     body: JSON.stringify({
-      identifier: { type, value },
+      identifier: { type: realType, value },
       verificationId,
       code,
     }),
   }, token);
-  return res.json();
+  return {
+    data: await res.json(),
+    status: res.status
+  };
 }
 
 export async function updateSensitiveField(
@@ -67,5 +85,8 @@ export async function updateSensitiveField(
     headers: { 'logto-verification-id': verificationRecordId },
     body: JSON.stringify({ [endpoint.includes('email') ? 'email' : 'phone']: value, newIdentifierVerificationRecordId: verificationRecordId }),
   }, token);
-  return res.json();
+  return {
+    data: await res.json(),
+    status: res.status
+  };
 }

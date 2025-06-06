@@ -1,80 +1,111 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { getBasicInfo, updateBasicInfo } from '@/lib/accountApi';
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { getBasicInfo, updateBasicInfo } from "@/lib/accountApi"
 
 export function BasicUserField({
   label,
   field,
   token,
 }: {
-  label: string;
-  field: string;
-  token: string;
+  label: string
+  field: string
+  token: string
 }) {
-  const [value, setValue] = useState<string>('');
-  const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState(false);
-  const [error, setError] = useState<string>('');
+  const [value, setValue] = useState<string>("")
+  const [loading, setLoading] = useState(true)
+  const [editing, setEditing] = useState(false)
+  const [error, setError] = useState<string>("")
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    let mounted = true;
+    let mounted = true
 
     async function fetchData() {
       try {
-        const fetchedValue = await getBasicInfo(field, token);
+        const fetchedValue = await getBasicInfo(field, token)
         if (mounted) {
-          setValue(fetchedValue || '');
-          setLoading(false);
+          setValue(fetchedValue.data || "")
+          setLoading(false)
         }
       } catch (err) {
         if (mounted) {
-          setError('Failed to load data');
-          setLoading(false);
+          setError("Failed to load data")
+          setLoading(false)
         }
       }
     }
 
-    fetchData();
+    fetchData()
 
     return () => {
-      mounted = false;
-    };
-  }, [field, token]);
+      mounted = false
+    }
+  }, [field, token])
 
   async function handleSave() {
     try {
-      await updateBasicInfo(field, value, token);
-      setEditing(false);
-      setError('');
+      setSaving(true)
+      setError("")
+      await updateBasicInfo(field, value, token)
+      setEditing(false)
     } catch {
-      setError('Failed to update');
+      setError("Failed to update")
+    } finally {
+      setSaving(false)
     }
   }
 
+  function handleCancel() {
+    setEditing(false)
+    setError("")
+    // Reset value to original if needed
+  }
+
   if (loading) {
-    return <p>Loading...</p>;
+    return <div className="text-sm text-muted-foreground">Loading...</div>
   }
 
   return (
-    <div>
-      <label>{label}</label>
+    <div className="space-y-2">
+      <Label htmlFor={field}>{label}</Label>
+
       {!editing ? (
-        <>
-          <span>{value || '(not set)'}</span>
-          <button onClick={() => setEditing(true)}>Edit</button>
-        </>
+        <div className="flex items-center gap-2">
+          <span className="text-sm">{value || <span className="text-muted-foreground">(not set)</span>}</span>
+          <Button variant="outline" size="sm" onClick={() => setEditing(true)}>
+            Edit
+          </Button>
+        </div>
       ) : (
-        <>
-          <input
+        <div className="space-y-3">
+          <Input
+            id={field}
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            placeholder={`Enter ${label.toLowerCase()}`}
           />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setEditing(false)}>Cancel</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </>
+
+          <div className="flex gap-2">
+            <Button size="sm" onClick={handleSave} disabled={saving}>
+              {saving ? "Saving..." : "Save"}
+            </Button>
+            <Button variant="outline" size="sm" onClick={handleCancel} disabled={saving}>
+              Cancel
+            </Button>
+          </div>
+
+          {error && (
+            <Alert variant="destructive">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+        </div>
       )}
     </div>
-  );
+  )
 }

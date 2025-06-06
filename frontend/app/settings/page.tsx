@@ -7,30 +7,32 @@ import { redirect } from "next/navigation";
 export default async function SettingsPage() {
   const token = await getAccessTokenRSC(logtoConfig);
 
-  console.log("Access Token:", token);
-
   if (!token) {
     return redirect("/api/logto/sign-in")
   }
 
   return (
-    <div>
-      <h1>Settings</h1>
-      <BasicUserField
-        label="Name"
-        field="name"
-        token={token}
-      />
-      <SensitiveUserField
-        label="Email"
-        field="primaryEmail"
-        token={token}
-      />
-      <SensitiveUserField
-        label="Phone"
-        field="primaryPhone"
-        token={token}
-      />
-    </div>
+    <main className="container mx-auto px-4 py-8">
+      <section className="my-12 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm">
+        <div className="container max-w-3xl px-6">
+          <h1>Settings</h1>
+          <BasicUserField
+            label="Name"
+            field="name"
+            token={token}
+          />
+          <SensitiveUserField
+            label="Email"
+            field="primaryEmail"
+            token={token}
+          />
+          <SensitiveUserField
+            label="Phone"
+            field="primaryPhone"
+            token={token}
+          />
+        </div>
+      </section>
+    </main>
   );
 }
