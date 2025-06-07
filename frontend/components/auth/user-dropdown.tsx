@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { User } from "@/lib/logto"
+import { User } from "@/components/user-context"
 
 interface Props {
   onSignOut: () => Promise<void>;
@@ -22,10 +22,10 @@ export default function UserDropdown({ onSignOut, onSettings, user }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-auto p-2 hover:bg-accent">
+        <Button variant="ghost" className="text-slate-300 transition-colors">
           <div className="flex items-center gap-3">
             {/* Left column: Avatar */}
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-8 w-8 text-slate-900">
               <AvatarImage src={user.picture} alt={user.name} />
               <AvatarFallback className="text-sm">{user.initials}</AvatarFallback>
             </Avatar>

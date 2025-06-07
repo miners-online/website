@@ -1,3 +1,4 @@
+import { User } from "@/components/user-context";
 import { LogtoContext, LogtoNextConfig, UserScope } from "@logto/next";
 
 export const logtoConfig = {
@@ -18,14 +19,6 @@ export const logtoConfig = {
         UserScope.Roles
     ],
 } as LogtoNextConfig;
-
-export interface User {
-    id: string;
-    email?: string;
-    name?: string;
-    picture?: string;
-    initials?: string;
-}
 
 export function getUser(config: LogtoContext) {
     if (!config.isAuthenticated) {

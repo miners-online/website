@@ -1,120 +1,123 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { LogtoContext } from "@logto/next"
-import { getUser } from "@/lib/logto"
-import { ExternalLink } from "lucide-react"
+import { Menu } from "lucide-react"
+import { useState } from "react"
+
 import UserDropdown from "./auth/user-dropdown"
+import { Badge } from "./ui/badge"
+import { Button } from "./ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
+import { useUser } from "./user-context"
 
-interface Props {
-  logtoContext: LogtoContext;
-};
+export default function Navbar() {
+  const { user } = useUser()
+  const [isOpen, setIsOpen] = useState(false)
 
-
-export default function Navbar({logtoContext }: Props) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const user = getUser(logtoContext);
+  const navigationLinks = [
+    { href: "/", label: "Home" },
+    { href: "/#status", label: "Status" },
+    { href: "/#community", label: "Community" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/rules", label: "Rules" },
+    { href: "https://github.com/miners-online", label: "Source Code", external: true },
+  ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center px-4">
-        <div className="flex items-center gap-4 mr-4">
-          <div className="w-8 h-8 rounded flex items-center justify-center">
-            <Image width="64" height="64" alt="Miners Online Logo"  src="/favicon.svg"></Image>
-          </div>
-          <span className="font-bold text-xl">Miners Online</span>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex ml-auto gap-6">
-          <Link href="/"
-            className="h-auto py-4 hover:bg-accent text-sm font-medium"
-          >
-            Home
-          </Link>
-          <Link
-            href="/rules"
-            className="h-auto py-4 hover:bg-accent text-sm font-medium"
-          >
-            Rules
-          </Link>
-          <Link
-            href="https://github.com/miners-online"
-            className="h-auto py-4 hover:bg-accent text-sm font-medium"
-            >
-            <ExternalLink className="inline mr-1" size={16} />
-            GitHub
-          </Link>
-          {!user ? (
-            <Link
-              href="/api/logto/sign-in"
-              className="h-auto py-4 hover:bg-accent text-sm font-medium"
-            >
-              Sign In
-            </Link>
-          ) : (
-            <UserDropdown
-              user={user}
-              onSignOut={async () => {window.location.href = "/api/logto/sign-out"}}
-              onSettings={async () => {window.location.href = "/settings"}}
+    <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4">
+        <nav className="flex items-center justify-between">
+          {/* Logo and Title */}
+          <div className="flex items-center space-x-2">
+            <Image
+              width="64"
+              height="64"
+              alt="Miners Online Logo"
+              className="h-8 w-8 text-emerald-400"
+              src="/favicon.svg"
             />
-          )}
-        </nav>
+            <span className="text-2xl font-bold text-white">Miners Online</span>
+            <Badge variant="outline" className="border-amber-500 text-amber-400">
+              Alpha
+            </Badge>
+          </div>
 
-        {/* Mobile Menu Button */}
-        <Button variant="ghost" size="icon" className="ml-auto md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          <span className="sr-only">Toggle menu</span>
-        </Button>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t">
-          <div className="container flex flex-col space-y-3 py-4">
-            <Link
-              href="/"
-              className="h-auto py-4 hover:bg-accent text-sm font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="h-auto py-4 hover:bg-accent text-sm font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="https://github.com/miners-online"
-              className="h-auto py-4 hover:bg-accent"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              GitHub
-            </Link>
-            {!user ? (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            {navigationLinks.map((link) => (
               <Link
-                href="/api/logto/sign-in"
-                className="h-auto py-4 hover:bg-accent text-sm font-medium"
+                key={link.href}
+                href={link.href}
+                className="text-slate-300 hover:text-white transition-colors"
+                {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
               >
+                {link.label}
+              </Link>
+            ))}
+            {!user ? (
+              <Link href="/api/logto/sign-in" className="text-slate-300 hover:text-white transition-colors">
                 Sign In
               </Link>
             ) : (
               <UserDropdown
                 user={user}
-                onSignOut={async () => {window.location.href = "/api/logto/sign-out"}}
-                onSettings={async () => {window.location.href = "/settings"}}
+                onSignOut={async () => {
+                  window.location.href = "/api/logto/sign-out"
+                }}
+                onSettings={async () => {
+                  window.location.href = "/settings"
+                }}
               />
             )}
           </div>
-        </div>
-      )}
+
+          {/* Mobile Navigation */}
+          <div className="flex md:hidden items-center space-x-2">
+            {/* User Auth for Mobile */}
+            {!user ? (
+              <Link href="/api/logto/sign-in" className="text-slate-300 hover:text-white transition-colors text-sm">
+                Sign In
+              </Link>
+            ) : (
+              <UserDropdown
+                user={user}
+                onSignOut={async () => {
+                  window.location.href = "/api/logto/sign-out"
+                }}
+                onSettings={async () => {
+                  window.location.href = "/settings"
+                }}
+              />
+            )}
+
+            {/* Mobile Menu Button */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-slate-300 hover:text-white">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-slate-900 border-slate-700">
+                <div className="flex flex-col space-y-4 mt-8">
+                  {navigationLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-slate-300 hover:text-white transition-colors text-lg py-2"
+                      onClick={() => setIsOpen(false)}
+                      {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </nav>
+      </div>
     </header>
   )
 }

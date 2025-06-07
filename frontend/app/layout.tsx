@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { getLogtoContext } from '@logto/next/server-actions';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import "./globals.css";
 
-import Navbar from "@/components/navbar"
 import { globals } from "../lib/globals";
+import { UserProvider, UserLoader } from "@/components/user-context";
+
+import { getLogtoContext } from "@logto/next/server-actions";
 import { logtoConfig } from "@/lib/logto";
+import { getUser } from "@/lib/logto"
 
 export const metadata: Metadata = {
   title: globals.siteName,
@@ -16,30 +18,23 @@ export const metadata: Metadata = {
   }
 };
 
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const logtoContext = await getLogtoContext(logtoConfig);
+  const user = getUser(logtoContext);
 
   return (
-    <html lang="en">
+    <html>
       <SpeedInsights/>
-      <body className={`antialiased`}>
-        <div className="min-h-screen bg-gradient-to-b from-green-900/20 to-green-950/30">
-          <Navbar
-            logtoContext={logtoContext}
-          />
-          {children}
-          <footer className="border-t py-6 mt-12">
-            <div className="container mx-auto px-4 text-center text-muted-foreground">
-              <p>© {new Date().getFullYear()} {globals.siteName}. All rights reserved.</p>
-              <p>NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</p>
-            </div>
-          </footer>
-        </div>
+      <body>
+        <UserProvider>
+          <UserLoader user={user}>
+            {children}
+          </UserLoader>
+        </UserProvider>
       </body>
     </html>
   );
