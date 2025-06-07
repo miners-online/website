@@ -1,8 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link";
 
-export const runtime = 'edge';
-
 export default function NotFound() {
   return (
     <main className="container mx-auto px-4 py-8">

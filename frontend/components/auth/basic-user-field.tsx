@@ -34,6 +34,7 @@ export function BasicUserField({
         }
       } catch (err) {
         if (mounted) {
+          console.error("Failed to fetch basic info:", err)
           setError("Failed to load data")
           setLoading(false)
         }

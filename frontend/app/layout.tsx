@@ -6,8 +6,6 @@ import Navbar from "@/components/navbar"
 import { globals } from "../lib/globals";
 import { logtoConfig } from "@/lib/logto";
 
-export const runtime = 'edge';
-
 export const metadata: Metadata = {
   title: globals.siteName,
   description: globals.siteDescription,

@@ -4,8 +4,6 @@ import { globals } from "../lib/globals"
 import { Faq } from "@/components/faq"
 import { faq_items } from "@/lib/faq"
 
-export const runtime = 'edge';
-
 export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">

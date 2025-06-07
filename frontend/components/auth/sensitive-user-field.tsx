@@ -43,9 +43,9 @@ export function SensitiveUserField({
       const res = await requestVerificationCode(field, originalValue, token)
       setVerificationRecordId(res.data.verificationRecordId)
       setShowVerificationDialog(true)
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      setError(err.message || "Failed to request verification code")
+      setError(err as string)
     }
   }
 
@@ -60,7 +60,7 @@ export function SensitiveUserField({
       setVerifying(true)
       setError("")
 
-      const {data, status} = await verifyCode(field, originalValue, verificationRecordId, verificationCode, token)
+      const {status} = await verifyCode(field, originalValue, verificationRecordId, verificationCode, token)
 
       if (status != 200) throw new Error("Code verification failed")
 
@@ -69,9 +69,9 @@ export function SensitiveUserField({
       setNewValue(originalValue) // Initialize with current value
       setShowVerificationDialog(false)
       setVerificationCode("")
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      setError(err.message || "Verification failed")
+      setError(err as string)
     } finally {
       setVerifying(false)
     }
@@ -89,9 +89,9 @@ export function SensitiveUserField({
       setOriginalValue(newValue)
       setIsVerified(false)
       setError("")
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      setError(err.message || "Failed to update")
+      setError(err as string)
     } finally {
       setSaving(false)
     }
@@ -121,6 +121,7 @@ export function SensitiveUserField({
         }
       } catch (err) {
         if (mounted) {
+          console.error("Failed to fetch sensitive field:", err)
           setError("Failed to load data")
           setLoading(false)
         }

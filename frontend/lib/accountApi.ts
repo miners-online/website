@@ -28,7 +28,7 @@ export async function getBasicInfo(field: string, token: string) {
   // return "";
 }
 
-export async function updateBasicInfo(field: string, value: any, token: string) {
+export async function updateBasicInfo(field: string, value: string, token: string) {
   const body = { [field]: value };
   const res = await fetchWithToken(`${LOGTO_ENDPOINT}/api/my-account`, {
     method: 'PATCH',
