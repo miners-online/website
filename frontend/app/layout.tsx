@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getLogtoContext } from '@logto/next/server-actions';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import "./globals.css";
 
 import Navbar from "@/components/navbar"
@@ -24,6 +26,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <SpeedInsights/>
       <body className={`antialiased`}>
         <div className="min-h-screen bg-gradient-to-b from-green-900/20 to-green-950/30">
           <Navbar
