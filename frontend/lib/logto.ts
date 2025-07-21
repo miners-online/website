@@ -1,4 +1,4 @@
-import { User } from "@/components/user-context";
+import { User } from "@/components/auth/user-context";
 import { LogtoContext, LogtoNextConfig, UserScope } from "@logto/next";
 
 export const logtoConfig = {

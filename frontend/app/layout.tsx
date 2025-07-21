@@ -4,12 +4,13 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 
 import { globals } from "../lib/globals";
-import { UserProvider, UserLoader } from "@/components/user-context";
+import { UserProvider } from "@/components/auth/user-context";
 import { VerificationProvider } from "@/components/auth/verification-context";
 
 import { getLogtoContext } from "@logto/next/server-actions";
 import { logtoConfig } from "@/lib/logto";
 import { getUser } from "@/lib/logto"
+
 
 export const metadata: Metadata = {
   title: globals.siteName,
@@ -31,11 +32,9 @@ export default async function RootLayout({
     <html>
       <SpeedInsights/>
       <body>
-        <UserProvider>
+        <UserProvider initialUser={user}>
           <VerificationProvider>
-            <UserLoader user={user}>
-              {children}
-            </UserLoader>
+            {children}
           </VerificationProvider>
         </UserProvider>
       </body>

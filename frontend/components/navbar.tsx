@@ -9,7 +9,7 @@ import UserDropdown from "./auth/user-dropdown"
 import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
-import { useUser } from "./user-context"
+import { useUser } from "./auth/user-context"
 
 export default function Navbar() {
   const { user } = useUser()

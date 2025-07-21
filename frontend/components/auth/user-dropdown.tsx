@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { User } from "@/components/user-context"
+import { User } from "@/components/auth/user-context"
 
 interface Props {
   onSignOut: () => Promise<void>;
