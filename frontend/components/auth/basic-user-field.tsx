@@ -64,7 +64,6 @@ export function BasicUserField({
   function handleCancel() {
     setEditing(false)
     setError("")
-    // Reset value to original if needed
   }
 
   if (loading) {

@@ -42,32 +42,28 @@ export async function updateBasicInfo(field: string, value: string, token: strin
 
 // Verification flows for sensitive fields
 
-export async function requestVerificationCode(type: 'primaryEmail' | 'primaryPhone', value: string, token: string) {
-  const realType = type === 'primaryEmail' ? 'email' : 'phone';
-
-  console.log(`Requesting verification code for ${realType}: ${value}`);
-
+export async function requestVerificationCode(value: string, token: string) {
   const res = await fetchWithToken(`${LOGTO_ENDPOINT}/api/verifications/verification-code`, {
     method: 'POST',
-    body: JSON.stringify({ identifier: { type: realType, value } }),
+    body: JSON.stringify({ identifier: { type: "email", value } }),
   }, token);
+
   return {
     data: await res.json(),
     status: res.status
   };
 }
 
-export async function verifyCode(type: 'primaryEmail' | 'primaryPhone', value: string, verificationId: string, code: string, token: string) {
-  const realType = type === 'primaryEmail' ? 'email' : 'phone';
-
+export async function emailVerify(value: string, verificationId: string, code: string, token: string) {
   const res = await fetchWithToken(`${LOGTO_ENDPOINT}/api/verifications/verification-code/verify`, {
     method: 'POST',
     body: JSON.stringify({
-      identifier: { type: realType, value },
+      identifier: { type: "email", value },
       verificationId,
       code,
     }),
   }, token);
+
   return {
     data: await res.json(),
     status: res.status
