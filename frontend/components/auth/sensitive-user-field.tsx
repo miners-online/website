@@ -74,6 +74,7 @@ export function SensitiveUserField({
       await updateSensitiveField(endpoint, value, currentVerificationId, token)
       setEditing(false)
     } catch (err) {
+      console.error("Failed to update sensitive field:", err)
       setError("Failed to update")
     } finally {
       setSaving(false)
