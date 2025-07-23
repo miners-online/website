@@ -16,12 +16,14 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { getBasicInfo } from "@/lib/accountApi"
 import { useRequestVerification, useVerifyCode, useHasValidVerification } from "./verification-context"
+import { useToken } from "./token-context"
 
-export function VerificationUnlock({
-  token,
-}: {
-  token: string
-}) {
+export function VerificationUnlock() {
+  const { token } = useToken()
+  if (!token) {
+    return null; // Ensure token is available
+  }
+
   const [error, setError] = useState("")
   const [showVerificationDialog, setShowVerificationDialog] = useState(false)
   const [verificationCode, setVerificationCode] = useState("")
@@ -38,6 +40,10 @@ export function VerificationUnlock({
 
   // Start verification process when user wants to edit
   async function startVerification() {
+    if (token === null) {
+      setError("No valid token found. Please log in again.")
+      return
+    }
     try {
       setError("")
       const fetchedValue = await getBasicInfo("primaryEmail", token)
@@ -52,6 +58,11 @@ export function VerificationUnlock({
 
   // Handle verification code submission
   async function handleVerification() {
+    if (token === null) {
+      setError("No valid token found. Please log in again.")
+      return
+    }
+
     if (!verificationCode.trim()) {
       setError("Please enter the verification code")
       return

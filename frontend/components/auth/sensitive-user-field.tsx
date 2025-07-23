@@ -7,16 +7,20 @@ import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { updateSensitiveField, getBasicInfo } from "@/lib/accountApi"
 import { useHasValidVerification, useLatestVerificationId } from "./verification-context"
+import { useToken } from "./token-context"
 
 export function SensitiveUserField({
   label,
   field,
-  token,
 }: {
   label: string
   field: "primaryEmail" | "primaryPhone"
-  token: string
 }) {
+  const { token } = useToken()
+  if (!token) {
+    return null; // Ensure token is available
+  }
+
   const [value, setValue] = useState<string>("")
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState(false)
@@ -37,6 +41,10 @@ export function SensitiveUserField({
     let mounted = true
 
     async function fetchData() {
+      if (!token) {
+        setError("No valid token found. Please log in again.")
+        return
+      }
       try {
         const fetchedValue = await getBasicInfo(field, token)
         if (mounted) {
@@ -61,6 +69,10 @@ export function SensitiveUserField({
 
   // Save the new value after verification
   async function handleSave() {
+    if (!token) {
+      setError("No valid token found. Please log in again.")
+      return
+    }
     try {
       setSaving(true)
       setError("")

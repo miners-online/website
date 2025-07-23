@@ -1,6 +1,8 @@
 import { BasicUserField } from "@/components/auth/basic-user-field";
 import { SensitiveUserField } from "@/components/auth/sensitive-user-field";
+import { TokenProvider } from "@/components/auth/token-context";
 import { VerificationUnlock } from "@/components/auth/verification-unlock";
+import Navbar from "@/components/navbar";
 import { logtoConfig } from "@/lib/logto";
 import { getAccessTokenRSC } from "@logto/next/server-actions";
 import { redirect } from "next/navigation";
@@ -13,28 +15,33 @@ export default async function SettingsPage() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <section className="my-12 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm">
-        <div className="container max-w-3xl px-6">
-          <h1>Settings</h1>
-          <VerificationUnlock token={token} />
-          <BasicUserField
-            label="Name"
-            field="name"
-            token={token}
-          />
-          <SensitiveUserField
-            label="Email"
-            field="primaryEmail"
-            token={token}
-          />
-          <SensitiveUserField
-            label="Phone"
-            field="primaryPhone"
-            token={token}
-          />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900">
+      <Navbar/>
+      <section id="community" className="py-6">
+        <div className="container mx-auto">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">Settings</h2>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <TokenProvider initialToken={token}>
+              <VerificationUnlock/>
+              <BasicUserField
+                label="Name"
+                field="name"
+              />
+              <SensitiveUserField
+                label="Email"
+                field="primaryEmail"
+              />
+              <SensitiveUserField
+                label="Phone"
+                field="primaryPhone"
+              />
+            </TokenProvider>
+          </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

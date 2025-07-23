@@ -6,16 +6,20 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { getBasicInfo, updateBasicInfo } from "@/lib/accountApi"
+import { useToken } from "./token-context"
 
 export function BasicUserField({
   label,
   field,
-  token,
 }: {
   label: string
   field: string
-  token: string
 }) {
+  const { token } = useToken()
+  if (!token) {
+    return null; // Ensure token is available
+  }
+
   const [value, setValue] = useState<string>("")
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState(false)
@@ -26,6 +30,10 @@ export function BasicUserField({
     let mounted = true
 
     async function fetchData() {
+      if (!token) {
+        setError("No valid token found. Please log in again.")
+        return
+      }
       try {
         const fetchedValue = await getBasicInfo(field, token)
         if (mounted) {
@@ -49,6 +57,10 @@ export function BasicUserField({
   }, [field, token])
 
   async function handleSave() {
+    if (!token) {
+      setError("No valid token found. Please log in again.")
+      return
+    }
     try {
       setSaving(true)
       setError("")
