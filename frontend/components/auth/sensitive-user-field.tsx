@@ -4,17 +4,20 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Alert, AlertDescription } from "@/components/ui/alert"
 import { updateSensitiveField, getBasicInfo } from "@/lib/accountApi"
 import { useHasValidVerification, useLatestVerificationId } from "./verification-context"
 import { useToken } from "./token-context"
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
+import { VerificationUnlock } from "./verification-unlock"
 
 export function SensitiveUserField({
   label,
   field,
+  description = "",
 }: {
   label: string
   field: "primaryEmail" | "primaryPhone"
+  description?: string
 }) {
   const { token } = useToken()
   if (!token) {
@@ -23,7 +26,6 @@ export function SensitiveUserField({
 
   const [value, setValue] = useState<string>("")
   const [loading, setLoading] = useState(true)
-  const [editing, setEditing] = useState(false)
   const [error, setError] = useState<string>("")
   const [saving, setSaving] = useState(false)
 
@@ -84,7 +86,6 @@ export function SensitiveUserField({
 
       const endpoint = field === "primaryEmail" ? "/api/my-account/email" : "/api/my-account/phone"
       await updateSensitiveField(endpoint, value, currentVerificationId, token)
-      setEditing(false)
     } catch (err) {
       console.error("Failed to update sensitive field:", err)
       setError("Failed to update")
@@ -93,51 +94,35 @@ export function SensitiveUserField({
     }
   }
 
-  function handleCancel() {
-    setEditing(false)
-    setError("")
-  }
-
   if (loading) {
     return <div className="text-sm text-muted-foreground">Loading...</div>
   }
 
   return (
-    <div className="space-y-2">
-      <Label htmlFor={field}>{label}</Label>
-
-      {!editing ? (
-        <div className="flex items-center gap-2">
-          <span className="text-sm">{value || <span className="text-muted-foreground">(not set)</span>}</span>
-          <Button variant="outline" size="sm" onClick={() => setEditing(true)} disabled={!isVerified}>
-            Edit
-          </Button>
-        </div>
-      ) : (
-        <div className="space-y-3">
-          <Input
-            id={field}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder={`Enter ${label.toLowerCase()}`}
-          />
-
-          <div className="flex gap-2">
-            <Button size="sm" onClick={handleSave} disabled={saving}>
-              {saving ? "Saving..." : "Save"}
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleCancel} disabled={saving}>
-              Cancel
-            </Button>
-          </div>
-
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-        </div>
-      )}
-    </div>
+    <Card className="bg-slate-800/50 border-slate-700 my-4">
+      <CardHeader>
+        <Label htmlFor={field} className="text-white text-lg font-medium">
+          {label}
+        </Label>
+        <p className="text-slate-300 text-sm">{description}</p>
+      </CardHeader>
+      <CardContent>
+        <Input
+          id={field}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder={`Enter ${label.toLowerCase()}`}
+          className="bg-gray-900 border-gray-700 text-white placeholder:text-gray-500 focus:border-gray-600 focus:ring-gray-600"
+          disabled={!isVerified}
+        />
+      </CardContent>
+      <CardFooter>
+        <p className="text-sm">{error}</p>
+        <Button variant="secondary" className="bg-gray-700 hover:bg-gray-600 text-white border-gray-600 mr-4" onClick={handleSave} disabled={saving || !isVerified}>
+          {saving ? "Saving..." : "Save"}
+        </Button>
+        <VerificationUnlock/>
+      </CardFooter>
+    </Card>
   )
 }

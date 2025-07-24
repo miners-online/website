@@ -25,18 +25,20 @@ export default async function SettingsPage() {
 
           <div className="max-w-4xl mx-auto">
             <TokenProvider initialToken={token}>
-              <VerificationUnlock/>
               <BasicUserField
                 label="Name"
                 field="name"
+                description="Please enter your full name, or a display name."
               />
               <SensitiveUserField
                 label="Email"
                 field="primaryEmail"
+                description="Please enter your primary email address. This will be used for account notifications and recovery."
               />
               <SensitiveUserField
                 label="Phone"
                 field="primaryPhone"
+                description="Please enter your primary phone number. This will be used for account notifications and recovery."
               />
             </TokenProvider>
           </div>
