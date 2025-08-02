@@ -4,9 +4,13 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Miners Online - Account Settings',
+  description: 'Manage your account settings and personal information securely.',
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+    shortcut: '/favicon.png',
+  },
 }
 
 export default function RootLayout({
