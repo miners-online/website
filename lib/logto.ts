@@ -1,6 +1,7 @@
 import 'dotenv/config'
 
 import { LogtoNextConfig, UserScope } from "@logto/next";
+import { CreateManagementApiOptions } from "@logto/api/management";
 
 export const logtoConfig = {
   endpoint: process.env.LOGTO_ENDPOINT,
@@ -21,3 +22,8 @@ export const logtoConfig = {
     UserScope.Roles
   ]
 } as LogtoNextConfig;
+
+export const logtoM2MConfig = {
+  clientId: process.env.LOGTO_M2M_CLIENT_ID,
+  clientSecret: process.env.LOGTO_M2M_CLIENT_SECRET
+} as CreateManagementApiOptions 
