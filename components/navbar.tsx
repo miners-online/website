@@ -30,6 +30,12 @@ export default function Navbar() {
           >
             GitHub
           </Link>
+          <Link
+            href="/api/auth/sign-out"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          >
+            Sign Out
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -56,6 +62,13 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               GitHub
+            </Link>
+            <Link
+              href="/api/auth/sign-out"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sign Out
             </Link>
           </div>
         </div>

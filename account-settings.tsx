@@ -1,12 +1,18 @@
 "use client"
 
+import { IdTokenClaims } from "@logto/next";
+
 import { Mail } from "lucide-react"
 import { SettingsSection } from "@/components/settings-section"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { FieldGroup } from "@/components/field-group"
 import { SettingsField } from "@/components/settings-field"
 
-export default function Component() {
+interface SettingsProps {
+  claims: IdTokenClaims 
+}
+
+export default function Component({ claims }: SettingsProps) {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -24,10 +30,13 @@ export default function Component() {
             <SettingsField
               label={<span className="text-sm font-medium text-gray-700">Avatar</span>}
               value={
+                (claims.picture && claims.picture !== "") ?
                 <Avatar className="h-10 w-10">
-                  <AvatarImage src="/placeholder.svg?height=40&width=40" alt="Profile avatar" />
-                  <AvatarFallback className="bg-blue-500 text-white text-sm">EN</AvatarFallback>
+                  <AvatarImage src={claims.picture} alt="Profile avatar" />
+                  <AvatarFallback className="bg-blue-500 text-white text-sm">?</AvatarFallback>
                 </Avatar>
+                :
+                <span className="text-sm text-gray-500">Not set</span>
               }
               actionLabel="Change"
               onAction={() => console.log("Change avatar")}
@@ -35,7 +44,14 @@ export default function Component() {
 
             <SettingsField
               label={<span className="text-sm font-medium text-gray-700">Name</span>}
-              value={<span className="text-sm text-gray-900">Example Name</span>}
+              value={
+                (claims.name && claims.name !== "") ?
+                <span className="text-sm text-gray-900">
+                  {claims.name}
+                </span>
+                :
+                <span className="text-sm text-gray-500">Not set</span>
+              }
               actionLabel="Change"
               onAction={() => console.log("Change name")}
               isLast
@@ -49,10 +65,18 @@ export default function Component() {
             <SettingsField
               label={<span className="text-sm font-medium text-gray-700">Email</span>}
               value={
+                (claims.email && claims.email !== "") ?
                 <>
                   <Mail className="h-4 w-4 text-gray-500" />
-                  <span className="text-sm text-gray-900">someone@example.com</span>
+                  <span className="text-sm text-gray-900">
+                    {claims.email}
+                  </span>
+                  <span className={`text-sm ${claims.email_verified ? "text-green-600" : "text-orange-500"} text-gray-900`}>
+                    {claims.email_verified ? "Verified" : "Not verified"}
+                  </span>
                 </>
+                :
+                <span className="text-sm text-gray-500">Not set</span>
               }
               actionLabel="Change"
               onAction={() => console.log("Change email")}
