@@ -5,7 +5,6 @@ import "./globals.css";
 
 import { globals } from "../lib/globals";
 import { UserProvider } from "@/components/auth/user-context";
-import { VerificationProvider } from "@/components/auth/verification-context";
 
 import { getLogtoContext } from "@logto/next/server-actions";
 import { logtoConfig } from "@/lib/logto";
@@ -33,9 +32,7 @@ export default async function RootLayout({
       <SpeedInsights/>
       <body>
         <UserProvider initialUser={user}>
-          <VerificationProvider>
-            {children}
-          </VerificationProvider>
+          {children}
         </UserProvider>
       </body>
     </html>
