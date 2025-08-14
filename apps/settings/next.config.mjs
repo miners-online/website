@@ -9,6 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  assetPrefix: '/settings-static',
 }
 
 export default nextConfig

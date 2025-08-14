@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   title: 'Miners Online - Account Settings',
   description: 'Manage your account settings and personal information securely.',
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
-    shortcut: '/favicon.png',
+    icon: '/favicon-256x256.png',
+    apple: '/favicon-256x256.png',
+    shortcut: '/favicon-256x256.png',
   },
 }
 

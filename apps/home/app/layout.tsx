@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: globals.siteName,
   description: globals.siteDescription,
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon-256x256.png",
   }
 };
 

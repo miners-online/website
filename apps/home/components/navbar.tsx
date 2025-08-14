@@ -61,7 +61,7 @@ export default function Navbar() {
               height="64"
               alt="Miners Online Logo"
               className="h-8 w-8 text-emerald-400"
-              src="/favicon.svg"
+              src="/favicon-256x256.png"
             />
             <span className="text-2xl font-bold text-white">Miners Online</span>
             <Badge variant="outline" className="border-amber-500 text-amber-400">

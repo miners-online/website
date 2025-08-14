@@ -3,13 +3,14 @@ import { logtoConfig } from '@/lib/logto';
 import { redirect } from 'next/navigation';
 
 import Navbar from "@/components/navbar"
-import AccountSettings from "../account-settings"
+import AccountSettings from "../../account-settings"
+import { HOME_URL } from '@/lib/config';
 
 export default async function Page() {
   const { isAuthenticated, claims } = await getLogtoContext(logtoConfig);
 
   if (!isAuthenticated || !claims) {
-    redirect('/api/auth/sign-in');
+    redirect(`${HOME_URL}/api/logto/sign-in?next=${encodeURIComponent('/settings')}`);
   }
 
   return (

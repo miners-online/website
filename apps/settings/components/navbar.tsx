@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { HOME_URL } from "@/lib/config"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,14 +15,14 @@ export default function Navbar() {
       <div className="container flex h-16 items-center px-4">
         <div className="flex items-center gap-2 mr-4">
           <div className="w-8 h-8 rounded flex items-center justify-center">
-            <Image src="/favicon.png" alt="" width={32} height={32}></Image>
+            <Image src="/favicon-256x256.png" alt="" width={32} height={32}></Image>
           </div>
           <span className="font-bold text-xl">Miners Online</span>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex ml-auto gap-6">
-          <Link href="https://minersonline.uk" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+          <Link href={HOME_URL} className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
             Home
           </Link>
           <Link
@@ -31,7 +32,7 @@ export default function Navbar() {
             GitHub
           </Link>
           <Link
-            href="/api/auth/sign-out"
+            href="/api/logto/sign-out"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             Sign Out
