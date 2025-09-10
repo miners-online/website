@@ -4,7 +4,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { Menu } from "lucide-react"
 import { useState } from "react"
-import UserDropdown from "./auth/user-dropdown"
 import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "./ui/sheet"
@@ -16,10 +15,38 @@ import {
   NavigationMenuContent,
   NavigationMenuTrigger,
 } from "./ui/navigation-menu"
-import { useUser } from "./auth/user-context"
+
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
+
+const DotIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+      <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z" />
+    </svg>
+  )
+}
+
+function UserProfile() {
+  return (
+    <UserButton>
+      {/* You can also pass the content as direct children */}
+      <UserButton.UserProfilePage label="Test" labelIcon={<DotIcon />} url="test">
+        <div>
+          <h1>Custom Test Page</h1>
+          <p>This is the content of the custom test page.</p>
+        </div>
+      </UserButton.UserProfilePage>
+    </UserButton>
+  )
+}
 
 export default function Navbar() {
-  const { user } = useUser()
   const [isOpen, setIsOpen] = useState(false)
 
   const navigationItems = [
@@ -114,44 +141,32 @@ export default function Navbar() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {!user ? (
-              <Link
-                href="/api/logto/sign-in"
-                className="text-slate-300 hover:text-white transition-colors px-4 py-2 rounded-md hover:bg-slate-800"
-              >
-                Sign In
-              </Link>
-            ) : (
-              <UserDropdown
-                user={user}
-                onSignOut={async () => {
-                  window.location.href = "/api/logto/sign-out"
-                }}
-                onSettings={async () => {
-                  window.location.href = "/settings"
-                }}
-              />
-            )}
+            <SignedOut>
+              <SignInButton>
+                <button className="text-slate-300 hover:text-white transition-colors px-4 py-2 rounded-md hover:bg-slate-800">Sign In</button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="text-slate-300 hover:text-white transition-colors px-4 py-2 rounded-md hover:bg-slate-800">Sign Up</button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserProfile/>
+            </SignedIn>
           </div>
 
           {/* Mobile Navigation */}
           <div className="flex md:hidden items-center space-x-2">
-            {/* User Auth for Mobile */}
-            {!user ? (
-              <Link href="/api/logto/sign-in" className="text-slate-300 hover:text-white transition-colors text-sm">
-                Sign In
-              </Link>
-            ) : (
-              <UserDropdown
-                user={user}
-                onSignOut={async () => {
-                  window.location.href = "/api/logto/sign-out"
-                }}
-                onSettings={async () => {
-                  window.location.href = "/settings"
-                }}
-              />
-            )}
+            <SignedOut>
+              <SignInButton>
+                <button className="text-slate-300 hover:text-white transition-colors text-sm">Sign In</button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="text-slate-300 hover:text-white transition-colors text-sm">Sign Up</button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserProfile/>
+            </SignedIn>
 
             {/* Mobile Menu Button */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
