@@ -12,7 +12,7 @@ export default async function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Image width="64" height="64" alt="Miners Online Logo" className="h-6 w-6 text-emerald-400"  src="/favicon.svg"></Image>
+              <Image width="64" height="64" alt="Miners Online Logo" className="h-6 w-6 text-emerald-400"  src="/favicon-256x256.png"></Image>
               <span className="text-xl font-bold text-white">Miners Online</span>
             </div>
             <p className="text-slate-400 text-sm">An open-source Minecraft server built by the community.</p>

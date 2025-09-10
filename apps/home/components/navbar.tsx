@@ -51,6 +51,7 @@ export default function Navbar() {
 
   const navigationItems = [
     { href: "/", label: "Home", group: null },
+    { href: "/blog", label: "Blog", group: null },
     { href: "/#status", label: "Status", group: "Server" },
     { href: "/faq", label: "FAQ", group: "Server" },
     { href: "/rules", label: "Rules", group: "Server" },

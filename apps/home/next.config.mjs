@@ -1,7 +1,16 @@
-import type { NextConfig } from "next";
+import { createMDX } from 'fumadocs-mdx/next';
+
 // const { SETTINGS_URL } = process.env;
 
-const nextConfig: NextConfig = {
+const withMDX = createMDX({
+  // customise the config file path
+  // configPath: "source.config.ts"
+});
+
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
   // async rewrites() {
   //   return [
   //     {
@@ -20,4 +29,4 @@ const nextConfig: NextConfig = {
   // },
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);;

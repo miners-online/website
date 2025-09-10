@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { RootProvider } from 'fumadocs-ui/provider';
 
 import "./globals.css";
 
@@ -23,11 +24,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html suppressHydrationWarning>
       <SpeedInsights/>
       <body>
         <ClerkProvider>
-          {children}
+          <RootProvider>
+            {children}
+          </RootProvider>
         </ClerkProvider>
       </body>
     </html>
