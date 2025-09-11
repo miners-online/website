@@ -34,7 +34,7 @@ export function ServerStatus() {
           players: data.online ? data.players.online : 0,
           maxPlayers: data.online ? data.players.max : 0,
           motd: data.online ? data.motd.clean : ["Server is offline"],
-          lastSeen: data.online ? undefined : new Date().toLocaleString(),
+          lastSeen: new Date().toLocaleString(),
         })
       } catch (error) {
         console.error("Failed to fetch server status:", error)
