@@ -270,6 +270,9 @@ export default function HomePage() {
                 <Button variant="outline" asChild>
                   <Link href="/faq">Check FAQ</Link>
                 </Button>
+                <Button variant="outline" asChild>
+                  <Link href="https://github.com/orgs/miners-online/discussions">Join the discussions</Link>
+                </Button>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AlertTriangle, Shield, Users, MessageSquare, Gamepad2, Ban } from "lucide-react"
 import { SiteFooter } from "@/components/site-footer"
+import Link from "next/link"
 
 export default function RulesPage() {
   return (
@@ -240,15 +241,15 @@ export default function RulesPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm leading-relaxed">
-                  If you believe you have been unfairly punished, you may submit an appeal through our Discord server.
+                  If you believe you have been unfairly punished, you may submit an appeal through our <Link href="support.minersonline.uk">dedicated support platform</Link>.
                   Appeals must be submitted within 30 days of the punishment and include relevant evidence.
                 </p>
                 <p className="text-sm leading-relaxed">
                   For questions about rules or to report rule violations, contact our staff team through:
                 </p>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>• In-game: Use /report or /staff commands</li>
-                  <li>• Discord: Create a support ticket</li>
+                  <li>• In-game: Use /report or /support commands</li>
+                  <li>• Support: Create a support ticket in our <Link href="support.minersonline.uk">dedicated support platform</Link></li>
                   <li>• Email: support@minersonline.uk</li>
                 </ul>
               </CardContent>

@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { HelpCircle, Server, Gamepad2, Users, Settings, Shield } from "lucide-react"
 import { SiteFooter } from "@/components/site-footer"
+import Link from "next/link"
 
 export default function FAQPage() {
   return (
@@ -34,7 +35,7 @@ export default function FAQPage() {
                     <AccordionContent className="text-sm leading-relaxed">
                       To connect to Miners Online, open your Minecraft Java Edition client and add a new server with the
                       IP address: <code className="bg-muted px-2 py-1 rounded text-xs">play.minersonline.uk</code>. We
-                      support Minecraft versions 1.19 and above. Make sure you have a stable internet connection for the
+                      support Minecraft versions 1.8 and above. Make sure you have a stable internet connection for the
                       best experience.
                     </AccordionContent>
                   </AccordionItem>
@@ -42,19 +43,9 @@ export default function FAQPage() {
                   <AccordionItem value="versions">
                     <AccordionTrigger>What Minecraft versions are supported?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      We support Minecraft Java Edition versions 1.19 through 1.21. We recommend using the latest
+                      We support Minecraft Java Edition versions 1.8 through 1.21.8. We recommend using the latest
                       version for the best performance and access to all features. Bedrock Edition is not currently
                       supported.
-                    </AccordionContent>
-                  </AccordionItem>
-
-                  <AccordionItem value="first-time">
-                    <AccordionTrigger>What should I do when I first join?</AccordionTrigger>
-                    <AccordionContent className="text-sm leading-relaxed">
-                      When you first join, you&lsquo;ll spawn in our welcome area. We highly recommend visiting the tutorial
-                      island to learn about our unique features, commands, and game mechanics. Use{" "}
-                      <code className="bg-muted px-2 py-1 rounded text-xs">/tutorial</code> to get started. Don&lsquo;t forget
-                      to read our rules with <code className="bg-muted px-2 py-1 rounded text-xs">/rules</code>.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -81,21 +72,22 @@ export default function FAQPage() {
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="game-modes">
-                    <AccordionTrigger>What game modes are available?</AccordionTrigger>
+                    <AccordionTrigger>What game modes are planned?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      We offer several popular minigames including SkyWars, Bed Wars, Build Battles, PvP Arena, and
-                      Capture the Flag. Each game mode has unique rules and objectives. Use{" "}
-                      <code className="bg-muted px-2 py-1 rounded text-xs">/games</code> to see all available modes and
-                      join games.
+                      We&lsquo;re actively developing several unique game modes including Golf (our signature minigame),
+                      creative building challenges, and puzzle-based adventures. These are designed for smaller groups
+                      and focus on creativity and skill rather than requiring large player counts. Check our blog and
+                      for development updates and beta testing opportunities.
                     </AccordionContent>
                   </AccordionItem>
 
                   <AccordionItem value="economy">
-                    <AccordionTrigger>How does the server economy work?</AccordionTrigger>
+                    <AccordionTrigger>Will there be an economy system?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      You earn coins by participating in games, completing daily challenges, and achieving milestones.
-                      Coins can be used to purchase cosmetics, upgrade your gear, and unlock special features. The
-                      economy is balanced to reward both skill and participation, so everyone can progress.
+                      Yes! We&lsquo;re developing a coin-based economy system where players can earn coins through gameplay
+                      achievements and participation. The economy will focus on cosmetic rewards, fun unlockables, tools,
+                      and equipment. This system is currently in development and will be introduced as
+                      game modes become available.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -109,12 +101,12 @@ export default function FAQPage() {
                   </AccordionItem>
 
                   <AccordionItem value="stats">
-                    <AccordionTrigger>How can I view my statistics?</AccordionTrigger>
+                    <AccordionTrigger>How will statistics work?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      Use <code className="bg-muted px-2 py-1 rounded text-xs">/stats</code> to view your personal
-                      statistics including wins, losses, kills, and other achievements. You can also view leaderboards
-                      with <code className="bg-muted px-2 py-1 rounded text-xs">/leaderboard</code> to see how you rank
-                      against other players.
+                      We&lsquo;re planning a comprehensive statistics system that will track your achievements, best scores,
+                      and progress across different game modes. This will include personal leaderboards and achievement
+                      tracking. The statistics system is being developed alongside the game modes and will launch when
+                      the first games become available.
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -137,7 +129,15 @@ export default function FAQPage() {
                       First, check your internet connection and try restarting Minecraft. If the issue persists, try
                       lowering your render distance and graphics settings. You can also use{" "}
                       <code className="bg-muted px-2 py-1 rounded text-xs">/ping</code> to check your connection to our
-                      server. If problems continue, contact our support team.
+                      server.
+
+                      If lag continues, it may be due to high server load during peak times. We recommend playing during
+                      off-peak hours for a smoother experience. 
+
+                      The issue is likely with your internet connection - contact your Internet Service Provider (ISP) for
+                      assistance with connection problems.
+
+                      If you suspect the issue is on our end, please report it in our in our <Link href="support.minersonline.uk">dedicated support platform</Link>
                     </AccordionContent>
                   </AccordionItem>
 
@@ -146,26 +146,38 @@ export default function FAQPage() {
                     <AccordionContent className="text-sm leading-relaxed">
                       Check our server status on the homepage first. If the server is online, verify you&lsquo;re using the
                       correct IP: <code className="bg-muted px-2 py-1 rounded text-xs">play.minersonline.uk</code>.
-                      Ensure you&lsquo;re using a supported Minecraft version (1.19+) and that your firewall isn&lsquo;t blocking
+                      Ensure you&lsquo;re using a supported Minecraft version (1.8+) and that your firewall isn&lsquo;t blocking
                       the connection.
+
+                      If you still can&lsquo;t connect, the issue is likely:
+                      <ol>
+                        <li>
+                          with your internet connection - contact your Internet Service Provider (ISP) for assistance
+                          with connection problems.
+                        </li>
+                        <li>
+                          our country restrictions banning your IP address. Use a VPN to connect from a different location.
+                        </li>
+                      </ol>
                     </AccordionContent>
                   </AccordionItem>
 
                   <AccordionItem value="banned">
                     <AccordionTrigger>I think I was banned unfairly. How do I appeal?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      You can submit a ban appeal through our Discord server by creating a support ticket. Appeals must
-                      be submitted within 30 days of the ban and should include any relevant evidence. Our staff will
-                      review your case fairly and respond within 48 hours.
+                      You can submit a ban appeal through our <Link href="support.minersonline.uk">dedicated support platform</Link>.
+                      Appeals must be submitted within 30 days of the ban and should include any relevant evidence.
+                      Our staff will review your case fairly and respond within 48 hours.
                     </AccordionContent>
                   </AccordionItem>
 
                   <AccordionItem value="lost-items">
-                    <AccordionTrigger>I lost my items due to a bug. Can you help?</AccordionTrigger>
+                    <AccordionTrigger>I lost my items during a game. Can you help?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      If you lost items due to a server bug or glitch, contact our support team immediately with details
-                      about what happened. Include the time, game mode, and what items were lost. We keep detailed logs
-                      and can often restore lost items if the loss was due to a server issue.
+                      Items and inventory in our minigames are designed to be temporary and don&lsquo;t persist between game
+                      sessions. This is normal behavior for minigame servers - each game starts fresh with balanced
+                      equipment. If you&lsquo;re experiencing technical issues during a game (like disconnections), try
+                      rejoining or contact support if the problem continues affecting your gameplay experience.
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -185,10 +197,9 @@ export default function FAQPage() {
                   <AccordionItem value="discord">
                     <AccordionTrigger>Do you have a Discord server?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      Yes! Join our Discord community to chat with other players, get support, participate in events,
-                      and stay updated on server news. Use{" "}
-                      <code className="bg-muted px-2 py-1 rounded text-xs">/discord</code> in-game to get the invite
-                      link.
+                      While we don&lsquo;t use Discord for official support, you can get help through our
+                      <Link href="support.minersonline.uk">dedicated support platform</Link>.
+                      For community discussions and updates, check our website and in-game announcements.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -196,9 +207,9 @@ export default function FAQPage() {
                     <AccordionTrigger>How do I report a rule violation or cheater?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
                       Use <code className="bg-muted px-2 py-1 rounded text-xs">/report [player] [reason]</code> to
-                      report rule violations in-game. For serious issues or if no staff are online, create a support
-                      ticket in our Discord server with evidence (screenshots or video). Our staff take all reports
-                      seriously.
+                      report rule violations in-game. For serious issues or if no staff are online, submit a report
+                      through our <Link href="support.minersonline.uk">dedicated support platform</Link>
+                      with evidence (screenshots or video). Our staff take all reports seriously.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -206,7 +217,7 @@ export default function FAQPage() {
                     <AccordionTrigger>How can I become a staff member?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
                       We occasionally recruit new staff members from our active community. Staff applications are
-                      announced on our Discord server and website. We look for mature, helpful players who are active
+                      announced on our server and website. We look for mature, helpful players who are active
                       and have a good understanding of our rules and community.
                     </AccordionContent>
                   </AccordionItem>
@@ -214,8 +225,9 @@ export default function FAQPage() {
                   <AccordionItem value="suggestions">
                     <AccordionTrigger>Can I suggest new features or improvements?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      We love hearing from our community. Share your suggestions in our Discord server&lsquo;s suggestion
-                      channel or participate in our regular feedback surveys. As an open-source project, we also welcome
+                      We love hearing from our community. Share your suggestions in our
+                      <Link href="https://github.com/orgs/miners-online/discussions/categories/ideas">ideas suggestion
+                      channel</Link> or participate in our regular feedback surveys. As an open-source project, we also welcome
                       code contributions on our GitHub repository.
                     </AccordionContent>
                   </AccordionItem>
@@ -238,7 +250,7 @@ export default function FAQPage() {
                     <AccordionContent className="text-sm leading-relaxed">
                       Miners Online is not a 24/7 server. We typically operate during peak hours (evenings and weekends
                       UK time) and during special events. Check our homepage for current server status and follow our
-                      Discord for announcements about operating schedules.
+                      website announcements for operating schedules.
                     </AccordionContent>
                   </AccordionItem>
 
@@ -292,7 +304,7 @@ export default function FAQPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    <strong>Discord:</strong> Create a support ticket in our Discord server
+                    <strong>Support:</strong> Create a support ticket in our <Link href="support.minersonline.uk">dedicated support platform</Link>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full"></span>
@@ -300,8 +312,8 @@ export default function FAQPage() {
                   </li>
                 </ul>
                 <p className="text-xs text-muted-foreground">
-                  Our support team typically responds within 24 hours. For urgent issues, Discord is the fastest way to
-                  get help.
+                  Our support team typically responds within 24 hours. For urgent issues, use our support platform for
+                  the fastest response.
                 </p>
               </CardContent>
             </Card>
