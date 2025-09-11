@@ -32,7 +32,7 @@ export function ServerStatus() {
         setStatus({
           online: data.online,
           players: data.online ? data.players.online : 0,
-          maxPlayers: data.online ? data.players.max : 100,
+          maxPlayers: data.online ? data.players.max : 0,
           motd: data.online ? data.motd.clean : ["Server is offline"],
           lastSeen: data.online ? undefined : new Date().toLocaleString(),
         })
@@ -65,39 +65,35 @@ export function ServerStatus() {
           <Badge variant={status.online ? "default" : "secondary"}>{status.online ? "Online" : "Offline"}</Badge>
         </div>
 
-        {status.online ? (
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-muted-foreground flex items-center gap-1">
+            <Users className="h-4 w-4" />
+            Players
+          </span>
+          <span className="font-medium">
+            {status.players}/{status.maxPlayers}
+          </span>
+        </div>
+
+        { status.lastSeen && (
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground flex items-center gap-1">
-              <Users className="h-4 w-4" />
-              Players
+              <Clock className="h-4 w-4" />
+              Last seen
             </span>
-            <span className="font-medium">
-              {status.players}/{status.maxPlayers}
-            </span>
+            <span className="text-sm">{status.lastSeen}</span>
           </div>
-        ) : (
-          <>
-          { status.lastSeen && (
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground flex items-center gap-1">
-                <Clock className="h-4 w-4" />
-                Last seen
+        )}
+        { status.motd && (
+          <div>
+            <span className="text-sm text-muted-foreground">Message of the Day</span>
+            <p className="text-sm mt-1">{status.motd.map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < status.motd.length - 1 && <br />}
               </span>
-              <span className="text-sm">{status.lastSeen}</span>
-            </div>
-          )}
-          { status.motd && (
-            <div>
-              <span className="text-sm text-muted-foreground">Message of the Day</span>
-              <p className="text-sm mt-1">{status.motd.map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < status.motd.length - 1 && <br />}
-                </span>
-              ))}</p>
-            </div>
-          )}
-          </>
+            ))}</p>
+          </div>
         )}
       </CardContent>
     </Card>
