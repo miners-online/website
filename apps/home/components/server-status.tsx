@@ -1,27 +1,43 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Wifi, WifiOff, Users, Clock } from "lucide-react"
 import { globals } from "@/lib/globals";
 import { type ServerStatus } from "@/lib/minecraft_status";
-import { Activity } from "lucide-react";
 
-export default function ServerStatus() {
-  const [serverStatus, setServerStatus] = useState<ServerStatus | null>(null)
-  const [loading, setLoading] = useState(true)
+interface ServerStatusInfo {
+  online: boolean
+  players: number
+  maxPlayers: number
+  motd: string[]
+  lastSeen?: string
+}
+
+export function ServerStatus() {
+  const [status, setStatus] = useState<ServerStatusInfo>({
+    online: false,
+    players: 0,
+    maxPlayers: 0,
+    motd: ["Loading..."],
+    lastSeen: undefined,
+  })
 
   useEffect(() => {
     const fetchServerStatus = async () => {
       try {
         const response = await fetch(`https://api.mcsrvstat.us/2/${globals.serverIP}`)
-        const data = await response.json()
-        setServerStatus(data)
+        const data = (await response.json()) as ServerStatus
+        setStatus({
+          online: data.online,
+          players: data.online ? data.players.online : 0,
+          maxPlayers: data.online ? data.players.max : 100,
+          motd: data.online ? data.motd.clean : ["Server is offline"],
+          lastSeen: data.online ? undefined : new Date().toLocaleString(),
+        })
       } catch (error) {
         console.error("Failed to fetch server status:", error)
-        setServerStatus({ online: false } as ServerStatus)
-      } finally {
-        setLoading(false)
       }
     }
 
@@ -32,70 +48,58 @@ export default function ServerStatus() {
   }, [])
 
   return (
-      <section id="status" className="py-16 px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Server Status</h2>
-            <p className="text-slate-300">Real-time information about our Minecraft server</p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <Card className="bg-slate-800/50 border-slate-700">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between text-white">
-                  <span className="flex items-center">
-                    <Activity className="h-5 w-5 mr-2" />
-                    {globals.serverIP}
-                  </span>
-                  {loading ? (
-                    <Badge variant="secondary">Checking...</Badge>
-                  ) : (
-                    <Badge
-                      variant={serverStatus?.online ? "default" : "destructive"}
-                      className={serverStatus?.online ? "bg-emerald-600" : ""}
-                    >
-                      {serverStatus?.online ? "Online" : "Offline"}
-                    </Badge>
-                  )}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {serverStatus?.online && (
-                  <>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-300">Players Online</span>
-                      <span className="text-white font-semibold">
-                        {serverStatus.players?.online || 0} / {serverStatus.players?.max || 0}
-                      </span>
-                    </div>
-                    {serverStatus.version && (
-                      <div className="flex justify-between items-center">
-                        <span className="text-slate-300">Version</span>
-                        <span className="text-white font-semibold">{serverStatus.version}</span>
-                      </div>
-                    )}
-                    {serverStatus.motd?.clean && (
-                      <div>
-                        <span className="text-slate-300 block mb-2">Message of the Day</span>
-                        <div className="bg-slate-900/50 p-3 rounded-md">
-                          {serverStatus.motd.clean.map((line, index) => (
-                            <p key={index} className="text-white text-sm">
-                              {line}
-                            </p>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-                {!loading && !serverStatus?.online && (
-                  <p className="text-slate-400 text-center py-4">Server is currently offline. Check back later!</p>
-                )}
-              </CardContent>
-            </Card>
-          </div>
+    <Card className="w-full max-w-md">
+      <CardHeader className="pb-3">
+        <CardTitle className="flex items-center gap-2 text-lg">
+          {status.online ? (
+            <Wifi className="h-5 w-5 text-primary" />
+          ) : (
+            <WifiOff className="h-5 w-5 text-muted-foreground" />
+          )}
+          Server Status <code className="text-lg font-mono bg-muted px-3 py-1 rounded">play.minersonline.uk</code>
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">Status</span>
+          <Badge variant={status.online ? "default" : "secondary"}>{status.online ? "Online" : "Offline"}</Badge>
         </div>
-      </section>
 
+        {status.online ? (
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-muted-foreground flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              Players
+            </span>
+            <span className="font-medium">
+              {status.players}/{status.maxPlayers}
+            </span>
+          </div>
+        ) : (
+          <>
+          { status.lastSeen && (
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground flex items-center gap-1">
+                <Clock className="h-4 w-4" />
+                Last seen
+              </span>
+              <span className="text-sm">{status.lastSeen}</span>
+            </div>
+          )}
+          { status.motd && (
+            <div>
+              <span className="text-sm text-muted-foreground">Message of the Day</span>
+              <p className="text-sm mt-1">{status.motd.map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < status.motd.length - 1 && <br />}
+                </span>
+              ))}</p>
+            </div>
+          )}
+          </>
+        )}
+      </CardContent>
+    </Card>
   )
 }

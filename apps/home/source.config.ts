@@ -7,6 +7,9 @@ export const blogPosts = defineCollections({
   // add required frontmatter properties
   schema: frontmatterSchema.extend({
     author: z.string(),
-    date: z.string().date().or(z.date()),
+    date: z.date(),
+    readTime: z.string().optional(),
+    category: z.string().optional(),
+    image: z.string().optional(),
   }),
 });

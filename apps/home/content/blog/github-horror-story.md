@@ -2,6 +2,8 @@
 title: 'GitHub Horror Story: When Our Site Was Stolen in the Dark'
 author: "Samuel Hulme"
 date: 2024-10-28
+category: Security
+readTime: 5 min read
 ---
 
 On October 27, 2024, the Miners Online website was compromised by an external entity associated with a foreign online casino, leading to the unauthorized takeover of our site.

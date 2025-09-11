@@ -3,8 +3,12 @@ import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { blog } from '@/lib/source';
 
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
+import { SiteHeader } from "@/components/site-header"
+import { Badge } from "@/components/ui/badge"
+import { Calendar, Clock, ArrowLeft } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { SiteFooter } from "@/components/site-footer"
 
 
 export default async function Page(props: {
@@ -17,40 +21,52 @@ export default async function Page(props: {
   const Mdx = page.data.body;
 
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900">
-        <Navbar/>
-        <section className="py-16 px-4">
-          <div className="container mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-3xl font-bold text-white mb-4">{page.data.title}</h1>
-              <p className="text-slate-300 max-w-2xl mx-auto">
-                {page.data.description}
+    <div className="min-h-screen bg-gradient-to-br from-slate-200 via-blue-100 to-emerald-200 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-900">
+      <SiteHeader />
+      <main className="container py-16">
+        <div className="mx-auto max-w-3xl">
+          <Button variant="ghost" asChild className="mb-8">
+            <Link href="/blog" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Blog
+            </Link>
+          </Button>
+
+          <article className="prose prose-gray dark:prose-invert max-w-none">
+            <div className="mb-8">
+              <Badge variant="secondary" className="mb-4">
+                {page.data.category || "General"}
+              </Badge>
+              <h1 className="text-4xl font-bold tracking-tight mb-4 text-balance">{page.data.title}</h1>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  {page.data.date.toLocaleString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                </div>
+                <div className="flex items-center gap-1">
+                  <Clock className="h-4 w-4" />
+                  {page.data.readTime || "? min read"}
+                </div>
+              </div>
+              <p className="text-lg text-muted-foreground text-pretty">{page.data.description}</p>
+            </div>
+
+            <div className="space-y-6 text-foreground">
+              <InlineTOC items={page.data.toc} />
+              <Mdx components={defaultMdxComponents} />
+            </div>
+            <div className="text-sm my-10">
+              <p className="font-medium"><span className=" text-fd-muted-foreground">Written by:</span> {page.data.author}</p>
+              <p className="font-medium">
+                <span className="text-sm text-fd-muted-foreground">At: </span>
+                {new Date(page.data.date).toDateString()}
               </p>
             </div>
-            <article className="container flex flex-col px-4 py-8">
-              <div className="prose min-w-0">
-                <InlineTOC items={page.data.toc} />
-                <Mdx components={defaultMdxComponents} />
-              </div>
-              <div className="flex flex-col gap-4 text-sm">
-                <div>
-                  <p className="mb-1 text-fd-muted-foreground">Written by</p>
-                  <p className="font-medium">{page.data.author}</p>
-                </div>
-                <div>
-                  <p className="mb-1 text-sm text-fd-muted-foreground">At</p>
-                  <p className="font-medium">
-                    {new Date(page.data.date).toDateString()}
-                  </p>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
-      <Footer/>
-      </div>
-    </>
+          </article>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }
 

@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import type React from "react"
+import type { Metadata } from "next"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Suspense } from "react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { RootProvider } from 'fumadocs-ui/provider';
-
-import "./globals.css";
 
 import { globals } from "../lib/globals";
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
 
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: globals.siteName,
@@ -29,7 +31,11 @@ export default async function RootLayout({
       <body>
         <ClerkProvider>
           <RootProvider>
-            {children}
+            <Suspense fallback={null}>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                {children}
+              </ThemeProvider>
+            </Suspense>
           </RootProvider>
         </ClerkProvider>
       </body>

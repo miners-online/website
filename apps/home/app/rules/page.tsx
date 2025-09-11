@@ -1,237 +1,270 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Separator } from "@/components/ui/separator"
-import {
-  Shield,
-  Users,
-  Hammer,
-  MessageSquare,
-  Swords,
-  AlertTriangle,
-  Gamepad2,
-} from "lucide-react"
-import Link from "next/link"
-
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
+import { SiteHeader } from "@/components/site-header"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { AlertTriangle, Shield, Users, MessageSquare, Gamepad2, Ban } from "lucide-react"
+import { SiteFooter } from "@/components/site-footer"
 
 export default function RulesPage() {
-  const rules = [
-    {
-      icon: Shield,
-      title: "General Conduct",
-      description: "Behavior expectations in lobbies and future minigames",
-      rules: [
-        "Treat all players with respect regardless of skill level or rank",
-        "No harassment, toxicity, or unsportsmanlike conduct",
-        "Keep chat appropriate for all ages - minimal profanity allowed",
-        "No doxxing or sharing personal information of other players",
-        "Respect staff decisions and follow their instructions promptly",
-        "English is the primary language in main chat channels",
-      ],
-    },
-    {
-      icon: MessageSquare,
-      title: "Chat and Communication",
-      description: "Guidelines for lobby chat and future game communication",
-      rules: [
-        "No spam, excessive caps, or chat flooding",
-        "No advertising other servers, Discord servers, or external services",
-        "No begging for ranks, coins, or special treatment",
-        "No impersonating staff members, YouTubers, or other players",
-        "Use party chat for private conversations during games",
-        "Report inappropriate messages instead of arguing in chat",
-      ],
-    },
-    {
-      icon: Swords,
-      title: "Competitive Integrity",
-      description: "Fair play standards for all current and future minigames",
-      rules: [
-        "No hacked clients, cheats, or unfair advantage modifications",
-        "No teaming in solo games (when implemented)",
-        "No cross-teaming in team-based games",
-        "No intentionally losing games to manipulate stats or matchmaking",
-        "No exploiting game bugs or map glitches for advantages",
-        "Only authorised mods / mod packs in designated modded games are allowed",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Party and Team Play",
-      description: "Guidelines for playing with friends and in teams",
-      rules: [
-        "No toxic behavior toward teammates, even if they're performing poorly",
-        "Communicate constructively and help newer players learn",
-        "No griefing teammates in team-based games",
-        "Party leaders are responsible for their members' behavior",
-        "No stream sniping or targeting specific players/streamers",
-        "Respect party invitations - don't spam invites if declined",
-      ],
-    },
-    {
-      icon: Gamepad2,
-      title: "Lobby and Waiting Areas",
-      description: "Behavior standards in lobbies and pre-game areas",
-      rules: [
-        "No excessive parkour camping or blocking other players",
-        "Keep lobby games and activities fun for everyone",
-        "No inappropriate builds in lobby areas",
-        "Don't spam game join attempts or lobby NPCs",
-        "Respect personal space and don't follow players persistently",
-        "No lag machines or redstone contraptions in lobby areas",
-      ],
-    },
-    {
-      icon: Hammer,
-      title: "Stats and Rankings",
-      description: "Guidelines for competitive statistics and leaderboards",
-      rules: [
-        "No stat padding through illegitimate means",
-        "No account sharing to boost statistics or rankings",
-        "No creating alternate accounts to manipulate matchmaking",
-        "Report suspected stat manipulation or boosting",
-        "Accept wins and losses gracefully - no rage quitting penalties",
-        "Leaderboard positions are earned through fair play only",
-      ],
-    },
-  ]
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900">
-      {/* Header */}
-      <Navbar/>
-
-      {/* Hero Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto text-center">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Server{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">Rules</span>
-            </h1>
-            <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-              Guidelines to ensure a fun, fair, and respectful environment for all players in our community.
+    <div className="min-h-screen bg-gradient-to-br from-slate-200 via-blue-100 to-emerald-200 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-900">
+      <SiteHeader />
+      <main className="container py-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold tracking-tight mb-4">Server Rules</h1>
+            <p className="text-lg text-muted-foreground text-pretty">
+              Please read and follow these rules to ensure a fun and fair experience for everyone on Miners Online.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Alpha Notice */}
-      <section className="py-8 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <Alert className="bg-amber-900/20 border-amber-500/50">
-            <AlertTriangle className="h-4 w-4 text-amber-400" />
-            <AlertDescription className="text-amber-100">
-              <strong className="text-amber-400">Alpha Notice:</strong> These rules may be updated as the server
-              develops. Major changes will be announced in our{" "}
-              <Link
-                href="https://github.com/orgs/miners-online/discussions"
-                className="underline hover:text-amber-300"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub Discussions
-              </Link>
-              .
-            </AlertDescription>
-          </Alert>
-        </div>
-      </section>
-
-      {/* Rules Sections */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
           <div className="grid gap-8">
-            {rules.map((section, index) => (
-              <Card key={index} className="bg-slate-800/50 border-slate-700">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center text-2xl">
-                    <section.icon className="h-6 w-6 mr-3 text-emerald-400" />
-                    {section.title}
-                  </CardTitle>
-                  <CardDescription className="text-slate-300 text-base">{section.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {section.rules.map((rule, ruleIndex) => (
-                      <li key={ruleIndex} className="flex items-start">
-                        <div className="w-2 h-2 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                        <span className="text-slate-200">{rule}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+            {/* General Conduct */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
+                  General Conduct
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      1
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>Respect all players:</strong> Treat everyone with kindness and respect. Harassment,
+                      bullying, or discrimination of any kind will not be tolerated.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      2
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No inappropriate content:</strong> Keep all content family-friendly. This includes
+                      usernames, skins, builds, and chat messages.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      3
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>Follow staff instructions:</strong> Listen to and cooperate with server moderators and
+                      administrators at all times.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Chat Rules */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5 text-primary" />
+                  Chat Rules
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      1
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No spam or flooding:</strong> Avoid sending repetitive messages, excessive caps, or
+                      flooding the chat with unnecessary content.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      2
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>English only in global chat:</strong> Use English in public channels to ensure everyone
+                      can participate in conversations.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      3
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No advertising:</strong> Do not advertise other servers, Discord servers, or external
+                      services without permission.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      4
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No personal information:</strong> Never share personal information like real names,
+                      addresses, phone numbers, or social media accounts.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Gameplay Rules */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Gamepad2 className="h-5 w-5 text-primary" />
+                  Gameplay Rules
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      1
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No cheating or exploiting:</strong> Use of hacked clients, exploits, or any unfair
+                      advantages is strictly prohibited and will result in immediate punishment.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      2
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No griefing:</strong> Do not destroy, modify, or steal from other players' builds or items
+                      without permission.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      3
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>Play fairly:</strong> Participate in games with good sportsmanship. No rage quitting, team
+                      killing, or intentionally disrupting gameplay.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      4
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No alternate accounts:</strong> Using multiple accounts to gain unfair advantages or
+                      bypass punishments is not allowed.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Building Rules */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-primary" />
+                  Building Rules
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      1
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>Appropriate builds only:</strong> All builds must be family-friendly and appropriate for
+                      all ages. No offensive or inappropriate structures.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      2
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>No lag machines:</strong> Do not create redstone contraptions or builds designed to cause
+                      server lag or performance issues.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Badge variant="outline" className="mt-1 text-xs">
+                      3
+                    </Badge>
+                    <p className="text-sm leading-relaxed">
+                      <strong>Respect build themes:</strong> In themed building competitions or areas, ensure your
+                      builds match the specified theme and quality standards.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Punishments */}
+            <Card className="border-destructive/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-destructive">
+                  <Ban className="h-5 w-5" />
+                  Punishments
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="bg-destructive/10 p-4 rounded-lg">
+                  <div className="flex items-start gap-2 mb-3">
+                    <AlertTriangle className="h-4 w-4 text-destructive mt-0.5" />
+                    <p className="text-sm font-medium text-destructive">Rule violations will result in consequences:</p>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <p>
+                      <strong>Minor violations:</strong> Warning, temporary mute, or short-term suspension
+                    </p>
+                    <p>
+                      <strong>Major violations:</strong> Temporary ban (1-30 days) depending on severity
+                    </p>
+                    <p>
+                      <strong>Severe violations:</strong> Permanent ban with no appeal option
+                    </p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Punishments are issued at staff discretion based on the severity and frequency of rule violations.
+                  Repeat offenders will face increasingly severe consequences.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Appeals and Contact */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Appeals and Contact</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm leading-relaxed">
+                  If you believe you have been unfairly punished, you may submit an appeal through our Discord server.
+                  Appeals must be submitted within 30 days of the punishment and include relevant evidence.
+                </p>
+                <p className="text-sm leading-relaxed">
+                  For questions about rules or to report rule violations, contact our staff team through:
+                </p>
+                <ul className="text-sm space-y-1 ml-4">
+                  <li>• In-game: Use /report or /staff commands</li>
+                  <li>• Discord: Create a support ticket</li>
+                  <li>• Email: support@minersonline.uk</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <div className="text-center p-6 bg-muted/30 rounded-lg">
+              <p className="text-sm text-muted-foreground">
+                By playing on Miners Online, you agree to follow these rules. Rules may be updated at any time, and
+                players are responsible for staying informed of changes.
+              </p>
+              <p className="text-xs text-muted-foreground mt-2">Last updated: September 2025</p>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Enforcement Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="bg-slate-800/50 border-slate-700">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl flex items-center">
-                <Shield className="h-6 w-6 mr-3 text-red-400" />
-                Rule Enforcement
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-white font-semibold mb-3">Violation Consequences</h3>
-                  <ul className="space-y-2 text-slate-300">
-                    <li>
-                      • <strong>Chat violations:</strong> Mute (1 hour - permanent)
-                    </li>
-                    <li>
-                      • <strong>Minor cheating:</strong> 7-day ban + stat reset
-                    </li>
-                    <li>
-                      • <strong>Major cheating:</strong> 30-day ban + full account reset
-                    </li>
-                    <li>
-                      • <strong>Severe violations:</strong> Permanent ban from all games
-                    </li>
-                    <li>
-                      • <strong>Repeated offenses:</strong> Escalating penalties
-                    </li>
-                  </ul>
-                </div>
-                {/* <div>
-                  <h3 className="text-white font-semibold mb-3">Appeals Process</h3>
-                  <ul className="space-y-2 text-slate-300">
-                    <li>• Appeals can be made via GitHub Discussions</li>
-                    <li>• Provide your username and ban reason</li>
-                    <li>• Be honest and respectful in your appeal</li>
-                    <li>• Staff will review within 48 hours</li>
-                  </ul>
-                </div> */}
-              </div>
-              <Separator className="bg-slate-600" />
-              <div className="text-center">
-                <p className="text-slate-300 mb-4">Questions about the rules? {/*Need to report a violation?*/}</p>
-                <Button asChild>
-                  <Link
-                    href="https://github.com/orgs/miners-online/discussions"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MessageSquare className="h-4 w-4 mr-2" />
-                    Contact Staff
-                  </Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <Footer/>
+      </main>
+      <SiteFooter />
     </div>
   )
 }
