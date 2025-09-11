@@ -13,7 +13,7 @@ export default function FAQPage() {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold tracking-tight mb-4">Frequently Asked Questions</h1>
             <p className="text-lg text-muted-foreground text-pretty">
-              Find answers to common questions about Miners Online. Can't find what you're looking for? Contact our
+              Find answers to common questions about Miners Online. Can&lsquo;t find what you&lsquo;re looking for? Contact our
               support team.
             </p>
           </div>
@@ -51,9 +51,9 @@ export default function FAQPage() {
                   <AccordionItem value="first-time">
                     <AccordionTrigger>What should I do when I first join?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      When you first join, you'll spawn in our welcome area. We highly recommend visiting the tutorial
+                      When you first join, you&lsquo;ll spawn in our welcome area. We highly recommend visiting the tutorial
                       island to learn about our unique features, commands, and game mechanics. Use{" "}
-                      <code className="bg-muted px-2 py-1 rounded text-xs">/tutorial</code> to get started. Don't forget
+                      <code className="bg-muted px-2 py-1 rounded text-xs">/tutorial</code> to get started. Don&lsquo;t forget
                       to read our rules with <code className="bg-muted px-2 py-1 rounded text-xs">/rules</code>.
                     </AccordionContent>
                   </AccordionItem>
@@ -132,7 +132,7 @@ export default function FAQPage() {
               <CardContent>
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="lag">
-                    <AccordionTrigger>I'm experiencing lag. What can I do?</AccordionTrigger>
+                    <AccordionTrigger>I&lsquo;m experiencing lag. What can I do?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
                       First, check your internet connection and try restarting Minecraft. If the issue persists, try
                       lowering your render distance and graphics settings. You can also use{" "}
@@ -142,11 +142,11 @@ export default function FAQPage() {
                   </AccordionItem>
 
                   <AccordionItem value="connection">
-                    <AccordionTrigger>I can't connect to the server. What's wrong?</AccordionTrigger>
+                    <AccordionTrigger>I can&lsquo;t connect to the server. What&lsquo;s wrong?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      Check our server status on the homepage first. If the server is online, verify you're using the
+                      Check our server status on the homepage first. If the server is online, verify you&lsquo;re using the
                       correct IP: <code className="bg-muted px-2 py-1 rounded text-xs">play.minersonline.uk</code>.
-                      Ensure you're using a supported Minecraft version (1.19+) and that your firewall isn't blocking
+                      Ensure you&lsquo;re using a supported Minecraft version (1.19+) and that your firewall isn&lsquo;t blocking
                       the connection.
                     </AccordionContent>
                   </AccordionItem>
@@ -214,7 +214,7 @@ export default function FAQPage() {
                   <AccordionItem value="suggestions">
                     <AccordionTrigger>Can I suggest new features or improvements?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
-                      We love hearing from our community. Share your suggestions in our Discord server's suggestion
+                      We love hearing from our community. Share your suggestions in our Discord server&lsquo;s suggestion
                       channel or participate in our regular feedback surveys. As an open-source project, we also welcome
                       code contributions on our GitHub repository.
                     </AccordionContent>
@@ -252,7 +252,7 @@ export default function FAQPage() {
                   </AccordionItem>
 
                   <AccordionItem value="open-source">
-                    <AccordionTrigger>What does "open-source" mean for the server?</AccordionTrigger>
+                    <AccordionTrigger>What does &ldquo;open-source&rdquo; mean for the server?</AccordionTrigger>
                     <AccordionContent className="text-sm leading-relaxed">
                       Being open-source means our server plugins and configurations are publicly available on GitHub.
                       This promotes transparency, allows community contributions, and ensures the server can continue
@@ -282,7 +282,7 @@ export default function FAQPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm leading-relaxed">
-                  If you couldn't find the answer to your question, don't hesitate to reach out to our support team:
+                  If you couldn&lsquo;t find the answer to your question, don&lsquo;t hesitate to reach out to our support team:
                 </p>
                 <ul className="text-sm space-y-2">
                   <li className="flex items-center gap-2">

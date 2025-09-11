@@ -133,7 +133,7 @@ export default function RulesPage() {
                       2
                     </Badge>
                     <p className="text-sm leading-relaxed">
-                      <strong>No griefing:</strong> Do not destroy, modify, or steal from other players' builds or items
+                      <strong>No griefing:</strong> Do not destroy, modify, or steal from other players&lsquo; builds or items
                       without permission.
                     </p>
                   </div>

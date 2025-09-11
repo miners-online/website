@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
@@ -23,7 +24,7 @@ export function BlogCard({ post }: BlogCardProps) {
     <Card className="group hover:shadow-md transition-shadow">
       {post.image && <CardHeader className="p-0">
         <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
-          <img
+          <Image
             src={post.image || "/placeholder.svg"}
             alt={post.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

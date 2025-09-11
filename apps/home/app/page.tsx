@@ -23,7 +23,7 @@ export default function HomePage() {
                 <p className="text-lg text-muted-foreground text-pretty">
                   Miners Online is a passion project - a small, intimate Minecraft server where every player matters.
                   Started in 2017 and lovingly maintained by one dedicated developer, we focus on creating quality
-                  gaming experiences in a close-knit environment where you'll actually get to know other players.
+                  gaming experiences in a close-knit environment where you&lsquo;ll actually get to know other players.
                 </p>
               </div>
 
@@ -63,7 +63,7 @@ export default function HomePage() {
 
               <div className="text-center">
                 <p className="text-muted-foreground mb-6">
-                  Based in the UK and run with genuine care for every player. While we're small, that means you'll get
+                  Based in the UK and run with genuine care for every player. While we&lsquo;re small, that means you&lsquo;ll get
                   personal attention and your voice will actually be heard. Perfect for players who prefer quality
                   connections over crowded lobbies.
                 </p>
@@ -117,7 +117,7 @@ export default function HomePage() {
                   <CardContent>
                     <p className="text-sm text-muted-foreground">
                       In a small community, every player is valued. Your suggestions are heard, your problems get
-                      personal attention, and you'll build real friendships with fellow players.
+                      personal attention, and you&lsquo;ll build real friendships with fellow players.
                     </p>
                   </CardContent>
                 </Card>
@@ -195,8 +195,8 @@ export default function HomePage() {
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-3xl font-bold tracking-tight mb-4">Why Choose Small?</h2>
               <p className="text-lg text-muted-foreground mb-12 text-pretty">
-                In a world of massive, impersonal servers, there's something special about a place where you're not just
-                another number. Here's why small can be better.
+                In a world of massive, impersonal servers, there&lsquo;s something special about a place where you&lsquo;re not just
+                another number. Here&lsquo;s why small can be better.
               </p>
 
               <div className="grid md:grid-cols-3 gap-8">
@@ -218,7 +218,7 @@ export default function HomePage() {
                   <h3 className="text-xl font-semibold">Your Voice Matters</h3>
                   <p className="text-muted-foreground">
                     Suggestions get implemented, problems get solved personally, and you can directly influence the
-                    server's development. No corporate bureaucracy.
+                    server&lsquo;s development. No corporate bureaucracy.
                   </p>
                 </div>
 

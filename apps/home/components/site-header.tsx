@@ -9,7 +9,6 @@ import { Menu, X } from "lucide-react"
 
 import {
   SignInButton,
-  SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
