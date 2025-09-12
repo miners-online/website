@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+@import '@clerk/themes/shadcn.css';
 
 @plugin "tailwindcss-animate";
 
@@ -138,4 +139,14 @@
   .dark .bg-muted {
     background-color: rgba(51, 65, 85, 0.6) !important;
   }
+}
+
+/* Make Clerk user options full sized  */
+.cl-userProfile-root, .cl-cardBox {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }

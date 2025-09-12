@@ -9,6 +9,7 @@ import { globals } from "../lib/globals";
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
+import { shadcn } from '@clerk/themes'
 
 import "./globals.css"
 
@@ -29,15 +30,19 @@ export default async function RootLayout({
     <html suppressHydrationWarning>
       <SpeedInsights/>
       <body>
-        <ClerkProvider>
-          <RootProvider>
-            <Suspense fallback={null}>
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ClerkProvider
+            appearance={{
+              baseTheme: shadcn,
+            }}
+          >
+            <RootProvider>
+              <Suspense fallback={null}>
                 {children}
-              </ThemeProvider>
-            </Suspense>
-          </RootProvider>
-        </ClerkProvider>
+              </Suspense>
+            </RootProvider>
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
