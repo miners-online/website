@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
-@import '@clerk/themes/shadcn.css';
 
 @plugin "tailwindcss-animate";
 

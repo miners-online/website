@@ -7,15 +7,33 @@ import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X } from "lucide-react"
 
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+import { useSession, signIn } from "next-auth/react"
+
+
+function UserButton() {
+  const { data: session } = useSession()
+
+  return (
+    <div className="flex items-center gap-2">
+      {session?.user?.image && (
+        <Image
+          src={session.user.image}
+          alt={session.user.name || "User Avatar"}
+          width={32}
+          height={32}
+          className="h-8 w-8 rounded-full"
+        />
+      )}
+      <span className="text-sm font-medium text-muted-foreground">{session?.user?.name || "User"}</span>
+    </div>
+  )
+}
+
 
 export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { data: session } = useSession()
+  const isAuthenticated = !!session?.user
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -74,17 +92,17 @@ export function SiteHeader() {
           <Button asChild className="hidden md:inline-flex">
             <Link href="/#join">Join Server</Link>
           </Button>
-          <SignedOut>
-            <Button asChild className="hidden md:inline-flex">
-              <SignInButton>
-                Sign In
-              </SignInButton>
+
+          {!isAuthenticated && 
+            <Button className="hidden md:inline-flex" onClick={() => signIn("miners-online")}>
+              Sign In
             </Button>
-          </SignedOut>
+          }
+
           <ModeToggle />
-          <SignedIn>
-            <UserButton userProfileUrl="/settings"/>
-          </SignedIn>
+
+          {isAuthenticated && <UserButton/> }
+
         </div>
       </div>
 
@@ -124,13 +142,11 @@ export function SiteHeader() {
                 Join Server
               </Link>
             </Button>
-            <SignedOut>
-              <Button asChild className="w-fit">
-                <SignInButton>
-                  Sign In
-                </SignInButton>
+            {!isAuthenticated && 
+              <Button className="w-fit" onClick={() => signIn("miners-online")}>
+                Sign In
               </Button>
-            </SignedOut>
+            }
           </nav>
         </div>
       )}
