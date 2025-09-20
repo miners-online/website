@@ -4,36 +4,15 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { UserButton } from "@/components/auth/user-button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X } from "lucide-react"
 
-import { useSession, signIn } from "next-auth/react"
-
-
-function UserButton() {
-  const { data: session } = useSession()
-
-  return (
-    <div className="flex items-center gap-2">
-      {session?.user?.image && (
-        <Image
-          src={session.user.image}
-          alt={session.user.name || "User Avatar"}
-          width={32}
-          height={32}
-          className="h-8 w-8 rounded-full"
-        />
-      )}
-      <span className="text-sm font-medium text-muted-foreground">{session?.user?.name || "User"}</span>
-    </div>
-  )
-}
-
+import { useAuth } from "./auth/auth-context"
 
 export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { data: session } = useSession()
-  const isAuthenticated = !!session?.user
+  const { signIn, isAuthenticated } = useAuth();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -94,7 +73,7 @@ export function SiteHeader() {
           </Button>
 
           {!isAuthenticated && 
-            <Button className="hidden md:inline-flex" onClick={() => signIn("miners-online")}>
+            <Button className="hidden md:inline-flex" onClick={signIn}>
               Sign In
             </Button>
           }
@@ -102,7 +81,6 @@ export function SiteHeader() {
           <ModeToggle />
 
           {isAuthenticated && <UserButton/> }
-
         </div>
       </div>
 
@@ -143,7 +121,7 @@ export function SiteHeader() {
               </Link>
             </Button>
             {!isAuthenticated && 
-              <Button className="w-fit" onClick={() => signIn("miners-online")}>
+              <Button className="w-fit" onClick={signIn}>
                 Sign In
               </Button>
             }

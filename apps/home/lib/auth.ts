@@ -1,12 +1,21 @@
-import NextAuth from "next-auth"
- 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-    providers: [{
-        id: "miners-online", // signIn("my-provider") and will be part of the callback URL
-        name: "Miners Online", // optional, used on the default login page as the button text.
-        type: "oidc", // or "oauth" for OAuth 2 providers
-        issuer: process.env.AUTH_ISSUER, // to infer the .well-known/openid-configuration URL
-        clientId: process.env.AUTH_CLIENT_ID, // from the provider's dashboard
-        clientSecret: process.env.AUTH_CLIENT_SECRET, // from the provider's dashboard
-    }],
-})
+import { LogtoNextConfig, UserScope } from "@logto/next";
+
+export const logtoConfig = {
+  endpoint: process.env.AUTH_ISSUER!,
+  appId: process.env.AUTH_CLIENT_ID!,
+  appSecret: process.env.AUTH_CLIENT_SECRET!,
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL!,
+  cookieSecret: process.env.COOKIE_SECRET!,
+  cookieSecure: process.env.NODE_ENV === 'production',
+  scopes: [
+    UserScope.Address,
+    UserScope.CustomData,
+    UserScope.Email,
+    UserScope.Identities,
+    UserScope.OrganizationRoles,
+    UserScope.Organizations,
+    UserScope.Phone,
+    UserScope.Profile,
+    UserScope.Roles
+  ]
+} as LogtoNextConfig;

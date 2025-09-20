@@ -22,7 +22,7 @@ export default async function Page(props: {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-200 via-blue-100 to-emerald-200 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-900">
-      <SiteHeader />
+      <SiteHeader/>
       <main className="container py-16">
         <div className="mx-auto max-w-3xl">
           <Button variant="ghost" asChild className="mb-8">

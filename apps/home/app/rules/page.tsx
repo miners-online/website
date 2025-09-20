@@ -8,7 +8,7 @@ import Link from "next/link"
 export default function RulesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-200 via-blue-100 to-emerald-200 dark:from-slate-900 dark:via-slate-800 dark:to-emerald-900">
-      <SiteHeader />
+      <SiteHeader/>
       <main className="container py-16">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-12">
