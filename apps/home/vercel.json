@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/static/(.*)",
+      "destination": "https://api-service-green.vercel.app/static/$1"
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": "https://api-service-green.vercel.app/admin/$1"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "https://api-service-green.vercel.app/api/$1"
+    }
+  ]
+}
