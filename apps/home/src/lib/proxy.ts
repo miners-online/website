@@ -22,9 +22,9 @@ export async function proxyRequest(request: NextRequest, targetUrl: string) {
   });
 
   // Copy response headers
-  response.headers.forEach((value, key) => {
-    nextResponse.headers.set(key, value);
-  });
+  // response.headers.forEach((value, key) => {
+  //   nextResponse.headers.set(key, value);
+  // });
 
   return nextResponse;
 }
