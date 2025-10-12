@@ -7,11 +7,13 @@ export async function proxyRequest(request: NextRequest, targetUrl: string) {
   // Optional: remove headers that might interfere with the backend
   headers.delete('host'); // backend should handle its own host
 
+  const requestBody = await request.arrayBuffer();
+
   // Perform fetch to backend
   const response = await fetch(targetUrl, {
     method: request.method,
     headers,
-    body: ['GET', 'HEAD'].includes(request.method) ? undefined : request.body, // only include body for non-GET/HEAD
+    body: ['GET', 'HEAD'].includes(request.method) ? undefined : requestBody, // only include body for non-GET/HEAD
     redirect: 'manual', // do not follow redirects
   });
 
@@ -22,9 +24,9 @@ export async function proxyRequest(request: NextRequest, targetUrl: string) {
   });
 
   // Copy response headers
-  // response.headers.forEach((value, key) => {
-  //   nextResponse.headers.set(key, value);
-  // });
+  response.headers.forEach((value, key) => {
+    nextResponse.headers.set(key, value);
+  });
 
   return nextResponse;
 }
