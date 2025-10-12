@@ -1,0 +1,1 @@
+export const API_BASE_URL = process.env.API_BASE_URL == undefined ? 'http://localhost:8000' : process.env.API_BASE_URL;
