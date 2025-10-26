@@ -15,7 +15,7 @@ import {
 import Link, { type LinkProps } from 'fumadocs-core/link';
 import { useOnChange } from 'fumadocs-core/utils/use-on-change';
 import { cn } from '../lib/cn';
-import { ScrollArea, ScrollViewport } from './ui/scroll-area';
+import { ScrollArea } from './ui/scroll-area';
 import { isActive } from '../lib/is-active';
 import {
   Collapsible,
@@ -237,7 +237,7 @@ export function SidebarFooter(props: ComponentProps<'div'>) {
 export function SidebarViewport(props: ScrollAreaProps) {
   return (
     <ScrollArea {...props} className={cn('h-full', props.className)}>
-      <ScrollViewport
+      <div
         className="p-4 overscroll-contain"
         style={
           {
@@ -248,7 +248,7 @@ export function SidebarViewport(props: ScrollAreaProps) {
         }
       >
         {props.children}
-      </ScrollViewport>
+      </div>
     </ScrollArea>
   );
 }
