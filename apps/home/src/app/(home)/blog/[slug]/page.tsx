@@ -18,7 +18,7 @@ export default async function Page(props: {
       <div className="container rounded-xl border py-12 md:px-8">
         <h1 className="mb-2 text-3xl font-bold">{page.data.title}</h1>
         <p className="mb-4 text-fd-muted-foreground">{page.data.description}</p>
-        <p className="mb-1 text-fd-muted-foreground">Written by: {page.data.author}, At: {new Date(page.data.date).toDateString()}</p>
+        <p className="mb-1 text-fd-muted-foreground">Written by: {page.data.author}, At: {page.data.date.toDateString()}</p>
         <Link href="/blog">Back</Link>
       </div>
       <article className="container flex flex-col px-4 py-8">
