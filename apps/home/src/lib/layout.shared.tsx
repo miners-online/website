@@ -2,6 +2,11 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { BookIcon, GitBranch } from 'lucide-react';
 import Image from 'next/image';
 
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+
+import { UserAccountDropdown } from '@/components/user-account-dropdown';
+
 /**
  * Shared layout configurations
  *
@@ -10,6 +15,8 @@ import Image from 'next/image';
  * Docs Layout: app/docs/layout.tsx
  */
 export function baseOptions(): BaseLayoutProps {
+  const homePage = process.env.NEXT_PUBLIC_HOME_URL || 'https://www.minersonline.uk';
+
   return {
     nav: {
       title: (
@@ -39,6 +46,19 @@ export function baseOptions(): BaseLayoutProps {
         text: 'Blog',
         url: '/blog',
         secondary: false,
+      },
+      {
+        type: 'custom',
+        children: <UserAccountDropdown
+          fallbackComponent={
+            <Button variant="secondary" asChild>
+              <Link href={`${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}/sign-in?callbackURL=${encodeURIComponent(homePage)}`}>
+                Sign In
+              </Link>
+            </Button>
+          }
+        />,
+        secondary: true,
       },
     ],
   };
