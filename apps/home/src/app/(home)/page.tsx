@@ -58,7 +58,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild>
-              <Link href="/docs">
+              <Link href="/docs/core">
                 Play Now
               </Link>
             </Button>
@@ -157,7 +157,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild>
-              <Link href="/docs">
+              <Link href="/docs/core">
                 Documentation
               </Link>
             </Button>
