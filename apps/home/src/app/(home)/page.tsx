@@ -63,7 +63,7 @@ export default function HomePage() {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/docs/faq">
+              <Link href="/docs/core/faq">
                 FAQ
               </Link>
             </Button>
@@ -162,7 +162,7 @@ export default function HomePage() {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/docs/faq">
+              <Link href="/docs/core/faq">
                 FAQ
               </Link>
             </Button>
