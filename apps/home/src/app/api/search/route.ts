@@ -7,7 +7,7 @@ export const { GET } = createSearchAPI('advanced', {
 });
 
 function buildIndexes(): AdvancedIndex[] | Dynamic<AdvancedIndex> {
-  let indexes: AdvancedIndex[] = [];
+  const indexes: AdvancedIndex[] = [];
 
   for (const page of source.getPages()) {
     if (page.data.type == "authentication") {
