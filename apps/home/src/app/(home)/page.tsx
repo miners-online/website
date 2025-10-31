@@ -141,7 +141,11 @@ export default function HomePage() {
             Our server may not always be online, check <Link href="/faq">the FAQ for reasons</Link>. Here&rsquo;s the current status:
           </p>
           <div className="flex justify-center">
-          <MinecraftServerStatus serverAddress="play.minersonline.uk" refreshInterval={30000}/>
+            <MinecraftServerStatus
+              serverAddress="play.minersonline.uk"
+              refreshInterval={30000}
+              forceOfflineWithMatchingMOTD="miners-online is currently not available.\nJoin to get notified when it's back online!"
+            />
           </div>
         </div>
       </section>

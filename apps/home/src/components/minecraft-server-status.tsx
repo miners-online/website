@@ -10,24 +10,25 @@ import { Button } from "@/components/ui/button"
 interface ServerStatus {
   online: boolean
   motd?: {
-    clean?: string[]
-    raw?: string[]
+    clean?: string
+    raw?: string,
+    html?: string
   }
   players?: {
     online: number
     max: number
   }
-  version?: string
-  hostname?: string
+  host?: string
   port?: number
 }
 
 interface MinecraftServerStatusProps {
   serverAddress: string
   refreshInterval?: number
+  forceOfflineWithMatchingMOTD?: string
 }
 
-export function MinecraftServerStatus({ serverAddress, refreshInterval = 30000 }: MinecraftServerStatusProps) {
+export function MinecraftServerStatus({ serverAddress, refreshInterval = 30000, forceOfflineWithMatchingMOTD }: MinecraftServerStatusProps) {
   const [status, setStatus] = useState<ServerStatus | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -38,13 +39,33 @@ export function MinecraftServerStatus({ serverAddress, refreshInterval = 30000 }
       setLoading(true)
       setError(null)
 
-      const response = await fetch(`https://api.mcsrvstat.us/3/${serverAddress}`)
+      const response = await fetch(`https://api.mcstatus.io/v2/status/java/${serverAddress}`)
 
       if (!response.ok) {
         throw new Error("Failed to fetch server status")
       }
 
       const data = await response.json()
+
+      // Force offline status based on MOTD match
+      if (data.motd && data.motd.clean) {
+        const normalize = (s?: string) =>
+          s
+            ? s
+                // convert escaped newline sequences like "\n" or "\r\n" into actual newlines
+                .replace(/\\r\\n/g, "\n")
+                .replace(/\\n/g, "\n")
+                // normalize any actual CRLF sequences to LF
+                .replace(/\r\n/g, "\n")
+                .trim()
+            : s
+        const motdClean = normalize(data.motd.clean)
+        const matchTarget = normalize(forceOfflineWithMatchingMOTD)
+        if (matchTarget && motdClean === matchTarget) {
+          data.online = false
+        }
+      }
+
       setStatus(data)
       setLastUpdated(new Date())
     } catch (err) {
@@ -104,7 +125,7 @@ export function MinecraftServerStatus({ serverAddress, refreshInterval = 30000 }
               <Server className="h-5 w-5" />
               {serverAddress}
             </CardTitle>
-            <CardDescription>{status?.version || "Minecraft Server"}</CardDescription>
+            <CardDescription>Minecraft Server</CardDescription>
           </div>
           <Badge
             variant={status?.online ? "default" : "secondary"}
@@ -135,15 +156,15 @@ export function MinecraftServerStatus({ serverAddress, refreshInterval = 30000 }
             </div>
 
             {/* MOTD */}
-            {status.motd?.clean && status.motd.clean.length > 0 && (
+            {status.motd && (
               <div className="space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">Message of the Day</p>
                 <div className="p-3 rounded-lg bg-muted/50 font-mono text-sm leading-relaxed">
-                  {status.motd.clean.map((line, index) => (
-                    <p key={index} className="text-foreground">
-                      {line || "\u00A0"}
-                    </p>
-                  ))}
+                  {status.motd.html ? (
+                    <div dangerouslySetInnerHTML={{ __html: status.motd.html }} />
+                  ) : (
+                    <pre>{status.motd.clean}</pre>
+                  )}
                 </div>
               </div>
             )}
