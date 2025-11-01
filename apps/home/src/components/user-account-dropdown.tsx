@@ -36,8 +36,7 @@ export function UserAccountDropdown(
   }
 
   const handleSettings = () => {
-    console.log("Settings clicked")
-    // Add your settings navigation logic here
+    window.location.href = `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL!}/account`
   }
 
   const { data } = useSession()
